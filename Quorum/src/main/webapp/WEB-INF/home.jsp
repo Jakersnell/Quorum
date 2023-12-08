@@ -3,9 +3,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QUORUM</title>
 </head>
 <body>
+
+<h1>Welcome To Quorum!</h1>
+
+${SMOKETEST} <!-- DELETE THIS -->
 
 </body>
 </html>
