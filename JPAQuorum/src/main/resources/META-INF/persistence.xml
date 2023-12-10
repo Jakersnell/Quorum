@@ -15,7 +15,6 @@
 		<class>com.skilldistillery.quorum.entities.User</class>
 		<class>com.skilldistillery.quorum.entities.School</class>
 		<class>com.skilldistillery.quorum.entities.GroupPost</class>
-		<class>com.skilldistillery.quorum.entities.SocialGroupMember</class>
 		<class>com.skilldistillery.quorum.entities.GroupPostComment</class>
 		<class>com.skilldistillery.quorum.entities.SocialGroup</class>
 		
