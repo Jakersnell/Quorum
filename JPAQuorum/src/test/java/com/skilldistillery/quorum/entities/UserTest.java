@@ -2,6 +2,7 @@ package com.skilldistillery.quorum.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Month;
 
@@ -122,6 +123,13 @@ class UserTest {
     void test_User_School_Relationship() {
     	assertNotNull(user);
     	assertEquals("Metropolitan Tech", user.getSchool().getName());
+    }
+    
+    @Test
+    void test_User_Following_Relationship() {
+    	assertNotNull(user);
+    	assertTrue(user.getFollowing().size() > 0);
+    	assertEquals("Jane", user.getFollowing().get(0).getFirstName());
     }
 }
 
