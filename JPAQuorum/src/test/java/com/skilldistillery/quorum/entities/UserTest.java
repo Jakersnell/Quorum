@@ -115,7 +115,7 @@ class UserTest {
     @Test
     void test_ProfileImageUrl() {
         assertNotNull(user);
-        assertEquals("", user.getProfileImageUrl());
+        assertEquals("http://example.com/johnsmith.jpg", user.getProfileImageUrl());
     }
 }
 

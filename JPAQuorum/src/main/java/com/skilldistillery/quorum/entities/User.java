@@ -1,7 +1,6 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
