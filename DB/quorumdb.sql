@@ -95,13 +95,14 @@ DROP TABLE IF EXISTS `course` ;
 CREATE TABLE IF NOT EXISTS `course` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NULL,
-  `created_on` DATE NOT NULL,
-  `last_update` DATE NOT NULL,
+  `created_on` DATETIME NOT NULL,
+  `last_update` DATETIME NOT NULL,
   `date_start` DATE NOT NULL,
   `date_end` DATE NULL,
   `school_id` INT NOT NULL,
   `professor_id` INT NOT NULL,
   `enabled` TINYINT NULL,
+  `days_of_week` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_class_school1_idx` (`school_id` ASC),
   INDEX `fk_class_professor1_idx` (`professor_id` ASC),
@@ -458,27 +459,27 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quorum`;
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (1, 'Introduction to Computer Science', '2023-02-07', '2023-06-07', '2023-02-15', '2023-05-15', 1, 1, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (2, 'Data Structures and Algorithms', '2023-01-30', '2023-12-11', '2023-02-20', '2023-06-20', 1, 1, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (3, 'Database Management Systems', '2023-02-25', '2023-05-21', '2023-03-10', '2023-06-10', 1, 1, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (4, 'Art History: Renaissance to Modernism', '2023-11-25', '2023-12-23', '2023-01-15', '2023-05-15', 2, 2, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (5, 'Contemporary Art Practices', '2023-08-17', '2023-12-25', '2023-01-30', '2023-06-30', 2, 2, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (6, 'Environmental Science Fundamentals', '2023-12-19', '2023-12-26', '2023-02-05', '2023-05-05', 3, 3, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (7, 'Sustainability and Society', '2023-10-11', '2023-11-11', '2023-02-20', '2023-06-20', 3, 3, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (8, 'Business Administration Principles', '2023-04-11', '2023-05-22', '2023-03-01', '2023-06-01', 4, 4, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (9, 'Leadership and Management', '2023-02-03', '2023-06-25', '2023-03-15', '2023-06-15', 4, 4, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (10, 'English Literature: Shakespeare', '2023-12-25', '2023-12-30', '2023-02-15', '2023-05-15', 5, 5, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (11, 'Modern American Literature', '2023-02-10', '2023-11-10', '2023-03-01', '2023-06-01', 5, 5, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (12, 'Classical Music History', '2023-06-24', '2023-07-20', '2023-03-10', '2023-06-10', 1, 6, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (13, 'Music Theory and Composition', '2023-01-27', '2023-07-07', '2023-01-30', '2023-06-30', 1, 6, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (14, 'Financial Accounting', '2023-10-18', '2023-10-23', '2023-02-05', '2023-05-05', 2, 7, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (15, 'Marketing Strategies', '2023-01-13', '2023-01-16', '2023-02-20', '2023-06-20', 2, 7, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (16, 'Entrepreneurship and Innovation', '2023-02-04', '2023-02-08', '2023-03-01', '2023-06-01', 2, 7, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (17, 'Environmental Policy and Law', '2023-10-02', '2023-12-24', '2023-03-15', '2023-06-15', 3, 8, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (18, 'Climate Change Science', '2023-07-22', '2023-07-28', '2023-01-15', '2023-05-15', 3, 8, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (19, 'Investment Analysis', '2023-11-11', '2023-12-17', '2023-03-10', '2023-06-10', 4, 9, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (20, 'Financial Management', '2023-08-27', '2023-10-07', '2023-02-20', '2023-06-20', 4, 9, 1);
-INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`) VALUES (21, 'Psychology: Mind and Behavior', '2023-01-30', '2023-04-11', '2023-01-15', '2023-05-15', 5, 10, 1);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (1, 'Introduction to Computer Science', '2023-02-07', '2023-06-07', '2023-02-15', '2023-05-15', 1, 1, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (2, 'Data Structures and Algorithms', '2023-01-30', '2023-12-11', '2023-02-20', '2023-06-20', 1, 1, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (3, 'Database Management Systems', '2023-02-25', '2023-05-21', '2023-03-10', '2023-06-10', 1, 1, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (4, 'Art History: Renaissance to Modernism', '2023-11-25', '2023-12-23', '2023-01-15', '2023-05-15', 2, 2, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (5, 'Contemporary Art Practices', '2023-08-17', '2023-12-25', '2023-01-30', '2023-06-30', 2, 2, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (6, 'Environmental Science Fundamentals', '2023-12-19', '2023-12-26', '2023-02-05', '2023-05-05', 3, 3, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (7, 'Sustainability and Society', '2023-10-11', '2023-11-11', '2023-02-20', '2023-06-20', 3, 3, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (8, 'Business Administration Principles', '2023-04-11', '2023-05-22', '2023-03-01', '2023-06-01', 4, 4, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (9, 'Leadership and Management', '2023-02-03', '2023-06-25', '2023-03-15', '2023-06-15', 4, 4, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (10, 'English Literature: Shakespeare', '2023-12-25', '2023-12-30', '2023-02-15', '2023-05-15', 5, 5, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (11, 'Modern American Literature', '2023-02-10', '2023-11-10', '2023-03-01', '2023-06-01', 5, 5, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (12, 'Classical Music History', '2023-06-24', '2023-07-20', '2023-03-10', '2023-06-10', 1, 6, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (13, 'Music Theory and Composition', '2023-01-27', '2023-07-07', '2023-01-30', '2023-06-30', 1, 6, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (14, 'Financial Accounting', '2023-10-18', '2023-10-23', '2023-02-05', '2023-05-05', 2, 7, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (15, 'Marketing Strategies', '2023-01-13', '2023-01-16', '2023-02-20', '2023-06-20', 2, 7, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (16, 'Entrepreneurship and Innovation', '2023-02-04', '2023-02-08', '2023-03-01', '2023-06-01', 2, 7, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (17, 'Environmental Policy and Law', '2023-10-02', '2023-12-24', '2023-03-15', '2023-06-15', 3, 8, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (18, 'Climate Change Science', '2023-07-22', '2023-07-28', '2023-01-15', '2023-05-15', 3, 8, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (19, 'Investment Analysis', '2023-11-11', '2023-12-17', '2023-03-10', '2023-06-10', 4, 9, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (20, 'Financial Management', '2023-08-27', '2023-10-07', '2023-02-20', '2023-06-20', 4, 9, 1, NULL);
+INSERT INTO `course` (`id`, `title`, `created_on`, `last_update`, `date_start`, `date_end`, `school_id`, `professor_id`, `enabled`, `days_of_week`) VALUES (21, 'Psychology: Mind and Behavior', '2023-01-30', '2023-04-11', '2023-01-15', '2023-05-15', 5, 10, 1, NULL);
 
 COMMIT;
 

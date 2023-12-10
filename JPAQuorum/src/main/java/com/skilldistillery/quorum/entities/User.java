@@ -219,18 +219,12 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
-				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
-				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + ", school=" + school + ", following="
-				+ following + ", items=" + items + ", getId()=" + getId() + ", getUsername()=" + getUsername()
-				+ ", getPassword()=" + getPassword() + ", getCreatedOn()=" + getCreatedOn() + ", getEmail()="
-				+ getEmail() + ", getLastUpdate()=" + getLastUpdate() + ", isEnabled()=" + isEnabled() + ", getRole()="
-				+ getRole() + ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName()
-				+ ", getBiography()=" + getBiography() + ", getDateOfBirth()=" + getDateOfBirth()
-				+ ", getProfileImageUrl()=" + getProfileImageUrl() + ", getSchool()=" + getSchool()
-				+ ", getFollowing()=" + getFollowing() + ", getItems()=" + getItems() + ", hashCode()=" + hashCode()
-				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+		return "\nUser [id=" + id + "\nusername=" + username + "\npassword=" + password + "\ncreatedOn=" + createdOn
+				+ "\nemail=" + email + "\nlastUpdate=" + lastUpdate + "\nenabled=" + enabled + "\nrole=" + role
+				+ "\nfirstName=" + firstName + "\nlastName=" + lastName + "\nbiography=" + biography + "\ndateOfBirth="
+				+ dateOfBirth + "\nprofileImageUrl=" + profileImageUrl + "\nschool.getId()=" + school.getId() + "\nfollowing.size()="
+				+ following.size() + "\nitems.size()=" + items.size() + "]\n";
 	}
+
 
 }

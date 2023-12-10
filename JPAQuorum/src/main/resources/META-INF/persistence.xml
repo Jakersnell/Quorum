@@ -10,6 +10,9 @@
 		<class>com.skilldistillery.quorum.entities.PlannerItem</class>
 		<class>com.skilldistillery.quorum.entities.School</class>
 		<class>com.skilldistillery.quorum.entities.User</class>
+		<class>com.skilldistillery.quorum.entities.Course</class>
+		<class>com.skilldistillery.quorum.entities.Professor</class>
+		<class>com.skilldistillery.quorum.entities.ProfessorRating</class>
 
 		<properties>
 			<property name="jakarta.persistence.jdbc.url"
