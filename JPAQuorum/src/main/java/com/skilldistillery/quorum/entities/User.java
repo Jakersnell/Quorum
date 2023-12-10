@@ -1,6 +1,7 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -8,6 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -47,6 +52,18 @@ public class User {
 
 	@Column(name = "profile_image_url")
 	private String profileImageUrl;
+	
+	@ManyToOne
+	@JoinColumn(name = "school_id")
+	private School school;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "user_follow",
+			joinColumns=@JoinColumn(name = "user_id"),
+			inverseJoinColumns=@JoinColumn(name = "following_id")
+			)
+	private List<User> following;
 
 	public User() {
 	}
@@ -153,6 +170,22 @@ public class User {
 
 	public void setProfileImageUrl(String profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	public List<User> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<User> following) {
+		this.following = following;
 	}
 
 	@Override
