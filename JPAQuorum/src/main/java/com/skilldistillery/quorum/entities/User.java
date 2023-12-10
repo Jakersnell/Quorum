@@ -68,6 +68,12 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<PlannerItem> items;
+	
+	@OneToMany(mappedBy="sender")
+	private List<Message> sentMessages;
+	
+	@OneToMany(mappedBy="receiver")
+	private List<Message> receivedMessages;
 
 	public User() {
 	}
@@ -198,6 +204,22 @@ public class User {
 
 	public void setItems(List<PlannerItem> items) {
 		this.items = items;
+	}
+
+	public List<Message> getSentMessages() {
+		return sentMessages;
+	}
+
+	public void setSentMessages(List<Message> sentMessages) {
+		this.sentMessages = sentMessages;
+	}
+
+	public List<Message> getReceivedMessages() {
+		return receivedMessages;
+	}
+
+	public void setReceivedMessages(List<Message> receivedMessages) {
+		this.receivedMessages = receivedMessages;
 	}
 
 	@Override
