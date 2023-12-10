@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -64,6 +65,15 @@ public class User {
 			inverseJoinColumns=@JoinColumn(name = "following_id")
 			)
 	private List<User> following;
+	
+	@OneToMany(mappedBy="user")
+	private List<PlannerItem> items;
+	
+	@OneToMany(mappedBy="sender")
+	private List<Message> sentMessages;
+	
+	@OneToMany(mappedBy="receiver")
+	private List<Message> receivedMessages;
 
 	public User() {
 	}
@@ -188,6 +198,30 @@ public class User {
 		this.following = following;
 	}
 
+	public List<PlannerItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<PlannerItem> items) {
+		this.items = items;
+	}
+
+	public List<Message> getSentMessages() {
+		return sentMessages;
+	}
+
+	public void setSentMessages(List<Message> sentMessages) {
+		this.sentMessages = sentMessages;
+	}
+
+	public List<Message> getReceivedMessages() {
+		return receivedMessages;
+	}
+
+	public void setReceivedMessages(List<Message> receivedMessages) {
+		this.receivedMessages = receivedMessages;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -207,10 +241,12 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
-				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
-				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + "]";
+		return "\nUser [id=" + id + "\nusername=" + username + "\npassword=" + password + "\ncreatedOn=" + createdOn
+				+ "\nemail=" + email + "\nlastUpdate=" + lastUpdate + "\nenabled=" + enabled + "\nrole=" + role
+				+ "\nfirstName=" + firstName + "\nlastName=" + lastName + "\nbiography=" + biography + "\ndateOfBirth="
+				+ dateOfBirth + "\nprofileImageUrl=" + profileImageUrl + "\nschool.getId()=" + school.getId() + "\nfollowing.size()="
+				+ following.size() + "\nitems.size()=" + items.size() + "]\n";
 	}
+
 
 }

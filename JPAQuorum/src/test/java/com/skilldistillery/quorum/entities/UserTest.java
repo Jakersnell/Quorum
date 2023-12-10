@@ -131,5 +131,26 @@ class UserTest {
     	assertTrue(user.getFollowing().size() > 0);
     	assertEquals("Jane", user.getFollowing().get(0).getFirstName());
     }
+    
+    @Test
+    void test_User_PlannerItem_Relationship() {
+    	assertNotNull(user);
+    	assertTrue(user.getItems().size()>0);
+    	assertEquals("Study Group", user.getItems().get(0).getTitle());
+    }
+    
+    @Test
+    void test_User_Message_Relationship_Sent() {
+    	 user = em.find(User.class, 2);
+    	assertNotNull(user);
+    	assertEquals("Hey, are you going to the study group session tomorrow?", user.getSentMessages().get(0).getContents());
+    }
+    
+    @Test
+    void test_User_Message_Relationship_Receive() {
+    	user = em.find(User.class, 2);
+    	assertNotNull(user);
+    	assertEquals("How was your weekend? We should hang out soon.", user.getReceivedMessages().get(0).getContents());
+    }
 }
 

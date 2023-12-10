@@ -7,6 +7,11 @@
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+		<class>com.skilldistillery.quorum.entities.Course</class>
+		<class>com.skilldistillery.quorum.entities.Message</class>
+		<class>com.skilldistillery.quorum.entities.PlannerItem</class>
+		<class>com.skilldistillery.quorum.entities.Professor</class>
+		<class>com.skilldistillery.quorum.entities.ProfessorRating</class>
 		<class>com.skilldistillery.quorum.entities.User</class>
 		<class>com.skilldistillery.quorum.entities.School</class>
 
