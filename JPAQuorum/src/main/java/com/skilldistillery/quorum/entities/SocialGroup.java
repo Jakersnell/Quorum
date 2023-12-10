@@ -1,6 +1,7 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,7 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,9 +38,13 @@ public class SocialGroup {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 
-	@ManyToOne
-	@JoinColumn(name = "owner_id")
-	private User owner;
+	@ManyToMany
+    @JoinTable(
+        name = "social_group_member",
+        joinColumns = @JoinColumn(name = "group_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> members;
 
 	public SocialGroup() {
 	}
@@ -67,12 +73,12 @@ public class SocialGroup {
 		this.description = description;
 	}
 
-	public User getOwner() {
-		return owner;
+	public List<User> getMembers() {
+		return members;
 	}
 
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setMembers(List<User> members) {
+		this.members = members;
 	}
 
 	public LocalDateTime getCreatedOn() {
@@ -94,7 +100,7 @@ public class SocialGroup {
 	@Override
 	public String toString() {
 		return "SocialGroup [id=" + id + ", name=" + name + ", description=" + description + ", createdOn=" + createdOn
-				+ ", lastUpdate=" + lastUpdate + ", owner=" + owner + "]";
+				+ ", lastUpdate=" + lastUpdate + ", members=" + members + "]";
 	}
 
 	@Override
