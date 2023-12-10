@@ -131,5 +131,12 @@ class UserTest {
     	assertTrue(user.getFollowing().size() > 0);
     	assertEquals("Jane", user.getFollowing().get(0).getFirstName());
     }
+    
+    @Test
+    void test_User_PlannerItem_Relationship() {
+    	assertNotNull(user);
+    	assertTrue(user.getItems().size()>0);
+    	assertEquals("Study Group", user.getItems().get(0).getTitle());
+    }
 }
 

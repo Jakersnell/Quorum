@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -64,6 +65,9 @@ public class User {
 			inverseJoinColumns=@JoinColumn(name = "following_id")
 			)
 	private List<User> following;
+	
+	@OneToMany(mappedBy="user")
+	private List<PlannerItem> items;
 
 	public User() {
 	}
@@ -188,6 +192,14 @@ public class User {
 		this.following = following;
 	}
 
+	public List<PlannerItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<PlannerItem> items) {
+		this.items = items;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -210,7 +222,15 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
 				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
-				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + "]";
+				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + ", school=" + school + ", following="
+				+ following + ", items=" + items + ", getId()=" + getId() + ", getUsername()=" + getUsername()
+				+ ", getPassword()=" + getPassword() + ", getCreatedOn()=" + getCreatedOn() + ", getEmail()="
+				+ getEmail() + ", getLastUpdate()=" + getLastUpdate() + ", isEnabled()=" + isEnabled() + ", getRole()="
+				+ getRole() + ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName()
+				+ ", getBiography()=" + getBiography() + ", getDateOfBirth()=" + getDateOfBirth()
+				+ ", getProfileImageUrl()=" + getProfileImageUrl() + ", getSchool()=" + getSchool()
+				+ ", getFollowing()=" + getFollowing() + ", getItems()=" + getItems() + ", hashCode()=" + hashCode()
+				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
 	}
 
 }
