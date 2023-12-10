@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -47,6 +49,10 @@ public class User {
 
 	@Column(name = "profile_image_url")
 	private String profileImageUrl;
+	
+	@ManyToOne
+	@JoinColumn(name = "school_id")
+	private School school;
 
 	public User() {
 	}
@@ -153,6 +159,14 @@ public class User {
 
 	public void setProfileImageUrl(String profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
 	}
 
 	@Override

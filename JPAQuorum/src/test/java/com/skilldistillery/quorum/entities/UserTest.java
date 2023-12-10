@@ -117,5 +117,11 @@ class UserTest {
         assertNotNull(user);
         assertEquals("http://example.com/johnsmith.jpg", user.getProfileImageUrl());
     }
+    
+    @Test
+    void test_User_School_Relationship() {
+    	assertNotNull(user);
+    	assertEquals("Metropolitan Tech", user.getSchool().getName());
+    }
 }
 
