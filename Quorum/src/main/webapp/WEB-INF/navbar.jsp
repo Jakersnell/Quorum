@@ -9,6 +9,7 @@
             </c:when>
             <c:otherwise>
                 <li><a href="login.do">Login</a></li>
+                <li><a href="signup.do">Sign Up</a></li>
             </c:otherwise>
         </c:choose>
     </ul>
