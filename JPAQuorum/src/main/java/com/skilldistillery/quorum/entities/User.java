@@ -81,6 +81,7 @@ public class User {
 	private List<Message> receivedMessages;
 
 	public User() {
+		enabled = true;
 	}
 
 	public int getId() {
