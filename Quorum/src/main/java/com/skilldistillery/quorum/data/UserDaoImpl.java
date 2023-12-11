@@ -33,4 +33,17 @@ public class UserDaoImpl implements UserDAO {
 		return user;
 	}
 
+	@Override
+	public User createUser(User user) {
+		if (authenticateUser(user.getUsername(), user.getPassword()) != null) {
+			em.persist(user);
+		}
+		return user;
+	}
+	
+	@Override
+	public User getUserById(int id) {
+		return em.find(User.class, id);
+	}
+
 }
