@@ -35,3 +35,12 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+eclipse {
+    wtp {
+        facet {
+            // Set the correct version here
+            facet name: 'jst.web', version: '6.1'
+        }
+    }
+}
