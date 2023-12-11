@@ -117,7 +117,7 @@ public class GroupPost {
 	@Override
 	public String toString() {
 		return "GroupPost [id=" + id + ", title=" + title + ", contents=" + contents + ", createdOn=" + createdOn
-				+ ", lastUpdate=" + lastUpdate + ", user=" + user + ", socialGroup=" + socialGroup + ", enabled="
+				+ ", lastUpdate=" + lastUpdate + ", user.getId()=" + user.getId() + ", socialGroup.getId()=" + socialGroup.getId() + ", enabled="
 				+ enabled + "]";
 	}
 
