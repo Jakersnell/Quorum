@@ -132,7 +132,7 @@ public class PlannerItem {
 	public String toString() {
 		return "PlannerItem [id=" + id + ", title=" + title + ", description=" + description + ", startTime="
 				+ startTime + ", createdOn=" + createdOn + ", lastUpdate=" + lastUpdate + ", endTime=" + endTime
-				+ ", user=" + user + "]";
+				+ ", user.getId()=" + user.getId() + "]";
 	}
 	
 	
