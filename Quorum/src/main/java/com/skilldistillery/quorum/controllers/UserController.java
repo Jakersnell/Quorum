@@ -20,7 +20,6 @@ public class UserController {
 
 	@GetMapping({ "/", "home.do" })
 	public String home(Model model) {
-		model.addAttribute("SMOKETEST", userDao.authenticateUser("jtest", "jtest"));
 		return "home";
 	}
 
