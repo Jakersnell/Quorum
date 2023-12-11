@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <nav>
     <ul>
-        <li><a href="index.do">Home</a></li>
+        <li><a href="home.do">Home</a></li>
         <c:choose>
             <c:when test="${not empty loggedUser}">
                 <li><a href="account.do">Account</a></li>
