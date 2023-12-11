@@ -16,7 +16,7 @@
                     <label for="username">Username</label>
                 </th>
                 <td>
-                    <input type="text" name="username" id="username" value="username">
+                    <input type="text" name="username" id="username" placeholder="username" required>
                 </td>
             </tr>   
             <tr>
@@ -24,7 +24,7 @@
                     <label for="password">Password</label>
                 </th>
                 <td>
-                    <input type="password" name="password" id="password" placeholder="password">
+                    <input type="password" name="password" id="password" placeholder="password" required>
                 </td>
             </tr>   
             <tr>
@@ -32,7 +32,7 @@
                     <label for="firstName">First Name</label>
                 </th>
                 <td>
-                    <input type="text" name="firstName" id="firstName" placeholder="First Name">
+                    <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
                 </td>
             </tr>   
             <tr>
@@ -40,7 +40,7 @@
                     <label for="lastName">Last Name</label>
                 </th>
                 <td>
-                    <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+                    <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
                 </td>
             </tr>   
             <tr>
