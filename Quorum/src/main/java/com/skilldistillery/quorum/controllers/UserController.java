@@ -1,13 +1,18 @@
 package com.skilldistillery.quorum.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.quorum.data.SchoolDAO;
 import com.skilldistillery.quorum.data.UserDAO;
+import com.skilldistillery.quorum.entities.School;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +22,9 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDao;
+
+	@Autowired
+	private SchoolDAO schoolDao;
 
 	@GetMapping({ "/", "home.do" })
 	public String home(Model model) {
@@ -48,8 +56,15 @@ public class UserController {
 	}
 
 	@GetMapping({ "/signup", "signup.do" })
-	public String signupGet(HttpSession session) {
-		return (session.getAttribute("loggedUser") == null) ? "signup" : "redirect:/home.do";
+	public ModelAndView signupGet(HttpSession session, ModelAndView model) {
+		model.setViewName("signup");
+		if (session.getAttribute("loggedUser") == null) {
+			model.setViewName("redirect:/home.do");
+		}
+
+		List<School> school = schoolDao.getAll();
+		model.addObject("school", school);
+		return model;
 	}
 
 	@PostMapping({ "/signup", "signup.do" })
@@ -57,10 +72,13 @@ public class UserController {
 		String redirect = "redirect:/signup.do";
 
 		if (session.getAttribute("loggedUser") == null) {
+			
+			School selectedSchool = schoolDao.getById(user.getSchool().getId());
+			user.setSchool(selectedSchool);
+			
 			User createdUser = userDao.createUser(user);
 			session.setAttribute("loggedUser", createdUser);
 			redirect = "redirect:/home.do";
-
 		}
 
 		return redirect;
