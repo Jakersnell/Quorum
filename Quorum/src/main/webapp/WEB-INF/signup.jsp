@@ -9,46 +9,24 @@
     <main>
         <h1>Sign Up</h1>
         <br>
-        <table>
         <form action="signup.do" method="POST">
-            <tr>
-                <th>
-                    <label for="username">Username</label>
-                </th>
-                <td>
-                    <input type="text" name="username" id="username" placeholder="username" required>
-                </td>
-            </tr>   
-            <tr>
-                <th>
-                    <label for="password">Password</label>
-                </th>
-                <td>
-                    <input type="password" name="password" id="password" placeholder="password" required>
-                </td>
-            </tr>   
-            <tr>
-                <th>
-                    <label for="firstName">First Name</label>
-                </th>
-                <td>
-                    <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
-                </td>
-            </tr>   
-            <tr>
-                <th>
-                    <label for="lastName">Last Name</label>
-                </th>
-                <td>
-                    <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
-                </td>
-            </tr>   
-            <tr>
-                <td>
-                    <input type="submit" value="submit">
-                </td>
-
-            </tr>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="username" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="password" required>
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+            <label for="school">School</label>
+            <select name="school" id="school">
+                <option value="1">Metropolitan Tech</option>
+                <option value="2">Harborview Arts College</option>
+                <option value="3">Rivertown College</option>
+                <option value="4">Crestview Business School</option>
+                <option value="5">Avalon Liberal Arts</option>
+            </select>
+            <input type="submit" value="submit">
         </form>
     </table>
     </main>
