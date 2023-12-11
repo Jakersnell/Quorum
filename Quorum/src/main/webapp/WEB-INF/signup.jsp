@@ -10,7 +10,7 @@
         <h1>Sign Up</h1>
         <br>
         <table>
-        <form action="signup.do">
+        <form action="signup.do" method="POST">
             <tr>
                 <th>
                     <label for="username">Username</label>
