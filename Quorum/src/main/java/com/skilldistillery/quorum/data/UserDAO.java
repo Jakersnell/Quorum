@@ -9,5 +9,7 @@ public interface UserDAO {
 	User createUser (User user);
 	
 	public User getUserById(int id);
+	
+	User getUserByUsername(String username);
 
 }
