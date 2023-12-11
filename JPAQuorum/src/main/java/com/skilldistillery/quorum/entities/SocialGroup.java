@@ -100,7 +100,7 @@ public class SocialGroup {
 	@Override
 	public String toString() {
 		return "SocialGroup [id=" + id + ", name=" + name + ", description=" + description + ", createdOn=" + createdOn
-				+ ", lastUpdate=" + lastUpdate + ", members=" + members + "]";
+				+ ", lastUpdate=" + lastUpdate + ", members.size()=" + members.size() + "]";
 	}
 
 	@Override

@@ -93,8 +93,8 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", contents=" + contents + ", createdOn=" + createdOn + ", sender=" + sender
-				+ ", receiver=" + receiver + "]";
+		return "Message [id=" + id + ", contents=" + contents + ", createdOn=" + createdOn + ", sender.getId()=" + sender.getId()
+				+ ", receiver.getId()=" + receiver.getId() + "]";
 	}
 
 	

@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.User;
@@ -27,10 +26,7 @@ public class UserController {
 
 	@GetMapping({ "/login", "login.do" })
 	public String loginGet(HttpSession session) {
-		if (session.getAttribute("loggedUser") != null) {
-			return "redirect:/home.do";
-		}
-		return "login";
+		return (session.getAttribute("loggedUser") == null) ? "login" : "redirect:/home.do";
 	}
 
 	@PostMapping({ "/login", "login.do" })
@@ -44,13 +40,30 @@ public class UserController {
 			if (searchedUser != null) {
 				session.setAttribute("loggedUser", searchedUser);
 			} else {
-				redirect = "redirect:/login.do"; //change to sign-up
+				redirect = "redirect:/login.do";
 			}
-			
+
 		}
 
 		return redirect;
 	}
 
-}
+	@GetMapping({ "/signup", "signup.do" })
+	public String signupGet(HttpSession session) {
+		return (session.getAttribute("loggedUser") == null) ? "signup" : "redirect:/home.do";
+	}
 
+	@PostMapping({ "/signup", "signup.do" })
+	public String signupPost(@ModelAttribute User user, HttpSession session) {
+		String redirect = "redirect:/signup.do";
+
+		if (session.getAttribute("loggedUser") == null) {
+			User createdUser = userDao.createUser(user);
+			session.setAttribute("loggedUser", createdUser);
+			redirect = "redirect:/home.do";
+
+		}
+
+		return redirect;
+	}
+}

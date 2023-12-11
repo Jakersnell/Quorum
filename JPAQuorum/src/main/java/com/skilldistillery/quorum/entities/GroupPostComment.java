@@ -106,7 +106,7 @@ public class GroupPostComment {
 	@Override
 	public String toString() {
 		return "GroupPostComment [id=" + id + ", contents=" + contents + ", createdOn=" + createdOn + ", lastUpdate="
-				+ lastUpdate + ", user=" + user + ", groupPostId=" + groupPostId + ", enabled=" + enabled + "]";
+				+ lastUpdate + ", user=" + user.getId() + ", groupPostId=" + groupPostId + ", enabled=" + enabled + "]";
 	}
 
 	@Override
