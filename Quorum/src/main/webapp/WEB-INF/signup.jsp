@@ -19,7 +19,7 @@
             <label for="lastName">Last Name</label>
             <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
             <label for="school">School</label>
-            <select name="school" id="school">
+            <select name="school" id="school" required>
                 <option value="1">Metropolitan Tech</option>
                 <option value="2">Harborview Arts College</option>
                 <option value="3">Rivertown College</option>
