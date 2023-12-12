@@ -3,6 +3,7 @@ package com.skilldistillery.quorum.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -71,7 +72,46 @@ public class UserController {
 
 		return mv;
 	}
+	
+	@GetMapping({ "/editProfile", "editProfile.do" })
+	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
+			ModelAndView mv) {
+		mv.setViewName("redirect:/home");
 
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
+		if (loggedUser != null) {
+			if (loggedUser.getId() == userID || loggedUser.getRole().equals("admin")) {
+				User accEdit = userDao.getUserById(userID);
+
+				mv.addObject("user", accEdit);
+				mv.setViewName("editProfile");
+
+			}
+		}
+
+		return mv;
+	}
+
+	@GetMapping({ "/update", "update.do" })
+	private ModelAndView userEditProfilePOST(@ModelAttribute User user, HttpSession session,
+			ModelAndView mv) {
+		
+		mv.setViewName("redirect:/error.do");
+		
+		if (hasAuth(user.getId(), (User)session.getAttribute("loggedUser"))) {
+			
+			mv.setViewName("redirect:/profile?userID="+user.getId());
+			user = userDao.update(user);
+			session.setAttribute("loggedUser", user);
+		}
+			
+		
+//		System.out.println(user);
+		
+		return mv;
+	}
+		
 	@PostMapping({ "/removeFollower", "removeFollower.do" })
 	private String userRemoveFollower(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "removeID") int removeID, HttpSession session) {
