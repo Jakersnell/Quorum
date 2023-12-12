@@ -42,7 +42,19 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User getUserById(int id) {
-		return em.find(User.class, id);
+		return getUserById(id, false);
+	}
+
+	@Override
+	public User getUserById(int id, boolean loadFollows) {
+		User user = em.find(User.class, id);
+		
+		if (loadFollows) {
+			user.getFollowers().size();
+			user.getFollowing().size();
+		}
+		
+		return user;
 	}
 
 	@Override
@@ -59,12 +71,5 @@ public class UserDaoImpl implements UserDAO {
 		return user;
 	}
 
-	@Override
-	public User loadFollowDetails(User user) {
-		User loadedUser = em.find(User.class, user.getId());
-		user.setFollowers(loadedUser.getFollowers());
-		user.setFollowing(loadedUser.getFollowing());
-		return user;
-	}
 
 }

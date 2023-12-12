@@ -10,8 +10,8 @@ public interface UserDAO {
 
 	User getUserById(int id);
 
-	User getUserByUsername(String username);
+	User getUserById(int id, boolean loadFollows);
 
-	User loadFollowDetails(User user);
+	User getUserByUsername(String username);
 
 }
