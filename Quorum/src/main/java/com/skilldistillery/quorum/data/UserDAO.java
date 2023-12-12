@@ -14,4 +14,15 @@ public interface UserDAO {
 
 	User getUserByUsername(String username);
 
+	User update(User user);
+
+	void setEnabled(int id, boolean status);
+
+	void changeRole(int id, String role);
+
+	boolean removeFollower(int userId, int followerId);
+
+	boolean removeFollowing(int followingId, int userId);
+
+	boolean addFollowing(int userId, int followingId);
 }
