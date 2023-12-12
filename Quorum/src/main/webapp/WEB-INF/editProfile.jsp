@@ -87,9 +87,9 @@ pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="jakarta.tags.core"%>
             <div class="row mb-3">
               <input
                 type="hidden"
-                class="userID"
-                name="userID"
-                id="userID"
+                class="id"
+                name="id"
+                id="id"
                 value="${user.id}"
               /><br />
             </div>

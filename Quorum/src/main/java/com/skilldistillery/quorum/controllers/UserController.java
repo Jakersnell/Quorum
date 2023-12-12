@@ -96,13 +96,18 @@ public class UserController {
 	@GetMapping({ "/update", "update.do" })
 	private ModelAndView userEditProfilePOST(@ModelAttribute User user, HttpSession session,
 			ModelAndView mv) {
-		mv.setViewName("redirect:/profile");
-		User loggedUser = (User) session.getAttribute("loggedUser");
 		
+		mv.setViewName("redirect:/error.do");
 		
-		User managedUser = userDao.getUserById(user.getId());
+		if (hasAuth(user.getId(), (User)session.getAttribute("loggedUser"))) {
+			
+			mv.setViewName("redirect:/profile?userID="+user.getId());
+			user = userDao.update(user);
+			session.setAttribute("loggedUser", user);
+		}
+			
 		
-		
+//		System.out.println(user);
 		
 		return mv;
 	}
