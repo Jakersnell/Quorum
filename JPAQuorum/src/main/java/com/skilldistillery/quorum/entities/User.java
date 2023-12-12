@@ -59,26 +59,26 @@ public class User {
 
 	@Column(name = "profile_image_url")
 	private String profileImageUrl;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "school_id")
 	private School school;
-	
+
 	@ManyToMany
-	@JoinTable(
-			name = "user_follow",
-			joinColumns=@JoinColumn(name = "user_id"),
-			inverseJoinColumns=@JoinColumn(name = "following_id")
-			)
+	@JoinTable(name = "user_follow", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "following_id"))
 	private List<User> following;
-	
-	@OneToMany(mappedBy="user")
+
+	@ManyToMany
+	@JoinTable(name = "user_follow", joinColumns = @JoinColumn(name = "following_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> followers;
+
+	@OneToMany(mappedBy = "user")
 	private List<PlannerItem> items;
-	
-	@OneToMany(mappedBy="sender")
+
+	@OneToMany(mappedBy = "sender")
 	private List<Message> sentMessages;
-	
-	@OneToMany(mappedBy="receiver")
+
+	@OneToMany(mappedBy = "receiver")
 	private List<Message> receivedMessages;
 
 	public User() {
@@ -207,6 +207,14 @@ public class User {
 
 	public List<PlannerItem> getItems() {
 		return items;
+	}
+
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
 	}
 
 	public void setItems(List<PlannerItem> items) {
