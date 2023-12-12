@@ -8,6 +8,10 @@
 	<jsp:include page="navbar.jsp" />
 	<c:choose>
 		<c:when test="${not empty loggedUser}">
+			<h2>MyAccount</h2>
+			<h3>
+				<c:out value="${loggedUser.firstName} ${loggedUser.lastName}"></c:out>
+			</h3>
 			<c:out value="${loggedUser}"></c:out>
 		</c:when>
 		<c:otherwise>

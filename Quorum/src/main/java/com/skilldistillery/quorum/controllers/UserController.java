@@ -34,7 +34,7 @@ public class UserController {
 
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		if (loggedUser != null && userID == loggedUser.getId()) {
-			mav.setViewName("redirect:/myProfile.do");
+			mav.setViewName("redirect:/account.do");
 		} else {
 			User user = userDao.getUserById(userID);
 			if (user != null) {

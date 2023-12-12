@@ -23,6 +23,10 @@ public class UserDaoImpl implements UserDAO {
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("username", username)
 					.setParameter("password", password).getSingleResult();
+			user.getFollowing().size();
+			user.getSentMessages().size();
+			user.getReceivedMessages().size();
+			user.getItems().size();
 		} catch (Exception e) {
 			System.err.print("Invalid user: " + username + "\n");
 			e.printStackTrace();
