@@ -15,13 +15,6 @@
 					<c:out value="${loggedUser.firstName} ${loggedUser.lastName}"></c:out>
 				</h3>
 				<hr>
-				<c:out value="${loggedUser}"></c:out>
-				<hr>
-				<h3>Following</h3>
-				<c:forEach var="follower" items="${loggedUser.following}">
-					<h2>${follower.firstName}&nbsp;${follower.lastName}</h2>
-					<hr>
-				</c:forEach>
 			</c:when>
 			<c:otherwise>
 				<h4>User Not Found!</h4>
