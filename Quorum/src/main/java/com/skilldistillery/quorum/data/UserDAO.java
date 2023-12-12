@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.List;
+
 import com.skilldistillery.quorum.entities.User;
 
 public interface UserDAO {
@@ -11,5 +13,9 @@ public interface UserDAO {
 	public User getUserById(int id);
 
 	User getUserByUsername(String username);
+
+	List<User> getUserFollowers(User user);
+	
+	List<User> getUserFollowing(User user);
 
 }
