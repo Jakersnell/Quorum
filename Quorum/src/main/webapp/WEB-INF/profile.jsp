@@ -13,6 +13,9 @@
 				<h3>
 					<c:out value="${user.firstName} ${user.lastName}"></c:out>
 				</h3>
+				
+				<a class="nav-link" href="getFollow.do?userID=${user.id}">followers</a>
+				
 			</div>
 			<div class="col-2"></div>
 			<div class="col-2">
