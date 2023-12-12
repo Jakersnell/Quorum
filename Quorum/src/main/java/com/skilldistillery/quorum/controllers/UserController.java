@@ -58,7 +58,7 @@ public class UserController {
 	@GetMapping({ "/signup", "signup.do" })
 	public ModelAndView signupGet(HttpSession session, ModelAndView model) {
 		model.setViewName("signup");
-		if (session.getAttribute("loggedUser") == null) {
+		if (session.getAttribute("loggedUser") != null) {
 			model.setViewName("redirect:/home.do");
 		}
 
