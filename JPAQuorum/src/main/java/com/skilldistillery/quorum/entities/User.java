@@ -247,12 +247,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "\nUser [id=" + id + "\nusername=" + username + "\npassword=" + password + "\ncreatedOn=" + createdOn
-				+ "\nemail=" + email + "\nlastUpdate=" + lastUpdate + "\nenabled=" + enabled + "\nrole=" + role
-				+ "\nfirstName=" + firstName + "\nlastName=" + lastName + "\nbiography=" + biography + "\ndateOfBirth="
-				+ dateOfBirth + "\nprofileImageUrl=" + profileImageUrl + "\nschool.getId()=" + school.getId() + "\nfollowing.size()="
-				+ following.size() + "\nitems.size()=" + items.size() + "]\n";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
+				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
+				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + "]";
 	}
-
-
+	
 }
