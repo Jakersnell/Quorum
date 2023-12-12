@@ -98,7 +98,10 @@ public class UserDaoImpl implements UserDAO {
 		User user = em.find(User.class, userId);
 		User follower = em.find(User.class, followerId);
 		if (user.getFollowers().contains(follower)) {
-			user.removeFollower(follower);
+			user.getFollowers().remove(follower);
+			if (follower.getFollowing().contains(follower)) {
+				follower.getFollowing().remove(follower);
+			}
 			success = true;
 		}
 		return success;
@@ -108,8 +111,11 @@ public class UserDaoImpl implements UserDAO {
 		boolean success = false;
 		User user = em.find(User.class, userId);
 		User following = em.find(User.class, followingId);
-		if (user.getFollowers().contains(following)) {
-			user.removeFollowing(following);
+		if (user.getFollowing().contains(following)) {
+			user.getFollowing().remove(following);
+			if (following.getFollowers().contains(following)) {
+				following.getFollowers().remove(following);
+			}
 			success = true;
 		}
 		return success;
@@ -119,8 +125,11 @@ public class UserDaoImpl implements UserDAO {
 		boolean success = false;
 		User user = em.find(User.class, userId);
 		User following = em.find(User.class, followingId);
-		if (!user.getFollowers().contains(following)) {
-			user.addFollowing(following);
+		if (!user.getFollowing().contains(following)) {
+			user.getFollowing().add(following);
+			if (!following.getFollowers().contains(user)) {
+				following.getFollowers().add(user);
+			}
 			success = true;
 		}
 		return success;

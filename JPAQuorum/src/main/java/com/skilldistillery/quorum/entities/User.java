@@ -206,23 +206,6 @@ public class User {
 		this.following = following;
 	}
 
-	public void addFollowing(User user) {
-		if (!following.contains(user)) {
-			following.add(user);
-		}
-		if (!user.getFollowers().contains(this)) {
-			user.addFollower(this);
-		}
-	}
-
-	public void removeFollowing(User user) {
-		if (following.contains(user)) {
-			following.remove(user);
-		}
-		if (user.getFollowing().contains(this)) {
-			user.removeFollower(this);
-		}
-	}
 
 	public List<PlannerItem> getItems() {
 		return items;
@@ -236,23 +219,6 @@ public class User {
 		this.followers = followers;
 	}
 
-	public void addFollower(User user) {
-		if (!followers.contains(user)) {
-			followers.add(user);
-		}
-		if (!user.getFollowing().contains(this)) {
-			user.addFollowing(this);
-		}
-	}
-
-	public void removeFollower(User user) {
-		if (followers.contains(user)) {
-			followers.remove(user);
-		}
-		if (user.getFollowers().contains(this)) {
-			user.removeFollowing(this);
-		}
-	}
 
 	public void setItems(List<PlannerItem> items) {
 		this.items = items;
