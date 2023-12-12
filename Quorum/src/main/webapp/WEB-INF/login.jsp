@@ -9,11 +9,12 @@
 <body>
 	<jsp:include page="navbar.jsp" />
 
-	<div class="container mt-3 mb-3 ">
+	<div class="container">
 
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6 ">
+				<div class="xl-spacer"></div>
 				<form action="login.do" method="post">
 					<div class="row mb-3">
 
@@ -21,12 +22,12 @@
 							placeholder="username" required>
 					</div>
 					<div class="row  mb-3">
-						<input class="form-control login-form" type="password" name="password"
-							placeholder="password" />
+						<input class="form-control login-form" type="password"
+							name="password" placeholder="password" />
 					</div>
 					<div class="row  mb-3">
-						<button class="btn btn-primary form-control login-form" type="submit">Log
-							In</button>
+						<button class="btn btn-primary form-control login-form"
+							type="submit">Log In</button>
 					</div>
 				</form>
 			</div>
