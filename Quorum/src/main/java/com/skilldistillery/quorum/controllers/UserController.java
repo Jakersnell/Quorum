@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.SchoolDAO;
@@ -68,12 +69,12 @@ public class UserController {
 	}
 
 	@PostMapping({ "/signup", "signup.do" })
-	public String signupPost(@ModelAttribute User user, HttpSession session) {
+	public String signupPost(@ModelAttribute User user, HttpSession session, @RequestParam(name="schoolID") int schoolID) {
 		String redirect = "redirect:/signup.do";
 
 		if (session.getAttribute("loggedUser") == null) {
 			
-			School selectedSchool = schoolDao.getById(user.getSchool().getId());
+			School selectedSchool = schoolDao.getById(schoolID);
 			user.setSchool(selectedSchool);
 			
 			User createdUser = userDao.createUser(user);

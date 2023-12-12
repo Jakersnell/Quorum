@@ -19,12 +19,10 @@
             <label for="lastName">Last Name</label>
             <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
             <label for="school">School</label>
-            <select name="school" id="school" required>
-                <option value="1">Metropolitan Tech</option>
-                <option value="2">Harborview Arts College</option>
-                <option value="3">Rivertown College</option>
-                <option value="4">Crestview Business School</option>
-                <option value="5">Avalon Liberal Arts</option>
+            <select name="schoolID" id="schoolID" required>
+                <c:forEach items="${school}" var = "s">
+                    <option value="${s.id}">${s.name}</option>
+                </c:forEach>
             </select>
             <input type="submit" value="submit">
         </form>
