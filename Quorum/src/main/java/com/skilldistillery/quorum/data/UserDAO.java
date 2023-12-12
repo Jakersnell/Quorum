@@ -13,5 +13,7 @@ public interface UserDAO {
 	User getUserById(int id, boolean loadFollows);
 
 	User getUserByUsername(String username);
+	
+	public void updateUser(int id, User user);
 
 }

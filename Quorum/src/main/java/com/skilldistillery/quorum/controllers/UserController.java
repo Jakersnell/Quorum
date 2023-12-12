@@ -3,6 +3,8 @@ package com.skilldistillery.quorum.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,6 +70,40 @@ public class UserController {
 		mv.addObject("user", user);
 		mv.addObject("userEditAuth", loggedUser != null && userID == user.getId());
 
+		return mv;
+	}
+
+	@GetMapping({ "/editProfile", "editProfile.do" })
+	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
+			ModelAndView mv) {
+		mv.setViewName("redirect:/home");
+
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
+		if (loggedUser != null) {
+			if (loggedUser.getId() == userID || loggedUser.getRole().equals("admin")) {
+				User accEdit = userDao.getUserById(userID);
+
+				mv.addObject("user", accEdit);
+				mv.setViewName("editProfile");
+
+			}
+		}
+
+		return mv;
+	}
+
+	@GetMapping({ "/update", "update.do" })
+	private ModelAndView userEditProfilePOST(@ModelAttribute User user, HttpSession session,
+			ModelAndView mv) {
+		mv.setViewName("redirect:/profile");
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		
+		
+		User managedUser = userDao.getUserById(user.getId());
+		
+		
+		
 		return mv;
 	}
 }

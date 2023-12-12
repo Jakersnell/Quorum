@@ -70,6 +70,13 @@ public class UserDaoImpl implements UserDAO {
 		}
 		return user;
 	}
+	
+	@Override
+	public void updateUser(int id, User user) {
+		User managedUser = em.find(User.class, id);
+		managedUser = user;
+		em.persist(managedUser);
+	}
 
 
 }

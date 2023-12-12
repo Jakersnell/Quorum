@@ -20,7 +20,7 @@
 			<div class="col-2"></div>
 			<div class="col-2">
 				<c:if test="${userEditAuth}">
-					<button class="form-control btn btn-info">Edit Profile</button>
+					<a class="btn btn-info" role="button" href="editProfile.do?userID=${user.id}">Edit Profile</a>
 				</c:if>
 			</div>
 			<div class="col-2"></div>
