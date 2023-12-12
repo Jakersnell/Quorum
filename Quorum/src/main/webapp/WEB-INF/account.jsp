@@ -12,7 +12,7 @@
 				<h2>MyAccount</h2>
 				<hr>
 				<h3>
-					<c:out value="${loggedUser.firstName}&nbsp;${loggedUser.lastName}"></c:out>
+					<c:out value="${loggedUser.firstName} ${loggedUser.lastName}"></c:out>
 				</h3>
 				<hr>
 				<c:out value="${loggedUser}"></c:out>
