@@ -1,7 +1,5 @@
 package com.skilldistillery.quorum.data;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.User;
@@ -35,8 +33,11 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User createUser(User user) {
-		em.persist(user);
-
+		if (authenticateUser(user.getUsername(), user.getPassword()) == null) {
+			em.persist(user);
+		} else {
+			user = null;
+		}
 		return user;
 	}
 
@@ -48,12 +49,12 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User getUserById(int id, boolean loadFollows) {
 		User user = em.find(User.class, id);
-		
+
 		if (loadFollows) {
 			user.getFollowers().size();
 			user.getFollowing().size();
 		}
-		
+
 		return user;
 	}
 
@@ -78,5 +79,70 @@ public class UserDaoImpl implements UserDAO {
 		em.persist(managedUser);
 	}
 
+	@Override
+	public User update(User user) {
+
+		// "the code can't hurt you.."
+
+		// the code:
+
+		User managed = em.find(User.class, user.getId());
+
+		managed.setFirstName(user.getFirstName());
+		managed.setLastName(user.getLastName());
+		managed.setBiography(user.getBiography());
+		managed.setEmail(user.getEmail());
+		managed.setPassword(user.getPassword());
+		managed.setEnabled(user.isEnabled());
+		managed.setProfileImageUrl(user.getProfileImageUrl());
+		managed.setUsername(user.getUsername());
+
+		return user;
+	}
+
+	public boolean removeFollower(int userId, int followerId) {
+		boolean success = false;
+		User user = em.find(User.class, userId);
+		User follower = em.find(User.class, followerId);
+		if (user.getFollowers().contains(follower)) {
+			user.removeFollower(follower);
+			success = true;
+		}
+		return success;
+	}
+
+	public boolean removeFollowing(int userId, int followingId) {
+		boolean success = false;
+		User user = em.find(User.class, userId);
+		User following = em.find(User.class, followingId);
+		if (user.getFollowers().contains(following)) {
+			user.removeFollowing(following);
+			success = true;
+		}
+		return success;
+	}
+
+	public boolean addFollowing(int userId, int followingId) {
+		boolean success = false;
+		User user = em.find(User.class, userId);
+		User following = em.find(User.class, followingId);
+		if (!user.getFollowers().contains(following)) {
+			user.addFollowing(following);
+			success = true;
+		}
+		return success;
+	}
+
+	@Override
+	public void setEnabled(int id, boolean status) {
+		User user = em.find(User.class, id);
+		user.setEnabled(status);
+	}
+
+	@Override
+	public void changeRole(int id, String role) {
+		User user = em.find(User.class, id);
+		user.setRole(role);
+	}
 
 }
