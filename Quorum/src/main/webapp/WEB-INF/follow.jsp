@@ -9,42 +9,56 @@
 
 	<div class="container follow-container mt-4">
 		<div class="row">
-			<div class="row-6 text-center">
-				<h3>Following</h3>
-			</div>
-			<div class="row-6 text-center">
-				<h3>Followers</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6 scroll-container">
-				<c:forEach var="follower" items="${followers}">
-					<div class="container follow-item row">
-						<div class="col-10 text-center">
-							<h3>${follower.firstName}&nbsp;${follower.lastName}</h3>
-						</div>
-						<div class="col-2">
-							<c:if test="${editUserAuth}">
-								<button class="form-control btn btn-secondary">remove</button>
-							</c:if>
-						</div>
+			<div class="col-2"></div>
+			<div class="col-4">
+				<div class="row">
+					<div class="col-10">
+						<h2 class="table-title">Followers</h2>
 					</div>
-				</c:forEach>
+					<div class="col-2"></div>
+				</div>
+				<hr>
+				<div class="row scroll-container">
+					<c:forEach var="follower" items="${user.followers}">
+						<div class="follow-item row">
+							<div class="col-10">
+								<h3>${follower.firstName}&nbsp;${follower.lastName}</h3>
+							</div>
+							<div class="col-2">
+								<c:if test="${userEditAuth}">
+									<button
+										class="form-control btn btn-secondary remove-follow-btn">X</button>
+								</c:if>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
-			<div class="col-6 scroll-container">
-				<c:forEach var="follow" items="${following}">
-					<div class="container follow-item row">
-						<div class="col-10 text-center">
-							<h3>${follow.firstName}&nbsp;${follow.lastName}</h3>
-						</div>
-						<div class="col-2">
-							<c:if test="${editUserAuth}">
-								<button class="form-control btn btn-secondary">remove</button>
-							</c:if>
-						</div>
+			<div class="col-4">
+				<div class="row">
+					<div class="col-10">
+						<h2 class="table-title">Following</h2>
 					</div>
-				</c:forEach>
+					<div class="col-2"></div>
+				</div>
+				<hr>
+				<div class="row scroll-container">
+					<c:forEach var="follow" items="${user.following}">
+						<div class="follow-item row">
+							<div class="col-10">
+								<h3>${follow.firstName}&nbsp;${follow.lastName}</h3>
+							</div>
+							<div class="col-2">
+								<c:if test="${userEditAuth}">
+									<button
+										class="form-control btn btn-secondary remove-follow-btn">X</button>
+								</c:if>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
+			<div class="col-2"></div>
 		</div>
 	</div>
 

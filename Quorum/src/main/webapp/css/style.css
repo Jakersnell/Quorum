@@ -27,3 +27,20 @@ a {
 .navbar-collapse {
 	justify-content: center;
 }
+
+.login-form {
+	font-size: x-large;
+}
+
+.remove-follow-btn {
+	text-align: center;
+
+	vertical-align: middle;
+	padding: 0;
+	height: 60%;
+	width: 55%;
+}
+
+.xl-spacer {
+	padding-top: 10rem;
+}
