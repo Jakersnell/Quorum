@@ -19,7 +19,7 @@ import com.skilldistillery.quorum.entities.User;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class UserController {
+public class LoginController {
 
 	@Autowired
 	private UserDAO userDao;
