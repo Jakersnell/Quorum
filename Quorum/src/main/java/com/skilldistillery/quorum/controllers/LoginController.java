@@ -89,7 +89,7 @@ public class LoginController {
 	public ModelAndView logout(HttpSession session, ModelAndView model) {
 		session.removeAttribute("loggedUser");
 		String msg = "Thanks for coming!";
-		session.setAttribute("logoutMessage", msg);
+		session.invalidate();
 		model.setViewName("redirect:/home.do");
 		return model;
 	}
