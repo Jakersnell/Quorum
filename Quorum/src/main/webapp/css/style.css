@@ -27,3 +27,7 @@ a {
 .navbar-collapse {
 	justify-content: center;
 }
+
+.login-form {
+	font-size: x-large;
+}

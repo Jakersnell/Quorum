@@ -1,5 +1,6 @@
 package com.skilldistillery.quorum.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,35 +58,26 @@ public class UserController {
 	@GetMapping({ "/follow", "getFollow.do" })
 	private ModelAndView userProfileGetFollow(@RequestParam(name = "userID") int userID, HttpSession session,
 			ModelAndView mv) {
-		
+
 		mv.setViewName("follow");
-		Boolean edit = false;
-		
+
 		User user = userDao.getUserById(userID);
-		List<User> following = null;
-		List<User> followers = null;
-		
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		
-
-
-
-		if (loggedUser != null && userID == loggedUser.getId()) {
-			edit = true;
-			user = loggedUser;
-		}
-		
-		if (user != null) {
-			following = userDao.getUserFollowing(user);
-			followers = userDao.getUserFollowers(user);
-		} else {
+		if (user == null) {
 			mv.setViewName("not-found");
+		} else {
+			userDao.loadFollowDetails(user);
 		}
-		
+
+		HashMap<String, List<User>> followDetails = new HashMap<>();
+		followDetails.put("Followers", user.getFollowers());
+		followDetails.put("Following", user.getFollowing());
+
 		mv.addObject("user", user);
-		mv.addObject("following", following);
-		mv.addObject("followers", followers);
-		mv.addObject("userEditAuth", edit);
+		mv.addObject("followDetails", followDetails);
+		mv.addObject("userEditAuth", loggedUser != null && userID == user.getId());
+
 		return mv;
 	}
 }
