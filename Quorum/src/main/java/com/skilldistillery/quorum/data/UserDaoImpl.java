@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.User;
@@ -55,6 +57,18 @@ public class UserDaoImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		return user;
+	}
+
+	@Override
+	public List<User> getUserFollowers(User user) {
+		user.getFollowers().size();
+		return user.getFollowers();
+	}
+	
+	@Override
+	public List<User> getUserFollowing(User user) {
+		user.getFollowing().size();
+		return user.getFollowing();
 	}
 
 }
