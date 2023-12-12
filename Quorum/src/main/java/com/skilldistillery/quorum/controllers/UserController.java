@@ -1,8 +1,5 @@
 package com.skilldistillery.quorum.controllers;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,21 +58,14 @@ public class UserController {
 
 		mv.setViewName("follow");
 
-		User user = userDao.getUserById(userID);
+		User user = userDao.getUserById(userID, true);
 		User loggedUser = (User) session.getAttribute("loggedUser");
-		
+
 		if (user == null) {
 			mv.setViewName("not-found");
-		} else {
-			userDao.loadFollowDetails(user);
 		}
 
-		HashMap<String, List<User>> followDetails = new HashMap<>();
-		followDetails.put("Followers", user.getFollowers());
-		followDetails.put("Following", user.getFollowing());
-
 		mv.addObject("user", user);
-		mv.addObject("followDetails", followDetails);
 		mv.addObject("userEditAuth", loggedUser != null && userID == user.getId());
 
 		return mv;
