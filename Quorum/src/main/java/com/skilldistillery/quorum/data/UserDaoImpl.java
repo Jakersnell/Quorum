@@ -60,15 +60,11 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> getUserFollowers(User user) {
-		user.getFollowers().size();
-		return user.getFollowers();
-	}
-	
-	@Override
-	public List<User> getUserFollowing(User user) {
-		user.getFollowing().size();
-		return user.getFollowing();
+	public User loadFollowDetails(User user) {
+		User loadedUser = em.find(User.class, user.getId());
+		user.setFollowers(loadedUser.getFollowers());
+		user.setFollowing(loadedUser.getFollowing());
+		return user;
 	}
 
 }
