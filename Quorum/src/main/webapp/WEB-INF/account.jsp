@@ -7,8 +7,8 @@
 <body>
 	<jsp:include page="navbar.jsp" />
 	<c:choose>
-		<c:when test="${not empty user}">
-			<c:out value="${user}"></c:out>
+		<c:when test="${not empty loggedUser}">
+			<c:out value="${loggedUser}"></c:out>
 		</c:when>
 		<c:otherwise>
 			<h3>User Not Found!</h3>

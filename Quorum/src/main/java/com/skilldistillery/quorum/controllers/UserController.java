@@ -17,9 +17,9 @@ public class UserController {
 	@Autowired
 	private UserDAO userDao;
 
-	@GetMapping({ "/my-profile", "myProfile.do" })
+	@GetMapping({ "/account", "account.do" })
 	private String myProfileGet(HttpSession session) {
-		String view = "my-profile";
+		String view = "account";
 		if (session.getAttribute("loggedUser") == null) {
 			return "redirect:/login.do";
 		}
