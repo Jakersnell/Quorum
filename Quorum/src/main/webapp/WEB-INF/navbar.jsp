@@ -25,9 +25,11 @@
 						href="home.do">Home</a></li>
 					<c:choose>
 						<c:when test="${not empty loggedUser}">
+							<li class="nav-item"><a class="nav-link" href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
 							<li class="nav-item"><a class="nav-link" href="account.do">Account</a>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="logout.do">Logout</a></li>
+							
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item"><a class="nav-link" href="login.do">Login</a>

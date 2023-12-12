@@ -26,23 +26,29 @@ public class UserController {
 		return view;
 	}
 
-	@GetMapping({ "/user-profile", "userProfile.do" })
+	@GetMapping({ "/profile", "userProfile.do" })
 	private ModelAndView userProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
-			ModelAndView mav) {
+			ModelAndView mv) {
 
-		mav.setViewName("not-found");
+		mv.setViewName("not-found");
+		
+		Boolean edit = false;
 
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		if (loggedUser != null && userID == loggedUser.getId()) {
-			mav.setViewName("redirect:/account.do");
+			edit = true;
+			mv.addObject("user", loggedUser);
+			mv.addObject("userEditAuth", edit);
+			mv.setViewName("profile");
 		} else {
 			User user = userDao.getUserById(userID);
 			if (user != null) {
-				mav.addObject("user", user);
-				mav.setViewName("user-profile");
+				mv.addObject("user", user);
+				mv.addObject("userEditAuth", edit);
+				mv.setViewName("profile");
 			}
 		}
 
-		return mav;
+		return mv;
 	}
 }
