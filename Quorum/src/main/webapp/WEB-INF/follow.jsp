@@ -26,8 +26,10 @@
 							</div>
 							<div class="col-2">
 								<c:if test="${userEditAuth}">
-									<button
-										class="form-control btn btn-secondary remove-follow-btn">X</button>
+									<form action="removeFollower.do" method="post">
+										<button
+											class="form-control btn btn-secondary remove-follow-btn">X</button>
+									</form>
 								</c:if>
 							</div>
 						</div>

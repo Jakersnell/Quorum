@@ -3,6 +3,7 @@ package com.skilldistillery.quorum.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -66,8 +67,34 @@ public class UserController {
 		}
 
 		mv.addObject("user", user);
-		mv.addObject("userEditAuth", loggedUser != null && userID == user.getId());
+		mv.addObject("userEditAuth", hasAuth(userID, loggedUser));
 
 		return mv;
+	}
+
+	@PostMapping({ "/removeFollower", "removeFollower.do" })
+	private String userRemoveFollower(@RequestParam(name = "userID") int userID,
+			@RequestParam(name = "removeID") int removeID, HttpSession session) {
+		String redirect = "redirect:/error.do";
+		if (hasAuth(userID, (User) session.getAttribute("loggedUser"))) {
+			userDao.removeFollower(userID, userID);
+			redirect = "redirect:/getFollow.do?userID=" + userID;
+		}
+		return redirect;
+	}
+
+	@PostMapping({ "/removeFollowing", "removeFollowing.do" })
+	private String userRemoveFollowing(@RequestParam(name = "userID") int userID,
+			@RequestParam(name = "removeID") int removeID, HttpSession session) {
+		String redirect = "redirect:/error.do";
+		if (hasAuth(userID, (User) session.getAttribute("loggedUser"))) {
+			userDao.removeFollowing(userID, userID);
+			redirect = "redirect:/getFollow.do?userID=" + userID;
+		}
+		return redirect;
+	}
+
+	private boolean hasAuth(int accessUserId, User user) {
+		return user != null && (accessUserId == user.getId() || user.getRole().equals("admin"));
 	}
 }
