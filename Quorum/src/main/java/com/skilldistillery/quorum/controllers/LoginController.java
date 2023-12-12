@@ -84,4 +84,13 @@ public class LoginController {
 
 		return redirect;
 	}
+	
+	@GetMapping({ "/logout", "logout.do" })
+	public ModelAndView logout(HttpSession session, ModelAndView model) {
+		session.removeAttribute("loggedUser");
+		String msg = "Thanks for coming!";
+		session.setAttribute("logoutMessage", msg);
+		model.setViewName("redirect:/home.do");
+		return model;
+	}
 }

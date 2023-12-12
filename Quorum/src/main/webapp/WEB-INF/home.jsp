@@ -5,10 +5,13 @@
 <jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navbar.jsp" />
-<h1>Welcome To Quorum!</h1>
+	
+	<c:if test="${empty loggedUser}">
+		<h1>Welcome To Quorum!</h1>
+	</c:if>
 <br>
 	<c:if test="${not empty loggedUser}">
-		Hello, <c:out value="${loggedUser.firstName}">!</c:out>
+		<h1>Hello, <c:out value="${loggedUser.firstName}">!</c:out></h1>
 	</c:if>
 
 
