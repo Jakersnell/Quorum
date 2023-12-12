@@ -8,13 +8,31 @@
 
 <body>
 	<jsp:include page="navbar.jsp" />
-	<h2>Log In</h2>
 
-	<form action="login.do" method="post">
-		<input type="text" name="username" required> <input type="password"
-			name="password" /> <input type="submit" value="Log In" required>
-	</form>
+	<div class="container mt-3 mb-3 ">
 
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6 ">
+				<form action="login.do" method="post">
+					<div class="row mb-3">
+
+						<input class="form-control login-form" type="text" name="username"
+							placeholder="username" required>
+					</div>
+					<div class="row  mb-3">
+						<input class="form-control login-form" type="password" name="password"
+							placeholder="password" />
+					</div>
+					<div class="row  mb-3">
+						<button class="btn btn-primary form-control login-form" type="submit">Log
+							In</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 
