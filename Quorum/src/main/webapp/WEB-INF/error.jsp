@@ -12,7 +12,7 @@
 			<div class="col-4"></div>
 			<div class="col-4">
 				<div class="xl-spacer">
-					<h1>Sorry... We couldn't find that!</h1>
+					<h1>Sorry an error occured!</h1>
 				</div>
 			</div>
 			<div class="col-4"></div>
