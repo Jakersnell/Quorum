@@ -6,14 +6,23 @@
 <jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navbar.jsp" />
-	<c:choose>
-		<c:when test="${not empty user}">
-			<c:out value="${user}"></c:out>
-		</c:when>
-		<c:otherwise>
-			<h3>User Not Found!</h3>
-		</c:otherwise>
-	</c:choose>
+
+	<div class="container user-profile mt-5">
+		<div class="row">
+			<div class="col-6 text-center">
+				<h3>
+					<c:out value="${user.firstName} ${user.lastName}"></c:out>
+				</h3>
+			</div>
+			<div class="col-2"></div>
+			<div class="col-2">
+				<c:if test="${userEditAuth}">
+					<button class="form-control btn btn-info">Edit Profile</button>
+				</c:if>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>
