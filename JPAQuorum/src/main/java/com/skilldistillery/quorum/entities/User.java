@@ -254,22 +254,22 @@ public class User {
 		return id == other.id;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
-				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
-				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + ", school.getId()=" + school.getId()
-				+ ", following.size()=" + following.size() + ", items.size()=" + items.size() + ", sentMessages.size()="
-				+ sentMessages.size() + ", receivedMessages.size()=" + receivedMessages.size() + "]";
-	}
-
 //	@Override
 //	public String toString() {
 //		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
 //				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
 //				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
-//				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + "]";
+//				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + ", school.getId()=" + school.getId() + ", following.size()="
+//				+ following.size() + ", items.size()=" + items.size() + ", sentMessages.size()=" + sentMessages.size() + ", receivedMessages.size()="
+//				+ receivedMessages.size() + "]";
 //	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
+				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
+				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + "]";
+	}
+	
 }
