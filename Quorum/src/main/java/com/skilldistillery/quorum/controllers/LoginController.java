@@ -27,10 +27,6 @@ public class LoginController {
 	@Autowired
 	private SchoolDAO schoolDao;
 
-	@GetMapping({ "/", "home.do" })
-	public String home(Model model) {
-		return "home";
-	}
 
 	@GetMapping({ "/login", "login.do" })
 	public String loginGet(HttpSession session) {
