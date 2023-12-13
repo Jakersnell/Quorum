@@ -121,6 +121,7 @@ pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 		</div>
 		<div class="col-2">
 			<!-- column 6 -->
+			
 		</div>
 	</div>
 	  
