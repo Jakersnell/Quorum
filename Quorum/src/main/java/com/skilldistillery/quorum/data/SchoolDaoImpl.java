@@ -90,7 +90,7 @@ public class SchoolDaoImpl implements SchoolDAO {
 	@Override
 	public List<School> searchByQuery(String query) {
 		query = "%" + query + "%";
-		String jpql = "SELECT s FROM School s WHERE s.id LIKE :query OR s.name LIKE :query OR s.description LIKE :query AND s.enabled = true";
+		String jpql = "SELECT s FROM School s WHERE s.name LIKE :query OR s.description LIKE :query AND s.enabled = true";
         return em.createQuery(jpql, School.class)
                 .setParameter("query", query)
                 .getResultList();

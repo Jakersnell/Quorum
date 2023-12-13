@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.quorum.data.SchoolDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ public class GeneralController {
 	private UserDAO userDao;
 	
 	@Autowired
-	private UserDAO schoolDao;
+	private SchoolDAO schoolDao;
 
 	@GetMapping({ "/error", "error.do" })
 	public String errorOccured() {
