@@ -202,7 +202,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `message` ;
 
 CREATE TABLE IF NOT EXISTS `message` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `contents` VARCHAR(500) NULL,
   `created_on` DATETIME NULL,
   `sender_id` INT NOT NULL,
@@ -277,7 +277,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `group_post_comment` ;
 
 CREATE TABLE IF NOT EXISTS `group_post_comment` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `contents` TEXT NULL,
   `created_on` DATETIME NULL,
   `last_update` DATETIME NULL,
@@ -420,7 +420,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_u
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (23, 'ethanjohnson', 'password123', '2023-01-23 08:00:00', 'ethan.johnson@email.com', '2023-04-01 10:00:00', 1, 'student', 'Ethan', 'Johnson', 'Biography of Ethan \nJohnson', '2003-07-28', 'http://example.com/ethanjohnson.jpg', 5);
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (24, 'madisonsmith', 'password123', '2023-01-24 08:00:00', 'madison.smith@email.com', '2023-04-01 10:30:00', 1, 'student', 'Madison', 'Smith', 'Biography of Madison \nSmith', '2004-06-02', 'http://example.com/madisonsmith.jpg', 5);
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (25, 'oliverwilliams', 'password123', '2023-01-25 08:00:00', 'oliver.williams@email.com', '2023-04-01 11:00:00', 1, 'student', 'Oliver', 'Williams', 'Biography of Oliver \nWilliams', '2005-05-08', 'http://example.com/oliverwilliams.jpg', 5);
-INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (26, 'qadmin', 'admin123', '2023-01-25 08:00:00', 'admin@quorum.com', '2023-04-01 11:00:00', 1, 'admin', 'admin', 'admin', '', '2000-05-08', '', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (26, 'admin', 'admin123', '2023-01-25 08:00:00', 'admin@quorum.com', '2023-01-25 08:00:00', 1, 'admin', NULL, NULL, NULL, NULL, NULL, NULL);
+
 
 COMMIT;
 
