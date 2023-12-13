@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class SchoolDAOImpl implements SchoolDAO {
+public class SchoolDaoImpl implements SchoolDAO {
 
 	@PersistenceContext
 	private EntityManager em;

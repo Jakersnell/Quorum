@@ -6,6 +6,8 @@ import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.Professor;
 import com.skilldistillery.quorum.entities.School;
 
+import jakarta.persistence.EntityManager;
+
 public interface SchoolDAO {
 
 	List<School> getAll();
