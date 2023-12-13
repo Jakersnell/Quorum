@@ -37,12 +37,12 @@ public class GeneralController {
 		
 		ModelAndView mav = new ModelAndView("search");
 
-//		if (session.getAttribute("loggedUser") == null) {
-//			mav.setViewName("redirect:/login.do");
-//		} else {
+		if (session.getAttribute("loggedUser") == null) {
+			mav.setViewName("redirect:/login.do");
+		} else {
 			mav.addObject("userResults", userDao.searchByQuery(query));
 			mav.addObject("query", query);
-//		}
+		}
 
 		return mav;
 	}

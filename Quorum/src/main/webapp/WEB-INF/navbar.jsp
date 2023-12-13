@@ -18,38 +18,41 @@
 			<a class="nav-link" aria-current="page" href="home.do"><img
 				id="navbar-logo-img" alt="logo image" src="img/logo.png"></a>
 		</div>
-		<div class="col-5">
-			<div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
+		<div class="col-2">
+			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="home.do">Home</a></li>
-					<c:choose>
-						<c:when test="${not empty loggedUser}">
-							<li class="nav-item"><a class="nav-link" href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
-							<li class="nav-item"><a class="nav-link" href="account.do">Account</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="logout.do">Logout</a></li>
-							
-						</c:when>
-						<c:otherwise>
-							<li class="nav-item"><a class="nav-link" href="login.do">Login</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="signup.do">Sign
-									Up</a></li>
-						</c:otherwise>
-					</c:choose>
-<!-- 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> Dropdown link
-					</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><a class="dropdown-item" href="#">Something else
-									here</a></li>
-						</ul></li> -->
+					<li class="nav-item dropdown">
+						<button class="btn btn-light nav-link dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">Pages</button>
+						<ul class="dropdown-menu dropdown-menu-light">
+							<c:choose>
+								<c:when test="${not empty loggedUser}">
+									<li><a class="dropdown-item nav-link"
+										href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
+									<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
+									<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a class="dropdown-item nav-link" href="login.do">Login</a></li>
+									<li><a class="dropdown-item nav-link" href="signup.do">Sign
+											Up</a></li>
+								</c:otherwise>
+							</c:choose>
+
+						</ul>
+					</li>
 				</ul>
 			</div>
+
+		</div>
+		<div class="col-3">
+			<c:if test="${not empty loggedUser}">
+				<form class="d-flex" action="search.do" method="GET">
+					<input class="form-control me-2 searchbar" type="text" name="query"
+						aria-label="Search" required>
+					<button class="btn btn-info search-btn" type="submit">Search</button>
+				</form>
+			</c:if>
 		</div>
 	</div>
 </nav>
