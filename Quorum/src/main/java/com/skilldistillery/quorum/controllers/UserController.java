@@ -62,7 +62,7 @@ public class UserController {
 
 		User user = userDao.getUserById(userID, true);
 		User loggedUser = (User) session.getAttribute("loggedUser");
-
+		
 		if (user == null) {
 			mv.setViewName("not-found");
 		}
@@ -117,7 +117,7 @@ public class UserController {
 			@RequestParam(name = "removeID") int removeID, HttpSession session) {
 		String redirect = "redirect:/error.do";
 		if (hasAuth(userID, (User) session.getAttribute("loggedUser"))) {
-			userDao.removeFollower(userID, userID);
+			userDao.removeFollower(userID, removeID);
 			redirect = "redirect:/getFollow.do?userID=" + userID;
 		}
 		return redirect;
@@ -128,7 +128,7 @@ public class UserController {
 			@RequestParam(name = "removeID") int removeID, HttpSession session) {
 		String redirect = "redirect:/error.do";
 		if (hasAuth(userID, (User) session.getAttribute("loggedUser"))) {
-			userDao.removeFollowing(userID, userID);
+			userDao.removeFollowing(userID, removeID);
 			redirect = "redirect:/getFollow.do?userID=" + userID;
 		}
 		return redirect;

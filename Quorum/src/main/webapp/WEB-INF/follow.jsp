@@ -22,17 +22,22 @@
 					<c:forEach var="follower" items="${user.followers}">
 						<div class="follow-item row">
 							<div class="col-10">
-								<h3>${follower.firstName}&nbsp;${follower.lastName}</h3>
+								<h3>${follower.username}</h3>
+								<h5>${follower.firstName}&nbsp;${follower.lastName}</h5>
 							</div>
 							<div class="col-2">
 								<c:if test="${userEditAuth}">
 									<form action="removeFollower.do" method="post">
-										<button
+										<input type="hidden" id="removeFollowerID" name="removeID"
+											value="${follower.id}" /> <input type="hidden"
+											id="removeFollowerID" name="userID" value="${user.id}" />
+										<button type="submit"
 											class="form-control btn btn-secondary remove-follow-btn">X</button>
 									</form>
 								</c:if>
 							</div>
 						</div>
+						<hr>
 					</c:forEach>
 				</div>
 			</div>
@@ -48,15 +53,22 @@
 					<c:forEach var="follow" items="${user.following}">
 						<div class="follow-item row">
 							<div class="col-10">
-								<h3>${follow.firstName}&nbsp;${follow.lastName}</h3>
+								<h3>${follow.username}</h3>
+								<h5>${follow.firstName}&nbsp;${follow.lastName}</h5>
 							</div>
 							<div class="col-2">
 								<c:if test="${userEditAuth}">
-									<button
-										class="form-control btn btn-secondary remove-follow-btn">X</button>
+									<form action="removeFollowing.do" method="post">
+										<input type="hidden" id="removeFollowID" name="removeID"
+											value="${follow.id}" /> <input type="hidden"
+											id="removeFollowID" name="userID" value="${user.id}" />
+										<button type="submit"
+											class="form-control btn btn-secondary remove-follow-btn">X</button>
+									</form>
 								</c:if>
 							</div>
 						</div>
+						<hr>
 					</c:forEach>
 				</div>
 			</div>
