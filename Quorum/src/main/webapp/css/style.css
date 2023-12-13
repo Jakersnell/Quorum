@@ -44,3 +44,23 @@ a {
 .xl-spacer {
 	padding-top: 10rem;
 }
+
+.l-spacer {
+	padding-top: 7.5rem;
+}
+
+.spacer {
+	padding-top: 5rem;
+}
+
+.md-spacer {
+	padding-top: 3.5rem;
+}
+
+.sm-spacer {
+	padding-top: 2rem;
+}
+
+.card {
+	flex: 1;
+}
