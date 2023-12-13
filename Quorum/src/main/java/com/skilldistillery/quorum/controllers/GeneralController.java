@@ -41,6 +41,7 @@ public class GeneralController {
 //			mav.setViewName("redirect:/login.do");
 //		} else {
 			mav.addObject("userResults", userDao.searchByQuery(query));
+			mav.addObject("query", query);
 //		}
 
 		return mav;

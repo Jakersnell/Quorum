@@ -64,3 +64,25 @@ a {
 .card {
 	flex: 1;
 }
+
+.scrollable-card {
+	overflow-y: scroll;
+	height: 20rem;
+	overflow-x: hidden;
+}
+
+/* uncomment this to make the scroll bar on search invisible
+.scrollable-card::-webkit-scrollbar {
+   display: none; 
+} */
+
+
+.user-result-card {
+	padding-block: 1rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease; 
+}
+
+.user-result-card:hover {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); 
+}
