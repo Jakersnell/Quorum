@@ -47,7 +47,7 @@ public class MessageController {
 
 		if (loggedUser != null && loggedUser.getId() == senderID) {
 			messageDao.sendMessage(senderID, receiverID, msg);
-			redirect = "redirect:/message.do";
+			redirect = "redirect:/message.do?userID="+receiverID;
 		}
 
 		return redirect;
