@@ -154,4 +154,10 @@ public class UserDaoImpl implements UserDAO {
 		user.setRole(role);
 	}
 
+	@Override
+	public void sendMessage(int senderId, int receiverId) {
+		User sender = em.find(User.class, senderId);
+		
+	}
+
 }

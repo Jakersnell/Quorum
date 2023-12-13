@@ -26,7 +26,6 @@
             </select>
             <input type="submit" value="submit">
         </form>
-    </table>
     </main>
     <jsp:include page="footer.jsp" />
 </body>

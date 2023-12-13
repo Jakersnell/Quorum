@@ -74,7 +74,7 @@ pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 		</div>
 		<div class="col-4">
 			<h4>School</h4>
-			<a href="getSchool.do?schoolID=${user.school.id}"><c:out value="${user.school.name}"></c:out></a>
+			<a href="school.do?schoolID=${user.school.id}"><c:out value="${user.school.name}"></c:out></a>
 			<br>
 		</div>
 		<div class="col-4">
