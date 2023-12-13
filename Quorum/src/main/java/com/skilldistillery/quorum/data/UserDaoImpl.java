@@ -162,5 +162,5 @@ public class UserDaoImpl implements UserDAO {
 		String jpql = "SELECT u FROM User u WHERE u.username LIKE :query OR u.firstName LIKE :query OR u.lastName LIKE :query";
 		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
 	}
-
+	
 }
