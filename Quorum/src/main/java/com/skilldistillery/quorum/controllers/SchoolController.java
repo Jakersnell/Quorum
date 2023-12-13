@@ -33,9 +33,4 @@ public class SchoolController {
 		return mv;
 	}
 
-	//listSchools()
-	//createSchool()
-	//editSchool()
-	//updateSchool()
-	//deactivateSchool()
 }
