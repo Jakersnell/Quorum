@@ -8,4 +8,15 @@ public interface SchoolDAO {
 	List<School> getAll();
 
 	School getById(int id);
+<<<<<<< Updated upstream
+=======
+	public School createSchool(School school);
+	public School updateSchool(int id, School updatedSchool);
+	public boolean deactivateSchool(int id);
+	public School getSchoolByName(String name);
+	public List<Course> getCoursesBySchool(int schoolId);
+	public List<Professor> getProfessorsBySchool(int schoolId);
+	public List<School> searchByQuery(String query);
+	
+>>>>>>> Stashed changes
 }

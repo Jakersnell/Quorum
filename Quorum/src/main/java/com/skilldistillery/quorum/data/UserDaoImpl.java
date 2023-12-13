@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User getUserByUsername(String username) {
-		String jpql = "SELECT u FROM User u WHERE username = :username";
+		String jpql = "SELECT u FROM User u WHERE username = :username AND u.enabled = true";
 		User user = null;
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("username", username)
@@ -159,7 +159,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public List<User> searchByQuery(String query) {
 		query = "%" + query + "%";
-		String jpql = "SELECT u FROM User u WHERE u.username LIKE :query OR u.firstName LIKE :query OR u.lastName LIKE :query";
+		String jpql = "SELECT u FROM User u WHERE u.username LIKE :query OR u.firstName LIKE :query OR u.lastName LIKE :query AND u.enabled = true";
 		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
 	}
 	

@@ -16,6 +16,9 @@ public class GeneralController {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private UserDAO schoolDao;
 
 	@GetMapping({ "/error", "error.do" })
 	public String errorOccured() {
@@ -41,6 +44,7 @@ public class GeneralController {
 			mav.setViewName("redirect:/login.do");
 		} else {
 			mav.addObject("userResults", userDao.searchByQuery(query));
+			mav.addObject("schoolResults",schoolDao.searchByQuery(query));
 			mav.addObject("query", query);
 		}
 

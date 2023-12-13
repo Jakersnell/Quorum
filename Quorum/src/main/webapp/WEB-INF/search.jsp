@@ -53,7 +53,6 @@
 								aria-controls="collapseFour">Schools</button>
 						</div>
 					</div>
-
 				</div>
 				<div class="row p-2">
 					<div id="collapseOne" class="collapse show"
@@ -64,7 +63,7 @@
 							<c:forEach var="resultUser" items="${userResults}">
 								<a class="wrapper-link"
 									href="userProfile.do?userID=${resultUser.id}">
-									<div class="card-body user-result-card">
+									<div class="card-body result-card">
 										<div class="row">
 											<div class="col-2">${resultUser.firstName}
 												${resultUser.lastName}</div>
@@ -78,7 +77,25 @@
 						</div>
 					</div>
 					<div id="collapseTwo" class="collapse" data-parent="#accordion">
-						<div class="card-body">Content of Div 2</div>
+						<div class="card-body">
+							<div class="card-body scrollable-card" data-bs-spy="scroll"
+								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+								tabindex="0">
+								<c:forEach var="resultSchool" items="${schoolResults}">
+									<a class="wrapper-link"
+										href="school.do?schoolID=${resultSchool.id}">
+										<div class="card-body result-card">
+											<div class="row">
+												<div class="col-2">${resultSchool.name}</div>
+												<div class="col-10">
+													<p class="card-text result-card-description">${resultSchool.description}</p>
+												</div>
+											</div>
+										</div>
+									</a>
+								</c:forEach>
+							</div>
+						</div>
 					</div>
 					<div id="collapseThree" class="collapse" data-parent="#accordion">
 						<div class="card-body">Content of Div 3</div>
