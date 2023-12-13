@@ -2,14 +2,14 @@ package com.skilldistillery.quorum.data;
 
 import java.util.List;
 
+import com.skilldistillery.quorum.entities.Course;
+import com.skilldistillery.quorum.entities.Professor;
 import com.skilldistillery.quorum.entities.School;
 
 public interface SchoolDAO {
-	List<School> getAll();
 
+	List<School> getAll();
 	School getById(int id);
-<<<<<<< Updated upstream
-=======
 	public School createSchool(School school);
 	public School updateSchool(int id, School updatedSchool);
 	public boolean deactivateSchool(int id);
@@ -18,5 +18,4 @@ public interface SchoolDAO {
 	public List<Professor> getProfessorsBySchool(int schoolId);
 	public List<School> searchByQuery(String query);
 	
->>>>>>> Stashed changes
 }

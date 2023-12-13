@@ -14,15 +14,22 @@ a {
 	text-decoration: none;
 	color: black;
 }
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 
 a:hover {
+=======
+a:hover{
+>>>>>>> fixSearch
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
 }
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> fixSearch
 
 .navbar-brand {
 	font-weight: bolder;
