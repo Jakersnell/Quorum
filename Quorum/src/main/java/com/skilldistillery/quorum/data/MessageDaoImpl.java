@@ -24,7 +24,9 @@ public class MessageDaoImpl implements MessageDAO {
 		User sender = em.find(User.class, senderId);
 		User receiver = em.find(User.class, receiverId);
 		Message newMessage = new Message(msg, sender, receiver);
+		System.out.println(newMessage);
 		em.persist(newMessage);
+		System.out.println(newMessage);
 		return newMessage;
 	}
 	

@@ -3,6 +3,8 @@ package com.skilldistillery.quorum.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Message {
 	
 	private String contents;
 	
+	@CreationTimestamp
 	@Column(name="created_on")
 	private LocalDateTime createdOn;
 	
