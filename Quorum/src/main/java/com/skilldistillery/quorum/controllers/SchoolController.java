@@ -29,7 +29,7 @@ public class SchoolController {
 
 		School school = schoolDAO.getById(schoolID);
 		mv.addObject("school", school);
-		mv.setViewName("school/view");
+		mv.setViewName("school");
 		return mv;
 	}
 
