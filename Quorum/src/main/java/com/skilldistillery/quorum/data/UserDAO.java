@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.List;
+
 import com.skilldistillery.quorum.entities.User;
 
 public interface UserDAO {
@@ -13,8 +15,8 @@ public interface UserDAO {
 	User getUserById(int id, boolean loadFollows);
 
 	User getUserByUsername(String username);
-	
-	public void updateUser(int id, User user);
+
+	void updateUser(int id, User user);
 
 	User update(User user);
 
@@ -29,4 +31,6 @@ public interface UserDAO {
 	boolean addFollowing(int userId, int followingId);
 	
 	void sendMessage(int senderId, int receiverId);
+
+	List<User> searchByQuery(String query);
 }

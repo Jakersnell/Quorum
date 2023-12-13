@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.User;
@@ -71,7 +73,7 @@ public class UserDaoImpl implements UserDAO {
 		}
 		return user;
 	}
-	
+
 	@Override
 	public void updateUser(int id, User user) {
 		User managedUser = em.find(User.class, id);
@@ -160,4 +162,10 @@ public class UserDaoImpl implements UserDAO {
 		
 	}
 
+	public List<User> searchByQuery(String query) {
+		query = "%" + query + "%";
+		String jpql = "SELECT u FROM User u WHERE u.username LIKE :query OR u.firstName LIKE :query OR u.lastName LIKE :query";
+		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
+	}
+	
 }
