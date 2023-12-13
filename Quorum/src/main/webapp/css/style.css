@@ -14,6 +14,11 @@ a {
 	text-decoration: none;
 	color: black;
 }
+a:hover{
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
 
 .navbar-brand {
 	font-weight: bolder;
