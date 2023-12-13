@@ -32,6 +32,17 @@ public class Message {
 	private User receiver;
 	
 	public Message() {}
+	
+	
+
+	public Message(String contents, User sender, User receiver) {
+		super();
+		this.contents = contents;
+		this.sender = sender;
+		this.receiver = receiver;
+	}
+
+
 
 	public int getId() {
 		return id;

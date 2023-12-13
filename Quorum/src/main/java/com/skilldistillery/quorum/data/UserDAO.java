@@ -29,6 +29,8 @@ public interface UserDAO {
 	boolean removeFollowing(int followingId, int userId);
 
 	boolean addFollowing(int userId, int followingId);
+	
+	void sendMessage(int senderId, int receiverId);
 
 	List<User> searchByQuery(String query);
 }

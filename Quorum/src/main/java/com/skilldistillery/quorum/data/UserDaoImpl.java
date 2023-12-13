@@ -157,6 +157,11 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	@Override
+	public void sendMessage(int senderId, int receiverId) {
+		User sender = em.find(User.class, senderId);
+		
+	}
+
 	public List<User> searchByQuery(String query) {
 		query = "%" + query + "%";
 		String jpql = "SELECT u FROM User u WHERE u.username LIKE :query OR u.firstName LIKE :query OR u.lastName LIKE :query";
