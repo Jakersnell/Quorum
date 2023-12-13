@@ -45,7 +45,7 @@
 					</div>
 					<div class="row mb-3">
 						<input class="form-control" type="text" class="bio"
-							name="biography" id="bio" value="${user.biography }" required /><br />
+							name="biography" id="bio" value="${user.biography }" /><br />
 					</div>
 					<div class="row mb-3">
 						<input type="hidden" class="id" name="id" id="id"

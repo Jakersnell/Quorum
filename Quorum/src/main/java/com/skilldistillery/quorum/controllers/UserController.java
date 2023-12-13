@@ -36,10 +36,10 @@ public class UserController {
 
 		Boolean edit = false;
 
-		User loggedUser = (User) session.getAttribute("loggedUser");
-		if (loggedUser != null && userID == loggedUser.getId()) {
+
+		if (hasAuth(userID, session)) {
 			edit = true;
-			mv.addObject("user", loggedUser);
+			mv.addObject("user", userDao.getUserById(userID));
 			mv.addObject("userEditAuth", edit);
 			mv.setViewName("profile");
 		} else {
@@ -61,18 +61,17 @@ public class UserController {
 		mv.setViewName("follow");
 
 		User user = userDao.getUserById(userID, true);
-		User loggedUser = (User) session.getAttribute("loggedUser");
-		
+
 		if (user == null) {
 			mv.setViewName("not-found");
 		}
 
 		mv.addObject("user", user);
-		mv.addObject("userEditAuth", hasAuth(userID, loggedUser));
+		mv.addObject("userEditAuth", hasAuth(userID, session));
 
 		return mv;
 	}
-	
+
 	@GetMapping({ "/editProfile", "editProfile.do" })
 	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
 			ModelAndView mv) {
@@ -81,7 +80,7 @@ public class UserController {
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
 		if (loggedUser != null) {
-			if (loggedUser.getId() == userID || loggedUser.getRole().equals("admin")) {
+			if (hasAuth(userID, session)) {
 				User accEdit = userDao.getUserById(userID);
 
 				mv.addObject("user", accEdit);
@@ -94,29 +93,27 @@ public class UserController {
 	}
 
 	@GetMapping({ "/update", "update.do" })
-	private ModelAndView userEditProfilePOST(@ModelAttribute User user, HttpSession session,
-			ModelAndView mv) {
-		
+	private ModelAndView userEditProfilePOST(@ModelAttribute User user, HttpSession session, ModelAndView mv) {
+
 		mv.setViewName("redirect:/error.do");
-		
-		if (hasAuth(user.getId(), (User)session.getAttribute("loggedUser"))) {
-			
-			mv.setViewName("redirect:/profile?userID="+user.getId());
+
+		if (hasAuth(user.getId(), session)) {
+
+			mv.setViewName("redirect:/profile?userID=" + user.getId());
 			user = userDao.update(user);
 			session.setAttribute("loggedUser", user);
 		}
-			
-		
+
 //		System.out.println(user);
-		
+
 		return mv;
 	}
-		
+
 	@PostMapping({ "/removeFollower", "removeFollower.do" })
 	private String userRemoveFollower(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "removeID") int removeID, HttpSession session) {
 		String redirect = "redirect:/error.do";
-		if (hasAuth(userID, (User) session.getAttribute("loggedUser"))) {
+		if (hasAuth(userID, session)) {
 			userDao.removeFollower(userID, removeID);
 			redirect = "redirect:/getFollow.do?userID=" + userID;
 		}
@@ -127,14 +124,15 @@ public class UserController {
 	private String userRemoveFollowing(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "removeID") int removeID, HttpSession session) {
 		String redirect = "redirect:/error.do";
-		if (hasAuth(userID, (User) session.getAttribute("loggedUser"))) {
+		if (hasAuth(userID, session)) {
 			userDao.removeFollowing(userID, removeID);
 			redirect = "redirect:/getFollow.do?userID=" + userID;
 		}
 		return redirect;
 	}
 
-	private boolean hasAuth(int accessUserId, User user) {
+	private boolean hasAuth(int accessUserId, HttpSession session) {
+		User user = (User) session.getAttribute("loggedUser");
 		return user != null && (accessUserId == user.getId() || user.getRole().equals("admin"));
 	}
 }
