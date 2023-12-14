@@ -75,7 +75,7 @@
 			<div class="col-2"></div>
 		</div>
 	</div>
-
+	<div class="spacer"></div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

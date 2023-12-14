@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6 ">
-				<div class="xl-spacer"></div>
+				<div class="spacer"></div>
 				<form action="login.do" method="post">
 					<div class="row mb-3">
 
@@ -30,10 +30,12 @@
 							type="submit">Log In</button>
 					</div>
 				</form>
+				<div class="spacer"></div>
 			</div>
 			<div class="col-3"></div>
 		</div>
 	</div>
+	<div class="spacer"></div>
 	<jsp:include page="footer.jsp" />
 </body>
 

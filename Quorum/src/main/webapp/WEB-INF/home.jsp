@@ -24,6 +24,7 @@
 			<div class="col-3"></div>
 		</div>
 	</div>
+	<div class="xl-spacer"></div>
 
 	<jsp:include page="footer.jsp" />
 </body>
