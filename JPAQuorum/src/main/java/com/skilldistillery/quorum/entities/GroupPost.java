@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,11 +37,11 @@ public class GroupPost {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "social_group_id")
 	private SocialGroup socialGroup;
 
@@ -106,7 +107,7 @@ public class GroupPost {
 		this.socialGroup = socialGroup;
 	}
 
-	public Boolean getEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
@@ -117,8 +118,7 @@ public class GroupPost {
 	@Override
 	public String toString() {
 		return "GroupPost [id=" + id + ", title=" + title + ", contents=" + contents + ", createdOn=" + createdOn
-				+ ", lastUpdate=" + lastUpdate + ", user.getId()=" + user.getId() + ", socialGroup.getId()=" + socialGroup.getId() + ", enabled="
-				+ enabled + "]";
+				+ ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + "]";
 	}
 
 	@Override
