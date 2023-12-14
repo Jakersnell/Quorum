@@ -67,11 +67,14 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 				    SELECT 1
 				    FROM post.user.followers f
 				    WHERE f.id = :userId AND post = post
-				) OR EXISTS (
+				) 
+				OR EXISTS (
 				    SELECT 1
 				    FROM post.socialGroup.members member
 				    WHERE member.id = :userId AND post = post
-				)
+				) 
+				OR post.user.id = :userId
+				ORDER BY post.lastUpdate
 				""";
 		return em.createQuery(jpql, GroupPost.class).setParameter("userId", userId).getResultList();
 	}

@@ -38,13 +38,11 @@ public class SocialGroup {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 
+	private boolean enabled = true;
+
 	@ManyToMany
-    @JoinTable(
-        name = "social_group_member",
-        joinColumns = @JoinColumn(name = "group_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> members;
+	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> members;
 
 	public SocialGroup() {
 	}
@@ -97,10 +95,18 @@ public class SocialGroup {
 		this.lastUpdate = lastUpdate;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "SocialGroup [id=" + id + ", name=" + name + ", description=" + description + ", createdOn=" + createdOn
-				+ ", lastUpdate=" + lastUpdate + ", members.size()=" + members.size() + "]";
+				+ ", lastUpdate=" + lastUpdate + "]";
 	}
 
 	@Override

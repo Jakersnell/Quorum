@@ -12,8 +12,8 @@
 	<div class="container">
 
 		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6 ">
+			<div class="col-4"></div>
+			<div class="col-4 ">
 				<div class="spacer"></div>
 				<form action="login.do" method="post">
 					<div class="row mb-3">
@@ -32,7 +32,7 @@
 				</form>
 				<div class="spacer"></div>
 			</div>
-			<div class="col-3"></div>
+			<div class="col-4"></div>
 		</div>
 	</div>
 	<div class="spacer"></div>

@@ -68,7 +68,7 @@ a:hover {
 }
 
 .search-selector-spacer {
-	height: 3rem;
+  height: 3rem;
 }
 
 .card {
@@ -126,7 +126,82 @@ main {
 	margin-top: 0.3rem;
 	margin-bottom: -1rem;
 }
-
-.home-post-color-0 {
-	background-color: ;
+*/
+/* .home-post-color-0 {
+  background-color: #dcf9f3;
+}
+.home-post-color-1 {
+  background-color: #dcf9f3;
+}
+.home-post-color-2 {
+  background-color: #dcf9f3;
+}
+.home-post-color-3 {
+  background-color: #dcf9f3;
 } */
+
+.post-list,
+.make-post-form {
+  background-color: #d9d9d9;
+}
+.post-btn {
+  margin-top: 0.7rem;
+  background-color: #d998d3;
+  width: 10rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+.post-btn:hover {
+  background-color: #d998d3;
+}
+
+.make-post-form {
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+.title-input input,
+.post-content-input textarea,
+.group-selector {
+  width: 90%;
+  border: none;
+}
+.post-content-input textarea {
+  background-color: #fdfdfd;
+}
+
+.title-input input {
+  background-color: inherit;
+  margin-top: 1rem;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  border-bottom-width: 0.2rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.post-content-input textarea:focus,
+.title-input input:focus {
+  background-color: #fdfdfd;
+}
+
+.post-content-input textarea:focus {
+  outline: none !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.side-column-main {
+  height: 100%;
+  width: 100%;
+  background-image: url(img/background-image-1.png);
+}
+
+.group-selector select {
+  background-color:  #fdfdfd
+}
+
+.group-selector {
+	padding-bottom: 1rem;
+}

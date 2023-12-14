@@ -61,8 +61,7 @@ public class GroupPost {
 		this.lastUpdate = lastUpdate;
 	}
 
-	@Column
-	private Boolean enabled;
+	private Boolean enabled = true;
 
 	public GroupPost() {
 	}

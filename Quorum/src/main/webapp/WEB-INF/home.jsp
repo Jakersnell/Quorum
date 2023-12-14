@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
-<body>
+<body id="homeBody">
 	<jsp:include page="navbar.jsp" />
 	<div class="container wrapper">
 		<div class="row">
@@ -21,12 +21,21 @@
 						<h1>
 							Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 						</h1>
-						<div class="make-post-form">
-							<form action="create-post.do" method="post">
+						<div class="make-post-form shadow p-1 mb-5 rounded">
+							<form action="createPost.do" method="post">
+
 								<div class="title-input">
 									<input class="form-control" type="text" name="title"
 										id="Your posts title" placeholder="Whats on your mind?"
 										required /><br />
+								</div>
+								<div class="group-selector">
+									<select class="form-select" aria-label="Group Selector" name="groupId">
+										<option selected>What group is this for?</option>
+										<c:forEach var="group" items="${loggedUser.groups}">
+											<option value="${group.id}">${group.name}</option>
+										</c:forEach>
+									</select>
 								</div>
 								<div class="post-content-input">
 									<textarea class="form-control" id="postCodeSnippetInput"
@@ -35,14 +44,14 @@
 								<button class="btn post-btn" type="submit">Post</button>
 							</form>
 						</div>
-						<div class="spacer"></div>
 						<c:choose>
 							<c:when test="${empty feed}">
 								<h3>Your feed is empty!</h3>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="post" items="${feed}" varStatus="status">
-									<div class="shadow-sm p-3 mb-5 bg-body rounded container home-post-color-${status.index % 4}">
+									<div
+										class="shadow p-1 mb-5 rounded container post-list home-post-color-${status.index % 4}">
 										<div class="row">
 											<div class="col-6">
 												<h6>
