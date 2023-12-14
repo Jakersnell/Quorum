@@ -16,5 +16,6 @@ public interface SchoolDAO {
 	public School getSchoolByName(String name);
 	public List<Course> getCoursesBySchool(int schoolId);
 	public List<Professor> getProfessorsBySchool(int schoolId);
+	public List<School> searchByQuery(String query);
 	
 }

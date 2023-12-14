@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.quorum.data.SchoolDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +17,9 @@ public class GeneralController {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private SchoolDAO schoolDao;
 
 	@GetMapping({ "/error", "error.do" })
 	public String errorOccured() {
@@ -41,6 +45,7 @@ public class GeneralController {
 			mav.setViewName("redirect:/login.do");
 		} else {
 			mav.addObject("userResults", userDao.searchByQuery(query));
+			mav.addObject("schoolResults",schoolDao.searchByQuery(query));
 			mav.addObject("query", query);
 		}
 
