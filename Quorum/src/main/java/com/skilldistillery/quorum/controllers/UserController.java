@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.quorum.data.CourseDAO;
 import com.skilldistillery.quorum.data.UserDAO;
+import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +22,9 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private CourseDAO courseDao;
 
 	@GetMapping({ "/account", "account.do" })
 	private String myProfileGet(HttpSession session) {
@@ -50,7 +57,10 @@ public class UserController {
 				mv.setViewName("profile");
 			}
 		}
-
+		
+		List<Course> courses = courseDao.getCoursesByUser(userID);
+        mv.addObject("courses", courses);
+        mv.setViewName("profile");
 		return mv;
 	}
 

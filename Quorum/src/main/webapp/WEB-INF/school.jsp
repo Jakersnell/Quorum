@@ -12,13 +12,13 @@
 		data-bs-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="..." class="d-block w-100" alt="...">
+				<img src="../img/school-campus.jpg" class="d-block w-100" alt="A school campus">
 			</div>
 			<div class="carousel-item">
-				<img src="..." class="d-block w-100" alt="...">
+				<img src="../img/school-dark-wave.jpg" class="d-block w-100" alt="A school campus entrance">
 			</div>
 			<div class="carousel-item">
-				<img src="..." class="d-block w-100" alt="...">
+				<img src="../img/school-library.jpg" class="d-block w-100" alt="A school library">
 			</div>
 		</div>
 		<button class="carousel-control-prev" type="button"
@@ -36,7 +36,7 @@
 	<div class="container mt-4">
 		<div class="row">
 			<div class="col-md-4">
-				<img src="..." class="img-fluid" alt="School Image">
+				<img src="../img/school-pink-flowers.jpg" class="img-fluid" alt="School Image">
 			</div>
 			<div class="col-md-8">
 				<h2>${school.name}</h2>
@@ -59,7 +59,7 @@
 			<h2>Courses</h2>
 			<ul>
 				<c:forEach items="${courses}" var="course">
-					<li>${course.title}-${course.description}</li>
+					<li>${course.title}</li>
 				</c:forEach>
 			</ul>
 		</c:if>
@@ -98,7 +98,7 @@
 				<h2>Courses</h2>
 				<ul>
 					<c:forEach items="${courses}" var="course">
-						<li>${course.title}-${course.description}</li>
+						<li>${course.title}</li>
 					</c:forEach>
 				</ul>
 			</c:if>
@@ -107,10 +107,13 @@
 				<h3>Professors</h3>
 				<ul>
 					<c:forEach items="${professors}" var="professor">
-						<li>${professor.name}-${professor.department}</li>
+						<li>${professor.firstName}</li>
 					</c:forEach>
 				</ul>
 			</c:if>
+			
+			
+			
 		</c:when>
 		<c:otherwise>
 			<p>School details not available.</p>
