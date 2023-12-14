@@ -8,7 +8,7 @@
 	<jsp:include page="navbar.jsp" />
 	
 	
-	<!--Carousel-->
+	<!--Photo Carousel-->
 	<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -39,7 +39,7 @@
 		<!-- Display School details -->
 		<c:when test="${not empty school}">
 			<div>
-				<h2>${school.name}Details</h2>
+				<h2>${school.name} Details</h2>
 				<p>School ID: ${school.id}</p>
 				<p>Name: ${school.name}</p>
 				<p>Description: ${school.description}</p>
