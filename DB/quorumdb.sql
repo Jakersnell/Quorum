@@ -131,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `social_group` (
   `created_on` DATETIME NULL,
   `last_update` DATETIME NULL,
   `owner_id` INT NOT NULL,
+  `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   INDEX `owner_idx` (`owner_id` ASC),
@@ -422,7 +423,6 @@ INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_u
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (25, 'oliverwilliams', 'password123', '2023-01-25 08:00:00', 'oliver.williams@email.com', '2023-04-01 11:00:00', 1, 'student', 'Oliver', 'Williams', 'Biography of Oliver \nWilliams', '2005-05-08', 'http://example.com/oliverwilliams.jpg', 5);
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (26, 'admin', 'admin123', '2023-01-25 08:00:00', 'admin@quorum.com', '2023-01-25 08:00:00', 1, 'admin', NULL, NULL, NULL, NULL, NULL, NULL);
 
-
 COMMIT;
 
 
@@ -491,16 +491,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quorum`;
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (1, 'Theatre Troupe', 'An acting group for staging plays and developing theatrical skills.', '2023-03-16 14:48:58', '2023-03-24 14:48:58', 1);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (2, 'Debate Team', 'A team focused on honing debating skills and participating in regional and national debates.', '2023-08-04 07:45:54', '2023-08-09 07:45:54', 2);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (3, 'Art Collective', 'A space for artists to collaborate, exhibit, and critique each other\'s work.', '2023-06-03 02:44:07', '2023-06-12 02:44:07', 3);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (4, 'Literature Society', 'A community of book lovers sharing insights and discussions on various literary works.', '2023-02-04 21:39:47', '2023-02-05 21:39:47', 4);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (5, 'Painting Club', 'A community of college painters.', '2023-06-03 14:39:53', '2023-06-11 14:39:53', 5);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (6, 'Advanced Robotics Club', 'A group for robotics enthusiasts to design, build, and compete in robotics competitions.', '2023-10-14 05:08:01', '2023-10-20 05:08:01', 6);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (7, 'Science Society', 'A society for discussing scientific advancements and conducting experiments.', '2023-02-20 17:22:53', '2023-02-22 17:22:53', 7);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (8, 'Robotics Club', 'A group for robotics enthusiasts to design, build, and compete in robotics competitions.', '2023-02-15 17:37:30', '2023-02-16 17:37:30', 8);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (9, 'Coding Ninjas', 'A coding group focusing on developing programming skills and participating in hackathons.', '2023-08-12 19:21:24', '2023-08-15 19:21:24', 9);
-INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`) VALUES (10, 'Photography Club', 'A group for photography enthusiasts to share tips and organize photo walks.', '2023-09-16 17:34:47', '2023-09-24 17:34:47', 10);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (1, 'Theatre Troupe', 'An acting group for staging plays and developing theatrical skills.', '2023-03-16 14:48:58', '2023-03-24 14:48:58', 1, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (2, 'Debate Team', 'A team focused on honing debating skills and participating in regional and national debates.', '2023-08-04 07:45:54', '2023-08-09 07:45:54', 2, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (3, 'Art Collective', 'A space for artists to collaborate, exhibit, and critique each other\'s work.', '2023-06-03 02:44:07', '2023-06-12 02:44:07', 3, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (4, 'Literature Society', 'A community of book lovers sharing insights and discussions on various literary works.', '2023-02-04 21:39:47', '2023-02-05 21:39:47', 4, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (5, 'Painting Club', 'A community of college painters.', '2023-06-03 14:39:53', '2023-06-11 14:39:53', 5, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (6, 'Advanced Robotics Club', 'A group for robotics enthusiasts to design, build, and compete in robotics competitions.', '2023-10-14 05:08:01', '2023-10-20 05:08:01', 6, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (7, 'Science Society', 'A society for discussing scientific advancements and conducting experiments.', '2023-02-20 17:22:53', '2023-02-22 17:22:53', 7, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (8, 'Robotics Club', 'A group for robotics enthusiasts to design, build, and compete in robotics competitions.', '2023-02-15 17:37:30', '2023-02-16 17:37:30', 8, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (9, 'Coding Ninjas', 'A coding group focusing on developing programming skills and participating in hackathons.', '2023-08-12 19:21:24', '2023-08-15 19:21:24', 9, 1);
+INSERT INTO `social_group` (`id`, `name`, `description`, `created_on`, `last_update`, `owner_id`, `enabled`) VALUES (10, 'Photography Club', 'A group for photography enthusiasts to share tips and organize photo walks.', '2023-09-16 17:34:47', '2023-09-24 17:34:47', 10, 1);
 
 COMMIT;
 
