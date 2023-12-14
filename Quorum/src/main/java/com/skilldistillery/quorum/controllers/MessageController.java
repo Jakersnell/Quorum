@@ -31,12 +31,16 @@ public class MessageController {
 	public ModelAndView messageGet(@RequestParam(name="userID")int userID, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User loggedUser = (User) session.getAttribute("loggedUser");
+		
+		mv.setViewName("home");
+		if(loggedUser != null) {
 		User receiver = userDao.getUserById(userID);
 		List<Message> messages = messageDao.getMessages(loggedUser, receiver);
 		session.setAttribute("messages", messages);
 		
 		mv.addObject("user", receiver);
 		mv.setViewName("message");
+		}
 		
 		return mv;
 		
