@@ -31,6 +31,10 @@ a:hover {
     
 }
 
+#administrator {
+	font-family: 'Courier New', monospace;
+}
+
 .navbar-brand {
   font-weight: bolder;
   font-size: 2rem;

@@ -101,11 +101,7 @@ public class UserController {
 
 			mv.setViewName("redirect:/profile?userID=" + user.getId());
 			user = userDao.update(user);
-			session.setAttribute("loggedUser", user);
 		}
-
-//		System.out.println(user);
-
 		return mv;
 	}
 
