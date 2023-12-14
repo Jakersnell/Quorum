@@ -29,12 +29,15 @@ public class MessageDaoImpl implements MessageDAO {
 		System.out.println(newMessage);
 		return newMessage;
 	}
-
-	public List<Message> getMessages(int senderID) {
-		String jpql = "SELECT m FROM Message WHERE m.sender = :senderID";
-		List<Message> messages = em.createQuery(jpql, Message.class).setParameter("senderID", senderID).getResultList();
-
+	
+	public List<Message> getMessages(User sender, User receiver){
+	String jpql = "SELECT m FROM Message m WHERE sender = :senderID AND receiver = :receiverID ORDER BY createdOn";
+	
+	List<Message> messages = em.createQuery(jpql, Message.class)
+			.setParameter("senderID", sender)
+			.setParameter("receiverID", receiver)
+			.getResultList();
+	
 		return messages;
 	}
-
 }
