@@ -13,5 +13,7 @@ public interface CourseDAO {
     List<Course> getAllCourses();
     Course updateCourse(int id, Course course);
     boolean deactivateCourse(int id);
+	List<Course> getCoursesBySchool(int schoolId);
+	List<Course> getCoursesByUser(int userID);
 	
 }

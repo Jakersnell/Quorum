@@ -60,4 +60,19 @@ public class CourseDaoImpl implements CourseDAO {
 		return false;
 	}
 
+	@Override
+	public List<Course> getCoursesBySchool(int schoolId) {
+		//To get every course for each school returned from the initial query.
+		String jpql = "SELECT c FROM Course c WHERE c.school.id = :schoolId";
+		return em.createQuery(jpql, Course.class)
+                .setParameter("schoolId", schoolId)
+                .getResultList();
+	}
+
+	@Override
+	public List<Course> getCoursesByUser(int userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
