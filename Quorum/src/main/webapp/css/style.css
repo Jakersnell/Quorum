@@ -21,6 +21,16 @@ a:hover {
   font-weight: bold;
 }
 
+#sender {
+    background-color: #FAE7D6 !important;
+    
+}
+
+#receiver {
+    background-color: #F4E9EC !important;
+    
+}
+
 .navbar-brand {
   font-weight: bolder;
   font-size: 2rem;

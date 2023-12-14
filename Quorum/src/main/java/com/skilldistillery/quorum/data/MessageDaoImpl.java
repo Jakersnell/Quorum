@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -31,12 +33,16 @@ public class MessageDaoImpl implements MessageDAO {
 	}
 	
 	public List<Message> getMessages(User sender, User receiver){
-	String jpql = "SELECT m FROM Message m WHERE sender = :senderID AND receiver = :receiverID ORDER BY createdOn";
+	String jpql = "SELECT m FROM Message m WHERE sender = :senderID AND receiver = :receiverID "
+			+ "OR sender = :receiverID AND receiver = :senderID";
+	
 	
 	List<Message> messages = em.createQuery(jpql, Message.class)
 			.setParameter("senderID", sender)
 			.setParameter("receiverID", receiver)
 			.getResultList();
+	
+	System.out.println(messages);
 	
 		return messages;
 	}
