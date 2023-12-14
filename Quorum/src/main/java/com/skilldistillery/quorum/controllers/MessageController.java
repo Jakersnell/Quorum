@@ -1,6 +1,7 @@
 package com.skilldistillery.quorum.controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class MessageController {
 		ModelAndView mv = new ModelAndView();
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		
-		mv.setViewName("home");
+		mv.setViewName("error");
 		if(loggedUser != null) {
 		User receiver = userDao.getUserById(userID);
 		List<Message> messages = messageDao.getMessages(loggedUser, receiver);
@@ -49,7 +50,7 @@ public class MessageController {
 	@PostMapping({ "/message", "message.do" })
 	public String messagePost(@RequestParam(name="senderID")int senderID, @RequestParam(name="receiverID") int receiverID,@RequestParam(name="message") String msg,
 			 HttpSession session) {
-		String redirect = "redirect:/home.do";
+		String redirect = "redirect:/error.do";
 		
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
@@ -61,4 +62,17 @@ public class MessageController {
 		return redirect;
 	}
 
+	@GetMapping({ "/messages", "messages.do" })
+	public ModelAndView messagesGet(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		mv.setViewName("error");
+		if(loggedUser != null) {
+			HashSet<User> messagees = messageDao.getMessagees(loggedUser);
+			session.setAttribute("messagees", messagees);
+			mv.setViewName("messages");
+		}
+		
+		return mv;
+	}
 }

@@ -2,6 +2,7 @@ package com.skilldistillery.quorum.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -31,19 +32,31 @@ public class MessageDaoImpl implements MessageDAO {
 		System.out.println(newMessage);
 		return newMessage;
 	}
-	
-	public List<Message> getMessages(User sender, User receiver){
-	String jpql = "SELECT m FROM Message m WHERE sender = :senderID AND receiver = :receiverID "
-			+ "OR sender = :receiverID AND receiver = :senderID";
-	
-	
-	List<Message> messages = em.createQuery(jpql, Message.class)
-			.setParameter("senderID", sender)
-			.setParameter("receiverID", receiver)
-			.getResultList();
-	
-	System.out.println(messages);
-	
+
+	public List<Message> getMessages(User sender, User receiver) {
+		String jpql = "SELECT m FROM Message m WHERE sender = :senderID AND receiver = :receiverID "
+				+ "OR sender = :receiverID AND receiver = :senderID";
+
+		List<Message> messages = em.createQuery(jpql, Message.class).setParameter("senderID", sender)
+				.setParameter("receiverID", receiver).getResultList();
+
+		System.out.println(messages);
+
 		return messages;
+	}
+
+	public HashSet<User> getMessagees(User user) {
+		String jpql = "SELECT m FROM Message m WHERE sender = :userID OR receiver = :userID";
+
+		List<Message> messages = em.createQuery(jpql, Message.class).setParameter("userID", user).getResultList();
+		HashSet<User> messagees = new HashSet<>();
+
+		for (Message message : messages) {
+			messagees.add(message.getReceiver());
+			messagees.add(message.getSender());
+		}
+		messagees.remove(user);
+		System.out.println(messagees);
+		return messagees;
 	}
 }

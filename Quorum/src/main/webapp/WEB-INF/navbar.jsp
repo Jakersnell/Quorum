@@ -29,6 +29,7 @@
 								<li><a class="dropdown-item nav-link"
 									href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
 								<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
+								<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
 								<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
 							</ul>
 						</li>

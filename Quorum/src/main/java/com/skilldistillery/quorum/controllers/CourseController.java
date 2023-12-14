@@ -1,18 +1,9 @@
 package com.skilldistillery.quorum.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.CourseDAO;
-import com.skilldistillery.quorum.entities.Course;
-import com.skilldistillery.quorum.entities.User;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CourseController {
@@ -35,8 +26,8 @@ public class CourseController {
 //        mv.setViewName("school"); // JSP to display the courses for a school
 //        return mv;
 //    }
-	
-	//Method to get courses for a specific user
+//	
+//	//Method to get courses for a specific user
 //	@GetMapping({ "/profile", "/profile.do" })
 //    public ModelAndView getCoursesForUser(@RequestParam(name = "userID") int userID, HttpSession session) {
 //        ModelAndView mv = new ModelAndView();

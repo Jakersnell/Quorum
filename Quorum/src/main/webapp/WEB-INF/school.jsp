@@ -53,10 +53,10 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="container mt-4">
 		<h3>Course Information</h3>
 		<c:if test="${not empty courses}">
-			<h2>Courses</h2>
 			<ul>
 				<c:forEach items="${courses}" var="course">
 					<li>${course.title}</li>
@@ -75,6 +75,41 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<h1>School Details</h1>
 

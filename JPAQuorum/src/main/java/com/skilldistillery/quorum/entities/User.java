@@ -1,7 +1,6 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +42,7 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 
-	private boolean enabled;
+	private boolean enabled = true;
 
 	private String role;
 
@@ -81,6 +80,10 @@ public class User {
 
 	@OneToMany(mappedBy = "receiver")
 	private List<Message> receivedMessages;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+	private List<SocialGroup> groups;
 
 	public User() {
 		enabled = true;
@@ -206,7 +209,6 @@ public class User {
 		this.following = following;
 	}
 
-
 	public List<PlannerItem> getItems() {
 		return items;
 	}
@@ -218,7 +220,6 @@ public class User {
 	public void setFollowers(List<User> followers) {
 		this.followers = followers;
 	}
-
 
 	public void setItems(List<PlannerItem> items) {
 		this.items = items;
@@ -257,15 +258,13 @@ public class User {
 		return id == other.id;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
-//				+ ", email=" + email + ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", role=" + role
-//				+ ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + ", dateOfBirth="
-//				+ dateOfBirth + ", profileImageUrl=" + profileImageUrl + ", school.getId()=" + school.getId() + ", following.size()="
-//				+ following.size() + ", items.size()=" + items.size() + ", sentMessages.size()=" + sentMessages.size() + ", receivedMessages.size()="
-//				+ receivedMessages.size() + "]";
-//	}
+	public List<SocialGroup> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<SocialGroup> groups) {
+		this.groups = groups;
+	}
 
 	@Override
 	public String toString() {
