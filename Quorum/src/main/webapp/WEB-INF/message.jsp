@@ -7,6 +7,33 @@
 <body>
 <jsp:include page="navbar.jsp" />
 
+<div class="container">
+	<div class="col-2"></div>
+	  
+	  <c:forEach items="${messages}" var="m">
+					<div class="card">
+					  <div class="card-body">
+		    			<c:out value="${m.contents}"/>
+					  </div>
+					</div>
+	   </c:forEach>
+	<div class="col-2"></div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Message Box -->
+
 <h1> To: <c:out value="${user.firstName}"></c:out></h1>
 <form action="message.do" method="POST">
 	<label for="message">Message</label>
