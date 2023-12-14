@@ -1,5 +1,5 @@
 
-<footer class="fixed-bottom bg-light">
+<footer class="bg-light">
 	<div class="container py-4">
 		<div class="row">
 

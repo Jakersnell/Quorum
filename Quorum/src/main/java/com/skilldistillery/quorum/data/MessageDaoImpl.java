@@ -46,8 +46,4 @@ public class MessageDaoImpl implements MessageDAO {
 	
 		return messages;
 	}
-
-
-
-
 }
