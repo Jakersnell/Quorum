@@ -21,7 +21,7 @@ public class CourseController {
 	private CourseDAO courseDao;
 
 	//Method to get courses for a specific school
-//	@GetMapping({ "/school", "/school.do" })
+//	@GetMapping({ "/school", "/school.do"})
 //    public ModelAndView getCoursesForSchool(@RequestParam(name = "schoolID") int schoolID, HttpSession session) {
 //        ModelAndView mv = new ModelAndView();
 //
