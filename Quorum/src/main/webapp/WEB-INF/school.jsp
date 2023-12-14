@@ -31,6 +31,9 @@
   </button>
 </div>
 	
+		<!-- Colored background seperator -->
+		
+		<!-- -->
 	
 
 	<h1>School Details</h1>

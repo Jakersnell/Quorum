@@ -21,20 +21,20 @@ public class CourseController {
 	private CourseDAO courseDao;
 
 	//Method to get courses for a specific school
-	@GetMapping({ "/school", "/school.do" })
-    public ModelAndView getCoursesForSchool(@RequestParam(name = "schoolID") int schoolID, HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-
-        if (session.getAttribute("loggedUser") == null) {
-            mv.setViewName("redirect:/login");
-            return mv;
-        }
-
-        List<Course> courses = courseDao.getCoursesBySchool(schoolID);
-        mv.addObject("courses", courses);
-        mv.setViewName("school"); // JSP to display the courses for a school
-        return mv;
-    }
+//	@GetMapping({ "/school", "/school.do" })
+//    public ModelAndView getCoursesForSchool(@RequestParam(name = "schoolID") int schoolID, HttpSession session) {
+//        ModelAndView mv = new ModelAndView();
+//
+//        if (session.getAttribute("loggedUser") == null) {
+//            mv.setViewName("redirect:/login");
+//            return mv;
+//        }
+//
+//        List<Course> courses = courseDao.getCoursesBySchool(schoolID);
+//        mv.addObject("courses", courses);
+//        mv.setViewName("school"); // JSP to display the courses for a school
+//        return mv;
+//    }
 	
 	//Method to get courses for a specific user
 	@GetMapping({ "/profile", "/profile.do" })
