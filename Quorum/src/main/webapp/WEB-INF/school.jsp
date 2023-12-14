@@ -12,13 +12,16 @@
 		data-bs-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="../img/school-campus.jpg" class="d-block w-100" alt="A school campus">
+				<img src="../img/school-campus.jpg" class="d-block w-100"
+					alt="A school campus">
 			</div>
 			<div class="carousel-item">
-				<img src="../img/school-dark-wave.jpg" class="d-block w-100" alt="A school campus entrance">
+				<img src="../img/school-dark-wave.jpg" class="d-block w-100"
+					alt="A school campus entrance">
 			</div>
 			<div class="carousel-item">
-				<img src="../img/school-library.jpg" class="d-block w-100" alt="A school library">
+				<img src="../img/school-library.jpg" class="d-block w-100"
+					alt="A school library">
 			</div>
 		</div>
 		<button class="carousel-control-prev" type="button"
@@ -36,7 +39,8 @@
 	<div class="container mt-4">
 		<div class="row">
 			<div class="col-md-4">
-				<img src="../img/school-pink-flowers.jpg" class="img-fluid" alt="School Image">
+				<img src="../img/school-pink-flowers.jpg" class="img-fluid"
+					alt="School Image">
 			</div>
 			<div class="col-md-8">
 				<h2>${school.name}</h2>
@@ -53,7 +57,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="container mt-4">
 		<h3>Course Information</h3>
 		<c:if test="${not empty courses}">
@@ -65,47 +69,50 @@
 		</c:if>
 	</div>
 
+
+
+
 	<div class="container mt-4">
 		<h3>Professor Information</h3>
-		<div class="row">
-			<div class="col-md-4">
-				<img src="path-to-professor-image.jpg" class="img-fluid"
-					alt="Professor Name">
-				<p>Professor Name</p>
+		<c:if test="${not empty professors}">
+			<div class="row">
+				<c:forEach items="${professors}" var="professor" varStatus="status">
+					<div class="col-md-4">
+						<div class="card mb-3">
+							<div class="card-body">
+								<img src="../img/profheadshot.jpg" class="img-fluid"
+									alt="Professor Headshot">
+								<h5 class="card-title">${professor.firstName}
+									${professor.lastName}</h5>
+								<h5 class="card-title">${professor.ratings}</h5>
+
+							</div>
+						</div>
+					</div>
+
+					<c:if test="${status.count % 3 == 0}">
 			</div>
-		</div>
+			<div class="row">
+		</c:if>
+		</c:forEach>
+	</div>
+					</c:if>
 	</div>
 
 
 
+	<br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<div class="container mt-4">
+		<h3>Professor Information</h3>
+		<div class="row">
+			<div class="col-md-4">
+				<img src="../img/school-pink-flowers.jpg" class="img-fluid"
+					alt="Professor Headshot">
+				<p>Professor Name</p>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -146,9 +153,9 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			
-			
-			
+
+
+
 		</c:when>
 		<c:otherwise>
 			<p>School details not available.</p>

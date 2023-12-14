@@ -10,5 +10,6 @@ public interface ProfessorDAO  {
 	List<Professor> getAllBySchoolId(int id);
 	List<Professor> searchByQuery(String query);
 	List<Professor> getAll();
-	Professor update(Professor professor);	
+	Professor update(Professor professor);
+	double getAverageRating(int professorId);
 }

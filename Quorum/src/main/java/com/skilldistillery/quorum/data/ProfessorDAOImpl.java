@@ -50,4 +50,13 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		return professor;
 	}
 
+	@Override
+	public double getAverageRating(int professorId) {
+		String query = "SELECT AVG(r.rating) FROM ProfessorRating r WHERE r.professor.id = :profId";
+        Double average = em.createQuery(query, Double.class)
+                           .setParameter("profId", professorId)
+                           .getSingleResult();
+        return average != null ? average : 0.0;
+	}
+
 }
