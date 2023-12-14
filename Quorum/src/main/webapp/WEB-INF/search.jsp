@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%> -->
 <!DOCTYPE html>
 <html>
 
@@ -21,51 +21,43 @@
 
 <body>
 	<jsp:include page="navbar.jsp" />
-	<div class="sm-spacer"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-1"></div>
-			<div class="col-10" id="accordion">
-				<div class="row">
-					<div class="col-12 mb-3">
-						<h3>Search Results For: "${query}"</h3>
+	<main>
+		<div class="sm-spacer"></div>
+		<div id="accordion">
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-11 mb-3">
+					<h3>Search Results For: "${query}"</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-1">
+					<div class="card">
+						<button class="btn card-header" data-toggle="collapse"
+							data-target="#collapseOne" aria-expanded="true"
+							aria-controls="collapseOne">Users</button>
+					</div>
+					<div class="search-selector-spacer"></div>
+					<div class="card">
+						<button class="btn collapsed card-header" data-toggle="collapse"
+							data-target="#collapseTwo" aria-expanded="false"
+							aria-controls="collapseTwo">Schools</button>
+					</div>
+					<div class="search-selector-spacer"></div>
+					<div class="card">
+						<button class="btn collapsed card-header" data-toggle="collapse"
+							data-target="#collapseThree" aria-expanded="false"
+							aria-controls="collapseThree">Groups</button>
+					</div>
+					<div class="search-selector-spacer"></div>
+					<div class="card">
+						<button class="btn collapsed card-header" data-toggle="collapse"
+							data-target="#collapseFour" aria-expanded="false"
+							aria-controls="collapseFour">Posts</button>
 					</div>
 				</div>
-				<div class="row">
-
-					<div class="col-md-3">
-						<div class="card">
-							<button class="btn card-header" data-toggle="collapse"
-								data-target="#collapseOne" aria-expanded="true"
-								aria-controls="collapseOne">Users</button>
-						</div>
-					</div>
-
-					<div class="col-md-3">
-						<div class="card">
-							<button class="btn collapsed card-header" data-toggle="collapse"
-								data-target="#collapseTwo" aria-expanded="false"
-								aria-controls="collapseTwo">Schools</button>
-						</div>
-					</div>
-
-					<div class="col-md-3">
-						<div class="card">
-							<button class="btn collapsed card-header" data-toggle="collapse"
-								data-target="#collapseThree" aria-expanded="false"
-								aria-controls="collapseThree">Groups</button>
-						</div>
-					</div>
-
-					<div class="col-md-3">
-						<div class="card">
-							<button class="btn collapsed card-header" data-toggle="collapse"
-								data-target="#collapseFour" aria-expanded="false"
-								aria-controls="collapseFour">Posts</button>
-						</div>
-					</div>
-				</div>
-				<div class="row p-2">
+				<div class="col-9">
 					<div id="collapseOne" class="collapse show"
 						data-parent="#accordion">
 						<div class="card-body scrollable-card" data-bs-spy="scroll"
@@ -89,20 +81,24 @@
 					</div>
 					<div id="collapseTwo" class="collapse" data-parent="#accordion">
 						<div class="card-body">
-
-							<c:forEach var="resultSchool" items="${schoolResults}">
-								<a class="wrapper-link"
-									href="school.do?schoolID=${resultSchool.id}">
-									<div class="card-body result-card">
-										<div class="row">
-											<div class="col-4">${resultSchool.name}</div>
-											<div class="col-8">
-												<p class="card-text result-card-description">${resultSchool.description}</p>
+							<div class="card-body scrollable-card" data-bs-spy="scroll"
+								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+								tabindex="0">
+								<c:forEach var="resultSchool" items="${schoolResults}">
+									<a class="wrapper-link"
+										href="school.do?schoolID=${resultSchool.id}">
+										<div class="card-body result-card">
+											<div class="row">
+												<div class="col-4">${resultSchool.name}</div>
+												<div class="col-8">
+													<p class="card-text result-card-description">${resultSchool.description}
+													</p>
+												</div>
 											</div>
 										</div>
-									</div>
-								</a>
-							</c:forEach>
+									</a>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 					<div id="collapseThree" class="collapse" data-parent="#accordion">
@@ -115,7 +111,8 @@
 				<div class="col-1"></div>
 			</div>
 		</div>
-	</div>
+		<div class="sm-spacer"></div>
+	</main>
 	<jsp:include page="footer.jsp" />
 </body>
 
