@@ -8,7 +8,6 @@
 	<jsp:include page="navbar.jsp" />
 
 
-	<!--Photo Carousel-->
 	<div id="carouselExampleAutoplaying" class="carousel slide"
 		data-bs-ride="carousel">
 		<div class="carousel-inner">
@@ -34,15 +33,12 @@
 		</button>
 	</div>
 
-	<!-- School Image and Description -->
 	<div class="container mt-4">
 		<div class="row">
 			<div class="col-md-4">
-				<!-- School Image -->
 				<img src="..." class="img-fluid" alt="School Image">
 			</div>
 			<div class="col-md-8">
-				<!-- School Description -->
 				<h2>${school.name}</h2>
 				<p>At ${school.name}, they pride themselves on providing a rich
 					educational experience that prepares their students for the
@@ -57,69 +53,32 @@
 			</div>
 		</div>
 	</div>
-
-	<c:choose>
-	<!-- Course Information -->
 	<div class="container mt-4">
 		<h3>Course Information</h3>
-		<!-- Course details -->
 		<c:if test="${not empty courses}">
 			<h2>Courses</h2>
 			<ul>
 				<c:forEach items="${courses}" var="course">
 					<li>${course.title}-${course.description}</li>
-					<!-- Other course details -->
 				</c:forEach>
 			</ul>
 		</c:if>
 	</div>
-	
-	<!-- Professor Information -->
-    <div class="container mt-4">
-        <h3>Professor Information</h3>
-        <div class="row">
-            <!-- Professor details with placeholders for images -->
-            <div class="col-md-4">
-                <img src="path-to-professor-image.jpg" class="img-fluid" alt="Professor Name">
-                <p>Professor Name</p>
-                <!-- Additional professor info -->
-            </div>
-            <!-- Repeat for each professor -->
-        </div>
-    </div>
-	</c:choose>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<div class="container mt-4">
+		<h3>Professor Information</h3>
+		<div class="row">
+			<div class="col-md-4">
+				<img src="path-to-professor-image.jpg" class="img-fluid"
+					alt="Professor Name">
+				<p>Professor Name</p>
+			</div>
+		</div>
+	</div>
 
 	<h1>School Details</h1>
 
 	<c:choose>
-		<!-- Display School details -->
 		<c:when test="${not empty school}">
 			<div>
 				<h2>${school.name}Details</h2>
@@ -133,30 +92,26 @@
 					Image: <img src="${school.imageUrl}" alt="School Image">
 				</p>
 			</div>
+
+
+			<c:if test="${not empty courses}">
+				<h2>Courses</h2>
+				<ul>
+					<c:forEach items="${courses}" var="course">
+						<li>${course.title}-${course.description}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
+
+			<c:if test="${not empty professors}">
+				<h3>Professors</h3>
+				<ul>
+					<c:forEach items="${professors}" var="professor">
+						<li>${professor.name}-${professor.department}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
 		</c:when>
-
-		<!-- Display Courses details -->
-		<c:if test="${not empty courses}">
-			<h2>Courses</h2>
-			<ul>
-				<c:forEach items="${courses}" var="course">
-					<li>${course.title}-${course.description}</li>
-					<!-- Other course details -->
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<!-- Display Professors details -->
-		<c:if test="${not empty professors}">
-			<h3>Professors</h3>
-			<ul>
-				<c:forEach items="${professors}" var="professor">
-					<li>${professor.name}-${professor.department}</li>
-					<!-- Other professor details -->
-				</c:forEach>
-			</ul>
-		</c:if>
-
 		<c:otherwise>
 			<p>School details not available.</p>
 		</c:otherwise>
