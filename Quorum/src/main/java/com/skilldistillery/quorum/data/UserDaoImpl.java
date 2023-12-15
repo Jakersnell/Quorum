@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.quorum.entities.SocialGroup;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
@@ -159,7 +160,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public void sendMessage(int senderId, int receiverId) {
 		User sender = em.find(User.class, senderId);
-		
+
 	}
 
 	public List<User> searchByQuery(String query) {
@@ -167,5 +168,11 @@ public class UserDaoImpl implements UserDAO {
 		String jpql = "SELECT u FROM User u WHERE ((u.username LIKE :query) OR (u.firstName LIKE :query) OR (u.lastName LIKE :query)) AND (u.enabled = true AND u.role <> 'admin')";
 		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
 	}
-	
+
+	@Override
+	public List<User> getByGroupId(int groupId) {
+		SocialGroup group = em.find(SocialGroup.class, groupId);
+		return group.getMembers();
+	}
+
 }

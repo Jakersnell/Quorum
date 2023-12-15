@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.skilldistillery.quorum.data.GroupPostDAO;
 import com.skilldistillery.quorum.data.ProfessorDAO;
 import com.skilldistillery.quorum.data.SchoolDAO;
+import com.skilldistillery.quorum.data.SocialGroupDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.User;
 
@@ -17,7 +18,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class GeneralController {
 
-	
 	@Autowired
 	private GroupPostDAO postDao;
 
@@ -29,6 +29,9 @@ public class GeneralController {
 
 	@Autowired
 	private ProfessorDAO professorDao;
+
+	@Autowired
+	private SocialGroupDAO groupDao;
 
 	@GetMapping({ "/error", "error.do" })
 	public String errorOccured() {
@@ -62,6 +65,7 @@ public class GeneralController {
 			mav.addObject("userResults", userDao.searchByQuery(query));
 			mav.addObject("schoolResults", schoolDao.searchByQuery(query));
 			mav.addObject("professorResults", professorDao.searchByQuery(query));
+			mav.addObject("groupResults", groupDao.searchByQuery(query));
 			mav.addObject("query", query);
 		}
 

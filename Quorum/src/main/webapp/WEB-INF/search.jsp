@@ -32,7 +32,7 @@
 			</div>
 			<div class="row">
 				<div class="col-1"></div>
-				<div class="col-1">
+				<div class="col-2">
 					<div class="card">
 						<button class="btn card-header" data-toggle="collapse"
 							data-target="#collapseOne" aria-expanded="true"
@@ -56,10 +56,17 @@
 							data-target="#collapseFour" aria-expanded="false"
 							aria-controls="collapseFour">Posts</button>
 					</div>
+					<div class="search-selector-spacer"></div>
+					<div class="card">
+						<button class="btn collapsed card-header" data-toggle="collapse"
+							data-target="#collapseFive" aria-expanded="false"
+							aria-controls="collapseFive">Professors</button>
+					</div>
 				</div>
-				<div class="col-9">
+				<div class="col-8">
 					<div id="collapseOne" class="collapse show"
 						data-parent="#accordion">
+						<h4>Users</h4>
 						<div class="card-body scrollable-card" data-bs-spy="scroll"
 							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 							tabindex="0">
@@ -80,6 +87,7 @@
 						</div>
 					</div>
 					<div id="collapseTwo" class="collapse" data-parent="#accordion">
+						<h4>Schools</h4>
 						<div class="card-body scrollable-card" data-bs-spy="scroll"
 							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 							tabindex="0">
@@ -101,9 +109,29 @@
 					</div>
 
 					<div id="collapseThree" class="collapse" data-parent="#accordion">
-						<div class="card-body">Content of Div 3</div>
+						<h4>Groups</h4>
+						<div class="card-body scrollable-card" data-bs-spy="scroll"
+							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+							tabindex="0">
+							<c:forEach var="group" items="${groupResults}">
+								<a class="wrapper-link" href="group.do?groupID=${group.id}">
+									<div class="card-body result-card">
+										<div class="row">
+											<div class="col-6">
+												<h6>${group.name}</h6>
+											</div>
+											<div class="col-6">
+												<h6>${group.description}</h6>
+											</div>
+										</div>
+									</div>
+								</a>
+							</c:forEach>
+						</div>
 					</div>
+
 					<div id="collapseFour" class="collapse" data-parent="#accordion">
+						<h4>Posts</h4>
 						<div class="card-body scrollable-card" data-bs-spy="scroll"
 							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 							tabindex="0">
@@ -117,7 +145,6 @@
 											<div class="col-6">
 												<h6>${resultPost.socialGroup.name}</h6>
 											</div>
-
 										</div>
 										<div class="row">
 
@@ -126,6 +153,31 @@
 									</div>
 								</a>
 							</c:forEach>
+						</div>
+					</div>
+
+					<div id="collapseFive" class="collapse" data-parent="#accordion">
+						<h4>Proffesors</h4>
+						<div class="card-body">
+							<div class="card-body scrollable-card" data-bs-spy="scroll"
+								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+								tabindex="0">
+								<c:forEach var="professor" items="${professorResults}">
+									<a class="wrapper-link"
+										href="school.do?schoolID=${professor.school.id}">
+										<div class="card-body result-card">
+											<div class="row">
+												<div class="col-6">
+													<h6>${professor.firstName}&nbsp;${professor.lastName}</h6>
+												</div>
+												<div class="col-6">
+													<h6>${professor.school.name}</h6>
+												</div>
+											</div>
+										</div>
+									</a>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 				</div>

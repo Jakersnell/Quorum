@@ -20,4 +20,7 @@ public interface SocialGroupDAO {
 	boolean update(SocialGroup group);
 	
 	List<SocialGroup> searchByQuery(String query);
+	
+	boolean userIsOwner(int groupId, int userID);
+	
 }

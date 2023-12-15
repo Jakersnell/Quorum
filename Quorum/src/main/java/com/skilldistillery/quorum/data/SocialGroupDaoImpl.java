@@ -99,8 +99,13 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 				    (sg.name LIKE :query)
 				    OR (sg.description LIKE :query)
 				    AND sg.enabled = true
-				"""; 
+				""";
 		return em.createQuery(jpql, SocialGroup.class).setParameter("query", query).getResultList();
+	}
+
+	@Override
+	public boolean userIsOwner(int groupId, int userID) {
+		return em.find(SocialGroup.class, groupId).getOwner().getId() == userID;
 	}
 
 }

@@ -33,4 +33,6 @@ public interface UserDAO {
 	void sendMessage(int senderId, int receiverId);
 
 	List<User> searchByQuery(String query);
+	
+	List<User> getByGroupId(int groupId);
 }
