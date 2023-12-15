@@ -58,6 +58,7 @@ public class GeneralController {
 		if (session.getAttribute("loggedUser") == null) {
 			mav.setViewName("redirect:/login.do");
 		} else {
+			mav.addObject("postResults", postDao.searchByQuery(query));
 			mav.addObject("userResults", userDao.searchByQuery(query));
 			mav.addObject("schoolResults", schoolDao.searchByQuery(query));
 			mav.addObject("professorResults", professorDao.searchByQuery(query));

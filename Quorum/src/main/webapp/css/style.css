@@ -199,9 +199,34 @@ textarea {
 }
 
 .group-selector select {
-  background-color:  #fdfdfd
+  background-color: #fdfdfd;
 }
 
 .group-selector {
-	padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
+
+#msgAlert {
+  background-color: #f4e9ec;
+  border-radius: 1rem;
+  position: absolute;
+  top: 8vw;
+  left: 10vw;
+  width: fit-content;
+  padding: 0.5rem;
+}
+
+.msg-close-btn {
+  background-color: transparent;
+  width: 2rem;
+  border-radius: 1rem;
+  border-style: solid;
+  border-color: black;
+  height: min-content;
+  padding: 0;
+}
+
+.msg-close-btn p {
+  color: black;
+}
+

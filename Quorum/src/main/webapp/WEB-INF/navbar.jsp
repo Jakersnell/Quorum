@@ -58,3 +58,4 @@
 		</div>
 	</div>
 </nav>
+<jsp:include page="_alert.jsp" />
