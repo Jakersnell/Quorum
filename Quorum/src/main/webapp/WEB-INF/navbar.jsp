@@ -20,21 +20,40 @@
 		</div>
 		<div class="col-2">
 			<c:if test="${not empty loggedUser}">
-				<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-					<ul class="navbar-nav">
-						<li class="nav-item dropdown">
-							<button class="btn btn-light nav-link dropdown-toggle"
-								data-bs-toggle="dropdown" aria-expanded="false">Pages</button>
-							<ul class="dropdown-menu dropdown-menu-light">
-								<li><a class="dropdown-item nav-link"
-									href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
-								<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
-								<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
-								<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
+				<c:choose>
+					<c:when test="${loggedUser.role == 'admin'}">
+						<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown">
+									<button class="btn btn-light nav-link dropdown-toggle"
+										data-bs-toggle="dropdown" aria-expanded="false">Pages</button>
+									<ul class="dropdown-menu dropdown-menu-light">
+										<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
+										<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
+										<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
+									</ul>
+								</li>
 							</ul>
-						</li>
-					</ul>
-				</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown">
+									<button class="btn btn-light nav-link dropdown-toggle"
+										data-bs-toggle="dropdown" aria-expanded="false">Pages</button>
+									<ul class="dropdown-menu dropdown-menu-light">
+										<li><a class="dropdown-item nav-link"
+											href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
+										<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
+										<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
+										<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</c:if>
 		</div>
 		<div class="col-3">

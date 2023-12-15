@@ -15,21 +15,28 @@
 			<div class="col-4"></div>
 			<div class="col-4 ">
 				<div class="spacer"></div>
-				<form action="login.do" method="post">
-					<div class="row mb-3">
-
-						<input class="form-control login-form" type="text" name="username"
-							placeholder="username" required>
+				<div class="card shadow p-3 mb-5 rounded" id="logincard">
+					<div class="card-body" id="logincard">
+						<form action="login.do" method="post">
+							<div class="row mb-3">
+		
+								<input class="form-control login-form rounded bg-white" type="text" name="username"
+									placeholder="username" required>
+							</div>
+							<div class="row  mb-3">
+								<input class="form-control login-form rounded bg-white" type="password"
+									name="password" placeholder="password" />
+							</div>
+							<div class="row  mb-3">
+								<button class="btn form-control login-form rounded-pill" id="loginbtn"
+									type="submit">Log In</button>
+							</div>
+						</form>
+						<div class="text-center">
+						Don't have an account? <a href="signup.do" id="signuplink">Sign Up</a>						
+						</div>
 					</div>
-					<div class="row  mb-3">
-						<input class="form-control login-form" type="password"
-							name="password" placeholder="password" />
-					</div>
-					<div class="row  mb-3">
-						<button class="btn btn-primary form-control login-form"
-							type="submit">Log In</button>
-					</div>
-				</form>
+				</div>
 				<div class="spacer"></div>
 			</div>
 			<div class="col-4"></div>
