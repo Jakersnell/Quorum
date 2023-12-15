@@ -42,10 +42,13 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	@Override
 	public List<GroupPost> getByGroupId(int groupId) {
 		String jpql = """
-				SELECT p
-				FROM GroupPost p
-				WHERE p.socialGroup.id = :groupId
-				AND p.enabled = true
+				SELECT
+				    p
+				FROM
+				    GroupPost p
+				WHERE
+				    p.socialGroup.id = :groupId
+				    AND p.enabled = true
 				""";
 
 		return em.createQuery(jpql, GroupPost.class).setParameter("groupId", groupId).getResultList();

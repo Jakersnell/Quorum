@@ -4,6 +4,8 @@
   margin: 0;
 }
 
+
+
 .nav-link {
   color: black;
   font-size: 1.2rem;
@@ -104,14 +106,14 @@ a:hover {
 
 .scrollable-card {
   overflow-y: scroll;
-  height: 20rem;
+  height: 26rem;
   overflow-x: hidden;
 }
-
+/*
 .scrollable-card::-webkit-scrollbar {
   display: none;
 }
-
+*/
 .result-card {
   padding-block: 1rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.quorum.entities.SocialGroup;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
@@ -173,7 +174,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public void sendMessage(int senderId, int receiverId) {
 		User sender = em.find(User.class, senderId);
-		
+
 	}
 
 	public List<User> searchByQuery(String query, User user) {
@@ -191,5 +192,11 @@ public class UserDaoImpl implements UserDAO {
 		}
 		
 	}
-	
+
+	@Override
+	public List<User> getByGroupId(int groupId) {
+		SocialGroup group = em.find(SocialGroup.class, groupId);
+		return group.getMembers();
+	}
+
 }
