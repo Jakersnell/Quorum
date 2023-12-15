@@ -21,13 +21,20 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	public GroupPost getById(int id) {
 		return em.find(GroupPost.class, id);
 	}
+	
+	@Override
+	public List<GroupPost> getAll() {
+		String jpql = "SELECT p FROM GroupPost p";
+		return em.createQuery(jpql, GroupPost.class).getResultList();
+	}
 
 	@Override
 	public List<GroupPost> getByUserId(int id) {
 		String jpql = """
-				SELECT p 
-				FROM GroupPost p 
+				SELECT p
+				FROM GroupPost p
 				WHERE p.user.id = :id
+				AND p.enabled = true
 				""";
 		return em.createQuery(jpql, GroupPost.class).setParameter("id", id).getResultList();
 	}
@@ -35,10 +42,11 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	@Override
 	public List<GroupPost> getByGroupId(int groupId) {
 		String jpql = """
-			    SELECT p 
-			    FROM GroupPost p 
-			    WHERE p.socialGroup.id = :groupId
-			    """;
+				SELECT p
+				FROM GroupPost p
+				WHERE p.socialGroup.id = :groupId
+				AND p.enabled = true
+				""";
 
 		return em.createQuery(jpql, GroupPost.class).setParameter("groupId", groupId).getResultList();
 	}
@@ -50,32 +58,89 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	}
 
 	@Override
-	public GroupPost update(GroupPost post) {
+	public boolean update(GroupPost post) {
+		boolean success = false;
 		GroupPost managed = em.find(GroupPost.class, post.getId());
-		managed.setTitle(post.getTitle());
-		managed.setContents(post.getContents());
-		managed.setEnabled(post.isEnabled());
-		return managed;
+		if (managed != null) {
+			managed.setTitle(post.getTitle());
+			managed.setContents(post.getContents());
+			managed.setEnabled(post.isEnabled());
+			success = true;
+		}
+		return success;
 	}
 
 	@Override
 	public List<GroupPost> getUserFeed(int userId) {
 		String jpql = """
-				SELECT post
-				FROM GroupPost post
-				WHERE EXISTS (
-				    SELECT 1
-				    FROM post.user.followers f
-				    WHERE f.id = :userId AND post = post
-				) 
-				OR EXISTS (
-				    SELECT 1
-				    FROM post.socialGroup.members member
-				    WHERE member.id = :userId AND post = post
-				) 
-				OR post.user.id = :userId
-				ORDER BY post.lastUpdate
-				""";
+				SELECT
+				    post
+				FROM
+				    GroupPost post
+				WHERE
+				    (
+				        EXISTS (
+				            SELECT
+				                1
+				            FROM
+				                post.user.followers f
+				            WHERE
+				                f.id = :userId
+				                AND post = post
+				        )
+				        OR EXISTS (
+				            SELECT
+				                1
+				            FROM
+				                post.socialGroup.members member
+				            WHERE
+				                member.id = :userId
+				                AND post = post
+				        )
+				        OR post.user.id = :userId
+				    )
+				    AND post.enabled = true
+				ORDER BY
+				    post.lastUpdate
+								""";
 		return em.createQuery(jpql, GroupPost.class).setParameter("userId", userId).getResultList();
 	}
+
+	@Override
+	public List<GroupPost> searchByQuery(String query) {
+		query = "%" + query + "%";
+		String jpql = """
+				SELECT post FROM GroupPost post
+				WHERE
+				(
+					post.title LIKE :query
+					OR
+					post.contents LIKE :query
+				)
+				AND
+				post.enabled = true
+
+				""";
+		return em.createQuery(jpql, GroupPost.class).setParameter("query", query).getResultList();
+
+	}
+
+	@Override
+	public boolean userIsOwner(int postId, int userId) {
+		boolean result = false;
+		GroupPost post = em.find(GroupPost.class, postId);
+		if (post != null) {
+			result = post.getUser().getId() == userId;
+		}
+		return result;
+	}
+
+	@Override
+	public void setEnabled(int postId, boolean status) {
+		GroupPost post = em.find(GroupPost.class, postId);
+		if (post != null) {
+			post.setEnabled(status);
+		}
+	}
+	
 }
