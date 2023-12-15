@@ -80,6 +80,20 @@ public class UserDaoImpl implements UserDAO {
 		managedUser = user;
 		em.persist(managedUser);
 	}
+	
+	@Override
+	public void deleteUser(int id) {
+		User managedUser = em.find(User.class, id);
+		managedUser.setEnabled(false);;
+		em.persist(managedUser);
+	}
+	
+	@Override
+	public void activateUser(int id) {
+		User managedUser = em.find(User.class, id);
+		managedUser.setEnabled(true);;
+		em.persist(managedUser);
+	}
 
 	@Override
 	public User update(User user) {

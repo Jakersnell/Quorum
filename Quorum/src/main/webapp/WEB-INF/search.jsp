@@ -63,20 +63,42 @@
 						<div class="card-body scrollable-card" data-bs-spy="scroll"
 							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 							tabindex="0">
-							<c:forEach var="resultUser" items="${userResults}">
-								<a class="wrapper-link"
-									href="userProfile.do?userID=${resultUser.id}">
-									<div class="card-body result-card">
-										<div class="row">
-											<div class="col-2">${resultUser.firstName}
-												${resultUser.lastName}</div>
-											<div class="col-2"></div>
-											<div class="col-4">${resultUser.username}</div>
-											<div class="col-4">${resultUser.school.name}</div>
-										</div>
-									</div>
-								</a>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${loggedUser.role == 'admin'}">
+									<c:forEach var="resultUser" items="${userResults}">
+										<a class="wrapper-link"
+											href="userProfile.do?userID=${resultUser.id}">
+											<div class="card-body result-card">
+												<div class="row">
+													<div class="col-2">${resultUser.firstName}
+														${resultUser.lastName}</div>
+													<div class="col-2"></div>
+													<div class="col-4">${resultUser.username}</div>
+													<div class="col-4">${resultUser.school.name}</div>
+												</div>
+											</div>
+										</a>
+									</c:forEach>
+								</c:when>								
+								<c:otherwise>
+									<c:forEach var="resultUser" items="${userResults}">
+										<c:if test="${resultUser.enabled == true}">
+										<a class="wrapper-link"
+											href="userProfile.do?userID=${resultUser.id}">
+											<div class="card-body result-card">
+												<div class="row">
+													<div class="col-2">${resultUser.firstName}
+														${resultUser.lastName}</div>
+													<div class="col-2"></div>
+													<div class="col-4">${resultUser.username}</div>
+													<div class="col-4">${resultUser.school.name}</div>
+												</div>
+											</div>
+										</a>
+										</c:if>
+									</c:forEach>
+								</c:otherwise>								
+							</c:choose>
 						</div>
 					</div>
 					<div id="collapseTwo" class="collapse" data-parent="#accordion">
