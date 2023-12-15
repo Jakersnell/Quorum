@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.Professor;
+import com.skilldistillery.quorum.entities.ProfessorRating;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -48,6 +49,24 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		managed.setSchool(professor.getSchool());
 		managed.setEnabled(professor.isEnabled());
 		return professor;
+	}
+
+	@Override
+	public double getAverageRating(int professorId) {
+		String query = "SELECT AVG(r.rating) FROM ProfessorRating r WHERE r.professor.id = :profId";
+        Double average = em.createQuery(query, Double.class)
+                           .setParameter("profId", professorId)
+                           .getSingleResult();
+        return average != null ? average : 0.0;
+	}
+
+	@Override
+	public List<ProfessorRating> getAllRatingsByProfessorId(int professorId) {
+		String jpql = "SELECT r FROM ProfessorRating r WHERE r.professor.id = :profId AND r.enabled = true";
+	    List<ProfessorRating> ratings = em.createQuery(jpql, ProfessorRating.class)
+	                                      .setParameter("profId", professorId)
+	                                      .getResultList();
+	    return ratings;
 	}
 
 }
