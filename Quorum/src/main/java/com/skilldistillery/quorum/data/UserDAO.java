@@ -29,17 +29,15 @@ public interface UserDAO {
 	boolean removeFollowing(int followingId, int userId);
 
 	boolean addFollowing(int userId, int followingId);
-	
+
 	void sendMessage(int senderId, int receiverId);
-  
-	List<User> searchByQuery(String query);
-	
+
 	List<User> getByGroupId(int groupId);
 
-  List<User> searchByQuery(String query, User user);
-	
+	List<User> searchByQuery(String query, User user);
+
 	void deleteUser(int id);
-	
+
 	void activateUser(int id);
 
 }
