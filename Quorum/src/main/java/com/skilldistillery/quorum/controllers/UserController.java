@@ -40,22 +40,35 @@ public class UserController {
 	}
 
 	@GetMapping({ "/profile", "userProfile.do" })
-	private ModelAndView userProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
+	private ModelAndView userProfileGet(@RequestParam(name = "userID") 
+			int userID, 
+			HttpSession session,
 			ModelAndView mv) {
-		String viewName;
+			String viewName;
+			
+		User logged = (User) session.getAttribute("loggedUser");
+		
 		if (isLoggedIn(session)) {
+			
 			User user = userDao.getUserById(userID);
-			if (user != null) {
+			
+			if (user != null && user.isEnabled() == true ||
+				user != null && logged.getRole().equals("admin")) {
+				
 				mv.addObject("user", user);
 				mv.addObject("userEditAuth", hasAuth(userID, session));
 				mv.addObject("feed", postDao.getByUserId(userID));
 				viewName = "profile";
 				List<Course> courses = courseDao.getCoursesByUser(userID);
 				mv.addObject("courses", courses);
+				
 			} else {
+				
 				viewName = "redirect:/error.do";
 			}
+			
 		} else {
+			
 			viewName = "redirect:/login.do";
 		}
 		
@@ -109,6 +122,23 @@ public class UserController {
 
 			mv.setViewName("redirect:/profile?userID=" + user.getId());
 			user = userDao.update(user);
+		}
+		return mv;
+	}
+	
+	@GetMapping({ "/delete", "delete.do" })
+	private ModelAndView userEditProfilePOST(@RequestParam(name="userID")int userID, HttpSession session, ModelAndView mv) {
+		
+		mv.setViewName("redirect:/error.do");
+		
+		User user = (User) session.getAttribute("loggedUser");
+		
+		if (user.getId() == userID || user.getRole().equals("admin")) {
+			userDao.setEnabled(userID, false);
+			mv.setViewName("redirect:/profile?userID=" + user.getId());
+			if(user.getId() == userID) {
+				session.invalidate();
+			}
 		}
 		return mv;
 	}
