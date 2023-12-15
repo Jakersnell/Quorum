@@ -1,5 +1,7 @@
 package com.skilldistillery.quorum.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.quorum.data.CourseDAO;
 import com.skilldistillery.quorum.data.GroupPostDAO;
 import com.skilldistillery.quorum.data.UserDAO;
+import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +25,7 @@ public class UserController {
 	private UserDAO userDao;
 	
 	@Autowired
+	private CourseDAO courseDao;
 	private GroupPostDAO postDao;
 
 	@GetMapping({ "/account", "account.do" })
@@ -43,12 +48,15 @@ public class UserController {
 				mv.addObject("userEditAuth", hasAuth(userID, session));
 				mv.addObject("feed", postDao.getByUserId(userID));
 				viewName = "profile";
+				List<Course> courses = courseDao.getCoursesByUser(userID);
+				mv.addObject("courses", courses);
 			} else {
 				viewName = "redirect:/error.do";
 			}
 		} else {
 			viewName = "redirect:/login.do";
 		}
+		
 
 		mv.setViewName(viewName);
 

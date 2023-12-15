@@ -1,27 +1,18 @@
 package com.skilldistillery.quorum.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.CourseDAO;
-import com.skilldistillery.quorum.entities.Course;
-import com.skilldistillery.quorum.entities.User;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CourseController {
 
-//	@Autowired
-//	private CourseDAO courseDao;
-//
-//	//Method to get courses for a specific school
-//	@GetMapping({ "/school", "/school.do" })
+	@Autowired
+	private CourseDAO courseDao;
+
+	//Method to get courses for a specific school
+//	@GetMapping({ "/school", "/school.do"})
 //    public ModelAndView getCoursesForSchool(@RequestParam(name = "schoolID") int schoolID, HttpSession session) {
 //        ModelAndView mv = new ModelAndView();
 //
