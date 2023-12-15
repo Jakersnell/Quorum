@@ -30,6 +30,11 @@
 					            <label for="password">Password</label>
 							</div>
 							<div class="row mb-3">
+								<input class="form-control login-form rounded bg-white" type="email"
+									name="email" placeholder="email" />
+					            <label for="email">email</label>
+							</div>
+							<div class="row mb-3">
 								<input class="form-control login-form rounded bg-white" type="text" name="firstName"
 									placeholder="First Name" required>
 					            <label for="firstName">First Name</label>

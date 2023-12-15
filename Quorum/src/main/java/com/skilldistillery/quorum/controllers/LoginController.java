@@ -80,6 +80,7 @@ public class LoginController {
 
 			School selectedSchool = schoolDao.getById(schoolID);
 			user.setSchool(selectedSchool);
+			user.setRole("student");
 
 			User createdUser = userDao.createUser(user);
 			session.setAttribute("loggedUser", createdUser);
