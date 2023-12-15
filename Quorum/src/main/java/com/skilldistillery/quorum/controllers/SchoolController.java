@@ -13,6 +13,7 @@ import com.skilldistillery.quorum.data.ProfessorDAO;
 import com.skilldistillery.quorum.data.SchoolDAO;
 import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.Professor;
+import com.skilldistillery.quorum.entities.ProfessorRating;
 import com.skilldistillery.quorum.entities.School;
 
 import jakarta.servlet.http.HttpSession;
@@ -59,34 +60,23 @@ public class SchoolController {
 	@GetMapping({ "/professorview", "/professorview.do" })
 	public ModelAndView viewProfessorReview(@RequestParam(name = "professorId") int professorId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-//        Professor professor = professorDAO.getById(professorId);
-
-//        if (professor != null) {
-//            double avgRating = professorDAO.getAverageRating(professorId);
-//            professor.setAverageRating(avgRating);
-//            mv.addObject("professor", professor);
-//            mv.setViewName("professorview");
-//        } else {
-//            mv.setViewName("not-found");
-//        }
-//
-//        return mv;
+		Professor professor = professorDAO.getById(professorId);
 
 		if (session.getAttribute("loggedUser") != null) {
 
-			Professor professor = professorDAO.getById(professorId);
 			if (professor == null) {
 				mv.setViewName("not-found");
 			} else {
-				double avgRating = professorDAO.getAverageRating(professorId);
-	            professor.setAverageRating(avgRating);
-	            mv.addObject("professor", professor);
-	            mv.setViewName("professorview");
+				List<ProfessorRating> ratings = professorDAO.getAllRatingsByProfessorId(professorId);
+				mv.addObject("ratings", ratings);
 				
+				double avgRating = professorDAO.getAverageRating(professorId);
+				professor.setAverageRating(avgRating);
+				mv.addObject("professor", professor);
+				mv.setViewName("professorview");
 			}
 		}
 		return mv;
-
 	}
 
 }

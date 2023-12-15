@@ -83,7 +83,7 @@
 									<br>
 								<%-- <h5 class="card-title">${professor.firstName}
 									${professor.lastName}</h5> --%>
-									<a href="professorview.jsp?professorId=${professor.id}" class="card-title">
+									<a href="professorview?professorId=${professor.id}" class="card-title">
                                 <h5>${professor.firstName} ${professor.lastName}</h5>
                             </a>
 								<h5 class="card-title">Average Rating ${professor.averageRating}</h5>
