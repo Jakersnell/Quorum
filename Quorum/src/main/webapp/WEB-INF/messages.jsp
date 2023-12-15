@@ -10,21 +10,34 @@
 <div class="container">
 	<div class="row">
 		<div class="col"></div>
-		<div class="col-6"><h2>Active Messages</h2></div>
+		<div class="col-6 text-center"><h2>Active Messages</h2></div>
 		<div class="col"></div>
-	
-	
 	</div>
-
-
-	  <c:forEach items="${messagees}" var="m">
-	  	<div class="row">
-		  	<div class="col"></div>
-		  	<div class="col-6"><a href="message.do?userID=${m.id}"><c:out value="${m.firstName}"></c:out></a></div>
-		  	<div class="col"></div>
-	  	</div>
-	   </c:forEach>
+	
+	<div class="row">
+		<div class="col"></div>
+		<div class="col-6">
+			<table class="table">
+				<thead>
+				    <tr>
+				      <th scope="col">First</th>
+				      <th scope="col">Last</th>
+				    </tr>
+				</thead>
+				<tbody>
+				  <c:forEach items="${messagees}" var="m">
+					  <tr>
+					      <th scope="row"><a href="message.do?userID=${m.id}"><c:out value="${m.firstName}"></c:out></a></th>
+					      <td><c:out value="${m.lastName}"></c:out></td>
+					  </tr>
+				  </c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div class="col"></div>
 	</div>
+</div>
+	
 
 
 <jsp:include page="footer.jsp" />

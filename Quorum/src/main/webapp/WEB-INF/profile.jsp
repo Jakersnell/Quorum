@@ -66,7 +66,7 @@
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-2">
-			<c:if test="${userEditAuth}">
+			<c:if test="${not empty loggedUser}">
 				<a class="btn btn-info" role="button"
 					href="message.do?userID=${user.id}">Message</a>
 				</c:if>
