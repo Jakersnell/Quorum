@@ -18,9 +18,8 @@
 						<div class="xl-spacer"></div>
 					</c:when>
 					<c:when test="${loggedUser.role == 'admin'}">
-						<h1 id="administrator>">
-							01000001 01000100 01001101 01001001 01001110 			
-						</h1>
+						<h1 id="administrator>">01000001 01000100 01001101 01001001
+							01001110</h1>
 					</c:when>
 					<c:otherwise>
 						<div class="sm-spacer"></div>
@@ -43,15 +42,21 @@
 														href="userProfile.do?userID=${post.user.id}">@${post.user.username}</a>
 												</h6>
 											</div>
-											<div class="col-6">
+											<div class="col-3">
 												<h6>
 													<a class="post-link"
 														href="socialGroup.do?groupID=${post.socialGroup.id}">${post.socialGroup.name}</a>
 												</h6>
 											</div>
+											<div class="col-3">
+												<c:if test="${loggedUser.id == post.user.id}">
+													<a class="btn post-edit-btn"
+														href="editPost.do?postID=${post.id}">Edit</a>
+												</c:if>
+											</div>
 										</div>
 										<div class="row">
-											<h5 class="card-title">${post.title}</h3>
+											<h3 class="card-title">${post.title}</h3>
 										</div>
 										<div class="row">
 											<p>${post.contents}</p>
