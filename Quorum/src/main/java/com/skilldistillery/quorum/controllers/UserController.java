@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.quorum.data.GroupPostDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.User;
 
@@ -18,6 +19,9 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private GroupPostDAO postDao;
 
 	@GetMapping({ "/account", "account.do" })
 	private String myProfileGet(HttpSession session) {
@@ -31,24 +35,37 @@ public class UserController {
 	@GetMapping({ "/profile", "userProfile.do" })
 	private ModelAndView userProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
 			ModelAndView mv) {
-
-		mv.setViewName("not-found");
-
-		Boolean edit = false;
-
-
-		if (hasAuth(userID, session)) {
-			edit = true;
-			mv.addObject("user", userDao.getUserById(userID));
-			mv.addObject("userEditAuth", edit);
-			mv.setViewName("profile");
-		} else {
+		String viewName;
+		if (isLoggedIn(session)) {
 			User user = userDao.getUserById(userID);
 			if (user != null) {
 				mv.addObject("user", user);
-				mv.addObject("userEditAuth", edit);
-				mv.setViewName("profile");
+				mv.addObject("userEditAuth", hasAuth(userID, session));
+				mv.addObject("feed", postDao.getByUserId(userID));
+				viewName = "profile";
+			} else {
+				viewName = "redirect:/error.do";
 			}
+		} else {
+			viewName = "redirect:/login.do";
+		}
+
+		mv.setViewName(viewName);
+
+		return mv;
+	}
+
+	@GetMapping({ "/editProfile", "editProfile.do" })
+	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
+			ModelAndView mv) {
+		mv.setViewName("redirect:/login.do");
+
+		if (hasAuth(userID, session)) {
+			User accEdit = userDao.getUserById(userID);
+			mv.addObject("user", accEdit);
+			mv.setViewName("editProfile");
+		} else {
+			mv.setViewName("redirect:/error.do");
 		}
 
 		return mv;
@@ -62,32 +79,13 @@ public class UserController {
 
 		User user = userDao.getUserById(userID, true);
 
-		if (user == null) {
-			mv.setViewName("not-found");
+		if (user != null) {
+			mv.addObject("user", user);
+			mv.addObject("userEditAuth", hasAuth(userID, session));
+		} else {
+			mv.setViewName("redirect:/notFound.do");
 		}
 
-		mv.addObject("user", user);
-		mv.addObject("userEditAuth", hasAuth(userID, session));
-
-		return mv;
-	}
-
-	@GetMapping({ "/editProfile", "editProfile.do" })
-	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
-			ModelAndView mv) {
-		mv.setViewName("redirect:/home");
-
-		User loggedUser = (User) session.getAttribute("loggedUser");
-
-		if (loggedUser != null) {
-			if (hasAuth(userID, session)) {
-				User accEdit = userDao.getUserById(userID);
-
-				mv.addObject("user", accEdit);
-				mv.setViewName("editProfile");
-
-			}
-		}
 
 		return mv;
 	}
@@ -130,5 +128,9 @@ public class UserController {
 	private boolean hasAuth(int accessUserId, HttpSession session) {
 		User user = (User) session.getAttribute("loggedUser");
 		return user != null && (accessUserId == user.getId() || user.getRole().equals("admin"));
+	}
+
+	private boolean isLoggedIn(HttpSession session) {
+		return session.getAttribute("loggedUser") != null;
 	}
 }
