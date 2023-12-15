@@ -44,6 +44,7 @@
 			</div>
 			<div class="col-md-8">
 				<h2>${school.name}</h2>
+				<br>
 				<p>At ${school.name}, they pride themselves on providing a rich
 					educational experience that prepares their students for the
 					challenges of the future. Founded in ${school.foundedIn},
@@ -69,22 +70,23 @@
 		</c:if>
 	</div>
 
-
-
-
 	<div class="container mt-4">
 		<h3>Professor Information</h3>
 		<c:if test="${not empty professors}">
 			<div class="row">
 				<c:forEach items="${professors}" var="professor" varStatus="status">
 					<div class="col-md-4">
-						<div class="card mb-3">
-							<div class="card-body">
+						<div class="card mb-3 text-center">
+							<div class="card-body align-items-center">
 								<img src="../img/profheadshot.jpg" class="img-fluid"
 									alt="Professor Headshot">
-								<h5 class="card-title">${professor.firstName}
-									${professor.lastName}</h5>
-								<h5 class="card-title">${professor.ratings}</h5>
+									<br>
+								<%-- <h5 class="card-title">${professor.firstName}
+									${professor.lastName}</h5> --%>
+									<a href="professorview.jsp?professorId=${professor.id}" class="card-title">
+                                <h5>${professor.firstName} ${professor.lastName}</h5>
+                            </a>
+								<h5 class="card-title">Average Rating ${professor.averageRating}</h5>
 
 							</div>
 						</div>
@@ -96,71 +98,12 @@
 		</c:if>
 		</c:forEach>
 	</div>
-					</c:if>
+	</c:if>
 	</div>
 
 
+	
 
-	<br>
-
-	<div class="container mt-4">
-		<h3>Professor Information</h3>
-		<div class="row">
-			<div class="col-md-4">
-				<img src="../img/school-pink-flowers.jpg" class="img-fluid"
-					alt="Professor Headshot">
-				<p>Professor Name</p>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-	<h1>School Details</h1>
-
-	<c:choose>
-		<c:when test="${not empty school}">
-			<div>
-				<h2>${school.name}Details</h2>
-				<p>School ID: ${school.id}</p>
-				<p>Name: ${school.name}</p>
-				<p>Description: ${school.description}</p>
-				<p>Founded In: ${school.foundedIn}</p>
-				<p>Created On: ${school.createdOn}</p>
-				<p>Last Updated: ${school.lastUpdate}</p>
-				<p>
-					Image: <img src="${school.imageUrl}" alt="School Image">
-				</p>
-			</div>
-
-
-			<c:if test="${not empty courses}">
-				<h2>Courses</h2>
-				<ul>
-					<c:forEach items="${courses}" var="course">
-						<li>${course.title}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
-
-			<c:if test="${not empty professors}">
-				<h3>Professors</h3>
-				<ul>
-					<c:forEach items="${professors}" var="professor">
-						<li>${professor.firstName}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
-
-
-
-		</c:when>
-		<c:otherwise>
-			<p>School details not available.</p>
-		</c:otherwise>
-	</c:choose>
 
 	<jsp:include page="footer.jsp" />
 </body>

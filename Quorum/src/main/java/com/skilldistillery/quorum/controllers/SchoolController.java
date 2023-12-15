@@ -40,7 +40,13 @@ public class SchoolController {
 				mv.setViewName("not-found");
 			} else {
 				List<Course> courses = courseDAO.getCoursesBySchool(schoolID);
+
 				List<Professor> professors = professorDAO.getAllBySchoolId(schoolID);
+				for (Professor professor : professors) {
+					double avgRating = professorDAO.getAverageRating(professor.getId());
+					professor.setAverageRating(avgRating);
+				}
+
 				mv.addObject("school", school);
 				mv.addObject("courses", courses);
 				mv.addObject("professors", professors);
@@ -48,6 +54,39 @@ public class SchoolController {
 			}
 		}
 		return mv;
+	}
+
+	@GetMapping({ "/professorview", "/professorview.do" })
+	public ModelAndView viewProfessorReview(@RequestParam(name = "professorId") int professorId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+//        Professor professor = professorDAO.getById(professorId);
+
+//        if (professor != null) {
+//            double avgRating = professorDAO.getAverageRating(professorId);
+//            professor.setAverageRating(avgRating);
+//            mv.addObject("professor", professor);
+//            mv.setViewName("professorview");
+//        } else {
+//            mv.setViewName("not-found");
+//        }
+//
+//        return mv;
+
+		if (session.getAttribute("loggedUser") != null) {
+
+			Professor professor = professorDAO.getById(professorId);
+			if (professor == null) {
+				mv.setViewName("not-found");
+			} else {
+				double avgRating = professorDAO.getAverageRating(professorId);
+	            professor.setAverageRating(avgRating);
+	            mv.addObject("professor", professor);
+	            mv.setViewName("professorview");
+				
+			}
+		}
+		return mv;
+
 	}
 
 }
