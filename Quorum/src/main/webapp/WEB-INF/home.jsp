@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
+
 <body id="homeBody">
 	<jsp:include page="navbar.jsp" />
 	<div class="container wrapper">
@@ -26,29 +27,7 @@
 						<h1>
 							Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 						</h1>
-						<div class="make-post-form shadow p-1 mb-5 rounded">
-							<form action="createPost.do" method="post">
-
-								<div class="title-input">
-									<input class="form-control" type="text" name="title"
-										id="Your posts title" placeholder="Whats on your mind?"
-										required /><br />
-								</div>
-								<div class="group-selector">
-									<select class="form-select" aria-label="Group Selector" name="groupId">
-										<option selected>What group is this for?</option>
-										<c:forEach var="group" items="${loggedUser.groups}">
-											<option value="${group.id}">${group.name}</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="post-content-input">
-									<textarea class="form-control" id="postCodeSnippetInput"
-										rows="2" name="codeSnippet" required>${post.codeSnippet}</textarea>
-								</div>
-								<button class="btn post-btn" type="submit">Post</button>
-							</form>
-						</div>
+						<jsp:include page="makePostForm.jsp"></jsp:include>
 						<c:choose>
 							<c:when test="${empty feed}">
 								<h3>Your feed is empty!</h3>
