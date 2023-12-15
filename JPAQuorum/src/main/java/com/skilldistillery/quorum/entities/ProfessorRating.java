@@ -32,7 +32,7 @@ public class ProfessorRating {
 	private Professor professor;
 
 	private int rating;
-
+	
 	private String content;
 
 	@Column(name = "created_on")

@@ -80,6 +80,9 @@
 											<div class="col-2"></div>
 											<div class="col-4">${resultUser.username}</div>
 											<div class="col-4">${resultUser.school.name}</div>
+											<c:if test="${loggedUser.role == 'admin'}">
+												<div class="col-4">Active: ${resultUser.enabled}</div>
+											</c:if>
 										</div>
 									</div>
 								</a>

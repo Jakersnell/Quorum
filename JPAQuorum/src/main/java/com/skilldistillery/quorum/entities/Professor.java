@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Professor {
@@ -48,6 +49,9 @@ public class Professor {
 	@OneToMany(mappedBy = "professor")
 	private List<ProfessorRating> ratings;
 
+	@Transient
+	private double averageRating;
+	
 	private boolean enabled;
 
 	public Professor() {
@@ -140,6 +144,14 @@ public class Professor {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+
+	public double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(double averageRating) {
+		this.averageRating = averageRating;
 	}
 
 	public boolean isEnabled() {
