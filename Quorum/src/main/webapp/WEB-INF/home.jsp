@@ -16,6 +16,11 @@
 						<h1 class="welcome-header">Welcome To Quorum!</h1>
 						<div class="xl-spacer"></div>
 					</c:when>
+					<c:when test="${loggedUser.role == 'admin'}">
+						<h1 id="administrator>">
+							01000001 01000100 01001101 01001001 01001110 			
+						</h1>
+					</c:when>
 					<c:otherwise>
 						<div class="sm-spacer"></div>
 						<h1>
