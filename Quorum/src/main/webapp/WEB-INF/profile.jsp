@@ -38,15 +38,15 @@
 				<c:if test="${userEditAuth}">
 					<a class="btn btn-info" role="button"
 						href="editProfile.do?userID=${user.id}">Edit Profile</a>
-						<br>
+					<br>
 					<c:if test="${user.enabled == true }">
-					<a class="btn btn-danger" role="button"
-						href="delete.do?userID=${user.id}">Delete Account</a>
-					</c:if>	
+						<a class="btn btn-danger" role="button"
+							href="delete.do?userID=${user.id}">Delete Account</a>
+					</c:if>
 					<c:if test="${user.enabled == false }">
-					<a class="btn btn-success" role="button"
-						href="activate.do?userID=${user.id}">Activate Account</a>
-					</c:if>	
+						<a class="btn btn-success" role="button"
+							href="activate.do?userID=${user.id}">Activate Account</a>
+					</c:if>
 				</c:if>
 			</div>
 		</div>
@@ -112,6 +112,7 @@
 		<div class="container row">
 			<div class="col-2"></div>
 			<div class="col-8 profile-posts-scroll">
+				<jsp:include page="makePostForm.jsp"></jsp:include>
 				<c:forEach var="post" items="${feed}" varStatus="status">
 					<div
 						class="shadow p-1 mb-5 rounded container post-list home-post-color-${status.index % 4}">

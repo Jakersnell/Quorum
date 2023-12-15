@@ -26,6 +26,8 @@ public class UserController {
 	
 	@Autowired
 	private CourseDAO courseDao;
+	
+	@Autowired
 	private GroupPostDAO postDao;
 
 	@GetMapping({ "/account", "account.do" })
