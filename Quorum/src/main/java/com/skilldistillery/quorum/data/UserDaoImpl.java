@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User authenticateUser(String username, String password) {
-		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password AND u.enabled = true";
+		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password";
 		User user = null;
 
 		try {
