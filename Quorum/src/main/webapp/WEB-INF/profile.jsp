@@ -38,6 +38,15 @@
 				<c:if test="${userEditAuth}">
 					<a class="btn btn-info" role="button"
 						href="editProfile.do?userID=${user.id}">Edit Profile</a>
+						<br>
+					<c:if test="${user.enabled == true }">
+					<a class="btn btn-danger" role="button"
+						href="delete.do?userID=${user.id}">Delete Account</a>
+					</c:if>	
+					<c:if test="${user.enabled == false }">
+					<a class="btn btn-success" role="button"
+						href="activate.do?userID=${user.id}">Activate Account</a>
+					</c:if>	
 				</c:if>
 			</div>
 		</div>

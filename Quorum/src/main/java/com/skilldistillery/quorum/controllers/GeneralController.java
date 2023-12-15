@@ -54,12 +54,13 @@ public class GeneralController {
 	public ModelAndView search(@RequestParam(name = "query") String query, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView("search");
+		User user = (User) session.getAttribute("loggedUser");
 
-		if (session.getAttribute("loggedUser") == null) {
+		if (user == null) {
 			mav.setViewName("redirect:/login.do");
 		} else {
 			mav.addObject("postResults", postDao.searchByQuery(query));
-			mav.addObject("userResults", userDao.searchByQuery(query));
+			mav.addObject("userResults", userDao.searchByQuery(query, user));
 			mav.addObject("schoolResults", schoolDao.searchByQuery(query));
 			mav.addObject("professorResults", professorDao.searchByQuery(query));
 			mav.addObject("query", query);

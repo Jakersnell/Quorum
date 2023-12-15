@@ -32,7 +32,7 @@ public interface UserDAO {
 	
 	void sendMessage(int senderId, int receiverId);
 
-	List<User> searchByQuery(String query);
+	List<User> searchByQuery(String query, User user);
 	
 	void deleteUser(int id);
 	

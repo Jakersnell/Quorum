@@ -176,10 +176,20 @@ public class UserDaoImpl implements UserDAO {
 		
 	}
 
-	public List<User> searchByQuery(String query) {
+	public List<User> searchByQuery(String query, User user) {
 		query = "%" + query + "%";
-		String jpql = "SELECT u FROM User u WHERE ((u.username LIKE :query) OR (u.firstName LIKE :query) OR (u.lastName LIKE :query)) AND (u.enabled = true AND u.role <> 'admin')";
-		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
+		
+		
+		if (user.getRole().equals("admin")) {
+			String jpqlAdmin = "SELECT u FROM User u WHERE ((u.username LIKE :query) OR (u.firstName LIKE :query) OR (u.lastName LIKE :query)) AND (u.role <> 'admin')";
+			
+			return em.createQuery(jpqlAdmin, User.class).setParameter("query", query).getResultList();
+		} else {
+			String jpqlUser = "SELECT u FROM User u WHERE ((u.username LIKE :query) OR (u.firstName LIKE :query) OR (u.lastName LIKE :query)) AND (u.enabled = true AND u.role <> 'admin')";
+			
+			return em.createQuery(jpqlUser, User.class).setParameter("query", query).getResultList();
+		}
+		
 	}
 	
 }
