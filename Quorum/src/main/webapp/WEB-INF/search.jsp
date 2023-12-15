@@ -80,32 +80,53 @@
 						</div>
 					</div>
 					<div id="collapseTwo" class="collapse" data-parent="#accordion">
-						<div class="card-body">
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
-								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-								tabindex="0">
-								<c:forEach var="resultSchool" items="${schoolResults}">
-									<a class="wrapper-link"
-										href="school.do?schoolID=${resultSchool.id}">
-										<div class="card-body result-card">
-											<div class="row">
-												<div class="col-4">${resultSchool.name}</div>
-												<div class="col-8">
-													<p class="card-text result-card-description">${resultSchool.description}
-													</p>
-												</div>
+						<div class="card-body scrollable-card" data-bs-spy="scroll"
+							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+							tabindex="0">
+							<c:forEach var="resultSchool" items="${schoolResults}">
+								<a class="wrapper-link"
+									href="school.do?schoolID=${resultSchool.id}">
+									<div class="card-body result-card">
+										<div class="row">
+											<div class="col-4">${resultSchool.name}</div>
+											<div class="col-8">
+												<p class="card-text result-card-description">${resultSchool.description}
+												</p>
 											</div>
 										</div>
-									</a>
-								</c:forEach>
-							</div>
+									</div>
+								</a>
+							</c:forEach>
 						</div>
 					</div>
+
 					<div id="collapseThree" class="collapse" data-parent="#accordion">
 						<div class="card-body">Content of Div 3</div>
 					</div>
 					<div id="collapseFour" class="collapse" data-parent="#accordion">
-						<div class="card-body">Content of Div 4</div>
+						<div class="card-body scrollable-card" data-bs-spy="scroll"
+							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+							tabindex="0">
+							<c:forEach var="resultPost" items="${postResults}">
+								<a class="wrapper-link" href="post.do?postID=${resultPost.id}">
+									<div class="card-body result-card">
+										<div class="row">
+											<div class="col-6">
+												<h6>@${resultPost.user.username}</h6>
+											</div>
+											<div class="col-6">
+												<h6>${resultPost.socialGroup.name}</h6>
+											</div>
+
+										</div>
+										<div class="row">
+
+											<h5 class="card-title">${resultPost.title}</h5>
+										</div>
+									</div>
+								</a>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 				<div class="col-1"></div>
