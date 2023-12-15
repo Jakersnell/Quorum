@@ -206,13 +206,8 @@ main {
 }
 
 .title-input input {
-	background-color: inherit;
+	background-color: #fdfdfd;;
 	margin-top: 1rem;
-	border-bottom-style: solid;
-	border-bottom-color: black;
-	border-bottom-width: 0.2rem;
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
 }
 
 .post-content-input textarea:focus,
