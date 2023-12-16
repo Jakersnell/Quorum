@@ -39,5 +39,7 @@ public interface UserDAO {
 	void deleteUser(int id);
 
 	void activateUser(int id);
+	
+	boolean userIsFollowing(User followed, User following);
 
 }

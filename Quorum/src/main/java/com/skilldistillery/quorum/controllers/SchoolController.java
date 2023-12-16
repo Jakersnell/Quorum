@@ -30,7 +30,7 @@ public class SchoolController {
 	@Autowired
 	private CourseDAO courseDAO;
 
-	@GetMapping({ "/school", "/school.do" })
+	@GetMapping({ "/school", "school.do" })
 	public ModelAndView viewSchool(@RequestParam(name = "schoolID") int schoolID, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
@@ -38,7 +38,7 @@ public class SchoolController {
 
 			School school = schoolDAO.getById(schoolID);
 			if (school == null) {
-				mv.setViewName("not-found");
+				mv.setViewName("redirect:/404.do");
 			} else {
 				List<Course> courses = courseDAO.getCoursesBySchool(schoolID);
 
@@ -57,7 +57,7 @@ public class SchoolController {
 		return mv;
 	}
 
-	@GetMapping({ "/professorview", "/professorview.do" })
+	@GetMapping({ "/professorview", "professorview.do" }) 
 	public ModelAndView viewProfessorReview(@RequestParam(name = "professorId") int professorId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Professor professor = professorDAO.getById(professorId);
@@ -65,7 +65,7 @@ public class SchoolController {
 		if (session.getAttribute("loggedUser") != null) {
 
 			if (professor == null) {
-				mv.setViewName("not-found");
+				mv.setViewName("redirect:/404.do");
 			} else {
 				List<ProfessorRating> ratings = professorDAO.getAllRatingsByProfessorId(professorId);
 				mv.addObject("ratings", ratings);

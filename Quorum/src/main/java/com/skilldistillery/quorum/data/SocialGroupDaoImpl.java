@@ -45,10 +45,7 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 		User user = em.find(User.class, userId);
 		if (!managedGroup.getMembers().contains(user)) {
 			managedGroup.getMembers().add(user);
-			if (!user.getGroups().contains(managedGroup)) {
-				user.getGroups().add(managedGroup);
-				success = true;
-			}
+			success = true;
 		}
 		return success;
 	}
@@ -58,12 +55,9 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 		boolean success = false;
 		SocialGroup managedGroup = em.find(SocialGroup.class, socialGroupId);
 		User user = em.find(User.class, userId);
-		if (managedGroup.getMembers().contains(user)) {
+		if (user != null && managedGroup.getMembers().contains(user)) {
 			managedGroup.getMembers().remove(user);
-			if (user.getGroups().contains(managedGroup)) {
-				user.getGroups().remove(managedGroup);
-				success = true;
-			}
+			success = true;
 		}
 		return success;
 
@@ -106,6 +100,11 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 	@Override
 	public boolean userIsOwner(int groupId, int userID) {
 		return em.find(SocialGroup.class, groupId).getOwner().getId() == userID;
+	}
+
+	@Override
+	public boolean userIsInGroup(int groupId, int userId) {
+		return em.find(SocialGroup.class, groupId).getMembers().stream().anyMatch(member -> member.getId() == userId);
 	}
 
 }

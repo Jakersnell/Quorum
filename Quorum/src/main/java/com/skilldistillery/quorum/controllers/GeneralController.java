@@ -64,13 +64,19 @@ public class GeneralController {
 		} else {
 			mav.addObject("postResults", postDao.searchByQuery(query));
 			mav.addObject("userResults", userDao.searchByQuery(query, user));
-			mav.addObject("schoolResults", schoolDao.searchByQuery(query));
+			if (userIsAdmin(session)) {
+				mav.addObject("schoolResults", schoolDao.searchByQuery(query));
+			}
 			mav.addObject("professorResults", professorDao.searchByQuery(query));
 			mav.addObject("groupResults", groupDao.searchByQuery(query));
 			mav.addObject("query", query);
 		}
 
 		return mav;
+	}
+	
+	private boolean userIsAdmin(HttpSession session) {
+		return ((User) session.getAttribute("loggedUser")).getRole().equals("admin");
 	}
 
 }

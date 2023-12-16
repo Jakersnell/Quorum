@@ -7,7 +7,7 @@
 <body>
 	<jsp:include page="navbar.jsp" />
 
-	<div class="container">
+	<div class="container wrapper">
 		<div class="row">
 			<div class="col-4"></div>
 			<div class="col-4">
@@ -17,7 +17,7 @@
 			</div>
 			<div class="col-4"></div>
 		</div>
-	</div>
+	</div><div class="xl-spacer"></div>
 
 	<jsp:include page="footer.jsp" />
 </body>
