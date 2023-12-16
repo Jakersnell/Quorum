@@ -3,6 +3,7 @@ package com.skilldistillery.quorum.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,7 +70,7 @@ public class SocialGroupController {
 		}
 		return redirect;
 	}
-	
+
 	@PostMapping({ "/leave-group", "leaveGroup.do" })
 	public String leaveSocialGroup(@RequestParam(name = "groupID") int groupId, HttpSession session, ModelAndView mav) {
 		String redirect = "redirect:/login.do";
@@ -82,6 +83,27 @@ public class SocialGroupController {
 				redirect = "redirect:/error.do";
 			}
 		}
+		return redirect;
+	}
+
+	@GetMapping({ "/create-group", "createGroup.do" })
+	public String createSocialGroup(HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		return loggedUser == null || loggedUser.getRole().equals("admin") ? "redirect:/home.do" : "createGroup";
+	}
+
+	@PostMapping({ "/create-group", "createGroup.do" })
+	public String createSocialGroupPOST(@ModelAttribute SocialGroup group, HttpSession session) {
+		String redirect;
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		if (loggedUser == null || loggedUser.getRole().equals("admin")) {
+			redirect = "redirect:/error.do";
+		} else {
+			group.setOwner(loggedUser);
+			group = groupDao.create(group);
+			redirect = "redirect:/group.do?groupID=" + group.getId();
+		}
+			
 		return redirect;
 	}
 
