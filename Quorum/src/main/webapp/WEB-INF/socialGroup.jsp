@@ -80,7 +80,7 @@
 					<div class="col-1"></div>
 					<div class="col-10">
 						<c:if test="${userHasEditAuth}">
-							<a href="editGroup.do?groupID=${group.id}"
+							<a href="#"
 								class="btn btn-secondary form-control">edit this group</a>
 						</c:if>
 					</div>
