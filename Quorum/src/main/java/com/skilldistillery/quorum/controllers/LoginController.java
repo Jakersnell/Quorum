@@ -41,7 +41,14 @@ public class LoginController {
 			User searchedUser = userDao.authenticateUser(user.getUsername(), user.getPassword());
 
 			if (searchedUser != null) {
-				session.setAttribute("loggedUser", searchedUser);
+				if (searchedUser.isEnabled() == false) {
+					session.setAttribute("userID", searchedUser.getId());
+					redirect = "reactivate";
+					
+				} else {
+					session.setAttribute("loggedUser", searchedUser);
+				}
+				
 			} else {
 				redirectAttributes.addFlashAttribute("msg", "Sorry! Incorrect username/password!");
 				redirect = "redirect:/login.do";
@@ -73,6 +80,7 @@ public class LoginController {
 
 			School selectedSchool = schoolDao.getById(schoolID);
 			user.setSchool(selectedSchool);
+			user.setRole("student");
 
 			User createdUser = userDao.createUser(user);
 			session.setAttribute("loggedUser", createdUser);
@@ -90,5 +98,15 @@ public class LoginController {
 		model.setViewName("redirect:/home.do");
 		model.addObject("msg", msg);
 		return model;
+	}
+	
+	@GetMapping({ "/reactivate", "reactivate.do" })
+	public ModelAndView logout(@RequestParam(name="userID")int userID, HttpSession session, ModelAndView mv) {
+		String msg = "Success!";
+		session.invalidate();
+		userDao.activateUser(userID);
+		mv.setViewName("redirect:/login.do");
+		mv.addObject("msg", msg);
+		return mv;
 	}
 }

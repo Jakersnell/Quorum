@@ -35,7 +35,7 @@ public class MessageDaoImpl implements MessageDAO {
 
 	public List<Message> getMessages(User sender, User receiver) {
 		String jpql = "SELECT m FROM Message m WHERE sender = :senderID AND receiver = :receiverID "
-				+ "OR sender = :receiverID AND receiver = :senderID";
+				+ "OR sender = :receiverID AND receiver = :senderID ORDER BY id";
 
 		List<Message> messages = em.createQuery(jpql, Message.class).setParameter("senderID", sender)
 				.setParameter("receiverID", receiver).getResultList();
