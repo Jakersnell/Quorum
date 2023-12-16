@@ -23,4 +23,7 @@ public interface SocialGroupDAO {
 	
 	boolean userIsOwner(int groupId, int userID);
 	
+	boolean userIsInGroup(int groupId, int userId);
+	
+	
 }

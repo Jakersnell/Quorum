@@ -241,6 +241,27 @@ public class User {
 		this.receivedMessages = receivedMessages;
 	}
 
+	public List<SocialGroup> getGroups() {
+		return groups;
+	}
+	
+	public void setGroups(List<SocialGroup> groups) {
+		this.groups = groups;
+	}
+	
+	public void addGroup(SocialGroup group) {
+		if (groups != null && !groups.contains(group)) {
+			groups.add(group);
+		}
+	}
+	
+	public void removeGroup(SocialGroup group) {
+		if (groups != null && !groups.contains(group)) {
+			groups.add(group);
+		}
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -258,13 +279,6 @@ public class User {
 		return id == other.id;
 	}
 
-	public List<SocialGroup> getGroups() {
-		return groups;
-	}
-
-	public void setGroups(List<SocialGroup> groups) {
-		this.groups = groups;
-	}
 
 	@Override
 	public String toString() {

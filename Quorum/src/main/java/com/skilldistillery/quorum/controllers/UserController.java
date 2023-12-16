@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.CourseDAO;
 import com.skilldistillery.quorum.data.GroupPostDAO;
+import com.skilldistillery.quorum.data.SocialGroupDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.User;
@@ -23,10 +24,10 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDao;
-	
+
 	@Autowired
 	private CourseDAO courseDao;
-	
+
 	@Autowired
 	private GroupPostDAO postDao;
 
@@ -47,18 +48,24 @@ public class UserController {
 			User user = userDao.getUserById(userID);
 			if (user != null) {
 				mv.addObject("user", user);
-				mv.addObject("userEditAuth", hasAuth(userID, session));
 				mv.addObject("feed", postDao.getByUserId(userID));
 				viewName = "profile";
 				List<Course> courses = courseDao.getCoursesByUser(userID);
 				mv.addObject("courses", courses);
+
+				if (hasAuth(userID, session)) {
+					mv.addObject("userEditAuth", true);
+				} else {
+					mv.addObject("userIsFollowingUser",
+							userDao.userIsFollowing(user, (User) session.getAttribute("loggedUser")));
+				}
+
 			} else {
 				viewName = "redirect:/error.do";
 			}
 		} else {
 			viewName = "redirect:/login.do";
 		}
-		
 
 		mv.setViewName(viewName);
 
@@ -87,15 +94,11 @@ public class UserController {
 
 		mv.setViewName("follow");
 
-		User user = userDao.getUserById(userID, true);
-
-		if (user != null) {
-			mv.addObject("user", user);
-			mv.addObject("userEditAuth", hasAuth(userID, session));
+		if (hasAuth(userID, session)) {
+			mv.addObject("user", userDao.getUserById(userID, true));
 		} else {
 			mv.setViewName("redirect:/notFound.do");
 		}
-
 
 		return mv;
 	}
@@ -126,11 +129,23 @@ public class UserController {
 
 	@PostMapping({ "/removeFollowing", "removeFollowing.do" })
 	private String userRemoveFollowing(@RequestParam(name = "userID") int userID,
-			@RequestParam(name = "removeID") int removeID, HttpSession session) {
+			@RequestParam(name = "removeID") int removeID, HttpSession session,
+			@RequestParam(name = "fromProfile", required = false) Boolean fromProfile) {
 		String redirect = "redirect:/error.do";
 		if (hasAuth(userID, session)) {
 			userDao.removeFollowing(userID, removeID);
-			redirect = "redirect:/getFollow.do?userID=" + userID;
+			
+			redirect = (fromProfile == null ? "redirect:/getFollow.do?userID=" + userID : "redirect:/userProfile.do?userID=" + removeID);
+		}
+		return redirect;
+	}
+
+	@PostMapping({ "/addFollowing", "addFollowing.do" })
+	private String userAddFollowing(@RequestParam(name = "userID") int userID,
+			@RequestParam(name = "followID") int followID, HttpSession session) {
+		String redirect = "redirect:/userProfile.do?userID=" + followID;
+		if (hasAuth(userID, session)) {
+			userDao.addFollowing(userID, followID);
 		}
 		return redirect;
 	}

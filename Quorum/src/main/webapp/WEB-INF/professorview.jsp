@@ -7,16 +7,16 @@
 
 <body>
 	<jsp:include page="navbar.jsp" />
+	<div class="container wrapper">
+		<h5>${professor.firstName}${professor.lastName}</h5>
+		<h1>Average Rating ${professor.averageRating}</h1>
 
-	<h5>${professor.firstName} ${professor.lastName}</h5>
-	<h1>Average Rating ${professor.averageRating}</h1>
+		<c:forEach var="rating" items="${ratings}">
+			<h5>${rating.content}</h5>
+			<p>Rating: ${rating.rating}</p>
+		</c:forEach>
 
-	<c:forEach var="rating" items="${ratings}">
-		<h5>${rating.content}</h5>
-		<p>Rating: ${rating.rating}</p>
-	</c:forEach>
-
-
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 

@@ -8,7 +8,7 @@
 <body>
 <jsp:include page="navbar.jsp" />
 
-<div class="container">
+<div class="container wrapper">
 	  <c:forEach items="${messages}" var="m">
 	  	<div class="row">
 	  	<div class="col"></div>

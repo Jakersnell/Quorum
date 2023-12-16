@@ -8,7 +8,7 @@
 <body>
 	<jsp:include page="navbar.jsp" />
 	
-	<main>
+	<div class="container wrapper">
 	
 	
 	
@@ -24,7 +24,7 @@
 	
 	
 	
-	</main>
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 

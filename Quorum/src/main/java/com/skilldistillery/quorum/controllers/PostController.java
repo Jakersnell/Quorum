@@ -36,7 +36,8 @@ public class PostController {
 		if (loggedUser != null && group != null) {
 			post.setUser(loggedUser);
 			post.setSocialGroup(group);
-			redirect = "redirect:/post.do?postID=" + postDao.create(post).getId();
+			postDao.create(post);
+			redirect = "redirect:/home.do";
 		} else if (group == null) {
 			redirect = "redirect:/error.do";
 		} else {
@@ -44,24 +45,6 @@ public class PostController {
 		}
 
 		return redirect;
-	}
-
-	@GetMapping({ "/post", "post.do" })
-	public ModelAndView postDetailGET(@RequestParam(name = "postID") int postId, ModelAndView mav,
-			HttpSession session) {
-		GroupPost post = postDao.getById(postId);
-
-		if (!userIsLoggedIn(session)) {
-			mav.setViewName("redirect:/login.do");
-		} else if (post == null) {
-			mav.setViewName("redirect:/error.do");
-		} else {
-			mav.setViewName("post");
-			mav.addObject("post", post);
-			mav.addObject("userEditAuth", hasAuth(post.getUser().getId(), session));
-		}
-
-		return mav;
 	}
 
 	@GetMapping({ "/edit-post", "editPost.do" })
@@ -83,7 +66,7 @@ public class PostController {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect = "redirect:/login.do";
 		} else if (post != null && hasEditAuth(post.getId(), session) && postDao.update(post)) {
-			redirect = "redirect:/post.do?postID=" + post.getId();
+			redirect = "redirect:/home.do";
 		} else {
 			redirect = "redirect:/error.do";
 		}
@@ -104,10 +87,6 @@ public class PostController {
 		}
 
 		return redirect;
-	}
-
-	private boolean userIsLoggedIn(HttpSession session) {
-		return session.getAttribute("loggedUser") != null;
 	}
 
 	private boolean hasAuth(int accessUserId, HttpSession session) {

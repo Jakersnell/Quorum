@@ -4,7 +4,6 @@
 	margin: 0;
 }
 
-
 .nav-link {
 	color: black;
 	font-size: 1.2rem;
@@ -206,7 +205,8 @@ main {
 }
 
 .title-input input {
-	background-color: #fdfdfd;;
+	background-color: #fdfdfd;
+	;
 	margin-top: 1rem;
 }
 
@@ -234,7 +234,7 @@ textarea {
 }
 
 .group-selector {
-	padding-bottom: 1rem;
+	padding-top: 1rem;
 }
 
 #msgAlert {
@@ -255,6 +255,7 @@ textarea {
 	border-color: black;
 	height: min-content;
 	padding: 0;
+	z-index: 1;
 }
 
 .msg-close-btn p {
@@ -280,4 +281,9 @@ textarea {
 
 .scroll-feed {
 	height: 35rem;
+}
+
+
+.wrapper {
+	min-height: 50vh;
 }

@@ -7,7 +7,7 @@
 <body>
 <jsp:include page="navbar.jsp" />
 
-<div class="container">
+<div class="container wrapper">
 	<div class="row">
 		<div class="col"></div>
 		<div class="col-6 text-center"><h2>Active Messages</h2></div>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.GroupPost;
+import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -105,6 +106,7 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 				    AND post.enabled = true
 				ORDER BY
 				    post.lastUpdate
+				    DESC
 								""";
 		return em.createQuery(jpql, GroupPost.class).setParameter("userId", userId).getResultList();
 	}
@@ -145,5 +147,7 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 			post.setEnabled(status);
 		}
 	}
+
+
 	
 }

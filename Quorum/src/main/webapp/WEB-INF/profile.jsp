@@ -24,7 +24,31 @@
 		</div>
 		<div class="row">
 			<div class="col-2"></div>
-			<div class="col-4">
+			<div class="col-2"></div>
+			<div class="col-2">
+				<c:if test="${!userEditAuth}">
+					<c:choose>
+						<c:when test="${userIsFollowingUser}">
+							<form action="removeFollowing.do" method="post">
+								<input type="hidden" name="userID" id="userID"
+									value="${loggedUser.id}" /> <input type="hidden"
+									name="removeID" id="removeID" value="${user.id}" /> <input
+									type="hidden" name="fromProfile" id="fromProfile" value="true" />
+								<button type="submit" class="btn btn-secondary">Unfollow</button>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<form action="addFollowing.do" method="post">
+								<input type="hidden" name="userID" id="userID"
+									value="${loggedUser.id}" /> <input type="hidden"
+									name="followID" id="followID" value="${user.id}" />
+
+
+								<button type="submit" class="btn btn-secondary">Follow</button>
+							</form>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 				<h3>
 					<c:out value="${user.firstName} ${user.lastName}"></c:out>
 				</h3>
@@ -32,22 +56,28 @@
 			<div class="col-4">
 				<a class="nav-link btn btn-secondary form-control"
 					href="getFollow.do?userID=${user.id}">followers</a>
-
 			</div>
 			<div class="col-2">
-				<c:if test="${userEditAuth}">
-					<a class="btn btn-info" role="button"
-						href="editProfile.do?userID=${user.id}">Edit Profile</a>
-					<br>
-					<c:if test="${user.enabled == true }">
-						<a class="btn btn-danger" role="button"
-							href="delete.do?userID=${user.id}">Delete Account</a>
-					</c:if>
-					<c:if test="${user.enabled == false }">
-						<a class="btn btn-success" role="button"
-							href="activate.do?userID=${user.id}">Activate Account</a>
-					</c:if>
-				</c:if>
+				<c:choose>
+					<c:when test="${userEditAuth}">
+						<a class="btn btn-info" role="button"
+							href="editProfile.do?userID=${user.id}">Edit Profile</a>
+						<br>
+						<c:if test="${user.enabled == true }">
+							<a class="btn btn-danger" role="button"
+								href="delete.do?userID=${user.id}">Delete Account</a>
+						</c:if>
+						<c:if test="${user.enabled == false }">
+							<a class="btn btn-success" role="button"
+								href="activate.do?userID=${user.id}">Activate Account</a>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<a class="btn btn-info" role="button"
+							href="editProfile.do?userID=${user.id}">Edit Profile</a>
+						<br>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<div class="row">
@@ -110,45 +140,13 @@
 
 		<div class="spacer"></div>
 		<div class="container row">
-			<div class="col-2"></div>
-			<div class="col-8 profile-posts-scroll">
-				<jsp:include page="makePostForm.jsp"></jsp:include>
-				<c:forEach var="post" items="${feed}" varStatus="status">
-					<div
-						class="shadow p-1 mb-5 rounded container post-list home-post-color-${status.index % 4}">
-						<div class="row">
-							<div class="col-6">
-								<h6>
-									<a class="post-link"
-										href="userProfile.do?userID=${post.user.id}">@${post.user.username}</a>
-								</h6>
-							</div>
-							<div class="col-3">
-								<h6>
-									<a class="post-link"
-										href="socialGroup.do?groupID=${post.socialGroup.id}">${post.socialGroup.name}</a>
-								</h6>
-							</div>
-							<div class="col-3">
-								<c:if test="${loggedUser.id == post.user.id}">
-									<a class="btn post-edit-btn"
-										href="editPost.do?postID=${post.id}">Edit</a>
-								</c:if>
-							</div>
-						</div>
-						<div class="row">
-							<h3 class="card-title">${post.title}</h3>
-						</div>
-						<div class="row">
-							<p>${post.contents}</p>
-						</div>
-					</div>
-					<c:if test="${!status.last}">
-						<div class="xs-spacer"></div>
-					</c:if>
-				</c:forEach>
+			<div class="col-3"></div>
+			<div class="col-6 profile-posts-scroll">
+				<c:if test="${loggedUser == user}">
+					<jsp:include page="makePostForm.jsp"></jsp:include></c:if>
+				<jsp:include page="_feed.jsp" />
 			</div>
-			<div class="col-2"></div>
+			<div class="col-3"></div>
 		</div>
 	</div>
 	<div class="spacer"></div>

@@ -21,7 +21,7 @@
 
 <body>
 	<jsp:include page="navbar.jsp" />
-	<main>
+	<div class="wrapper">
 		<div class="sm-spacer"></div>
 		<div id="accordion">
 			<div class="row">
@@ -39,11 +39,13 @@
 							aria-controls="collapseOne">Users</button>
 					</div>
 					<div class="search-selector-spacer"></div>
-					<div class="card">
-						<button class="btn collapsed card-header" data-toggle="collapse"
-							data-target="#collapseTwo" aria-expanded="false"
-							aria-controls="collapseTwo">Schools</button>
-					</div>
+					<c:if test="${not empty schools}">
+						<div class="card">
+							<button class="btn collapsed card-header" data-toggle="collapse"
+								data-target="#collapseTwo" aria-expanded="false"
+								aria-controls="collapseTwo">Schools</button>
+						</div>
+					</c:if>
 					<div class="search-selector-spacer"></div>
 					<div class="card">
 						<button class="btn collapsed card-header" data-toggle="collapse"
@@ -89,28 +91,29 @@
 							</c:forEach>
 						</div>
 					</div>
-					<div id="collapseTwo" class="collapse" data-parent="#accordion">
-						<h4>Schools</h4>
-						<div class="card-body scrollable-card" data-bs-spy="scroll"
-							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-							tabindex="0">
-							<c:forEach var="resultSchool" items="${schoolResults}">
-								<a class="wrapper-link"
-									href="school.do?schoolID=${resultSchool.id}">
-									<div class="card-body result-card">
-										<div class="row">
-											<div class="col-4">${resultSchool.name}</div>
-											<div class="col-8">
-												<p class="card-text result-card-description">${resultSchool.description}
-												</p>
+					<c:if test="${not empty schools}">
+						<div id="collapseTwo" class="collapse" data-parent="#accordion">
+							<h4>Schools</h4>
+							<div class="card-body scrollable-card" data-bs-spy="scroll"
+								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+								tabindex="0">
+								<c:forEach var="resultSchool" items="${schoolResults}">
+									<a class="wrapper-link"
+										href="school.do?schoolID=${resultSchool.id}">
+										<div class="card-body result-card">
+											<div class="row">
+												<div class="col-4">${resultSchool.name}</div>
+												<div class="col-8">
+													<p class="card-text result-card-description">${resultSchool.description}
+													</p>
+												</div>
 											</div>
 										</div>
-									</div>
-								</a>
-							</c:forEach>
+									</a>
+								</c:forEach>
+							</div>
 						</div>
-					</div>
-
+					</c:if>
 					<div id="collapseThree" class="collapse" data-parent="#accordion">
 						<h4>Groups</h4>
 						<div class="card-body scrollable-card" data-bs-spy="scroll"
@@ -167,7 +170,7 @@
 								tabindex="0">
 								<c:forEach var="professor" items="${professorResults}">
 									<a class="wrapper-link"
-										href="school.do?schoolID=${professor.school.id}">
+										href="professorview.do?professorId=${professor.id}">
 										<div class="card-body result-card">
 											<div class="row">
 												<div class="col-6">
@@ -188,7 +191,7 @@
 			</div>
 		</div>
 		<div class="sm-spacer"></div>
-	</main>
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 

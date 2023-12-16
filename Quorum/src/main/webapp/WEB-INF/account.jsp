@@ -6,7 +6,7 @@
 <jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navbar.jsp" />
-	<div class="container text-center">
+	<div class="container text-center wrapper">
 		<c:choose>
 			<c:when test="${not empty loggedUser}">
 				<h2>MyAccount</h2>

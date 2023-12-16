@@ -199,4 +199,9 @@ public class UserDaoImpl implements UserDAO {
 		return group.getMembers();
 	}
 
+	@Override
+	public boolean userIsFollowing(User followed, User following) {
+		return followed.getFollowers().contains(following);
+	}
+
 }
