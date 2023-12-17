@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <c:if test="${!user.groups.isEmpty()}">
-	<div class="make-post-form shadow p-1 mb-5 rounded">
+	<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
+		align="center">
+		<div class="row text-center container">
+			<h6 class="content-header">Make A Post</h6>
+		</div>
 		<form action="createPost.do" method="post">
 
 			<div class="title-input">

@@ -3,6 +3,7 @@ package com.skilldistillery.quorum.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,23 +32,25 @@ public class SocialGroupController {
 	public ModelAndView getSocialGroup(@RequestParam(name = "groupID") int groupID, HttpSession session,
 			ModelAndView mav) {
 		String viewName;
-		SocialGroup group;
+		SocialGroup group = null;
+
 		if (session.getAttribute("loggedUser") != null) {
 			group = groupDao.getById(groupID);
-			if (group != null) {
-				viewName = "socialGroup";
-				mav.addObject("group", group);
-				if (userIsMember(groupID, session)) {
-					mav.addObject("userIsMember", true);
-					mav.addObject("members", userDao.getByGroupId(groupID));
-					mav.addObject("feed", postDao.getByGroupId(groupID));
-					mav.addObject("userHasEditAuth", userHasEditAuth(groupID, session));
-				}
-			} else {
-				viewName = "redirect:/404.do";
-			}
 		} else {
 			viewName = "redirect:/login.do";
+		}
+
+		if (group != null) {
+			viewName = "socialGroup";
+			mav.addObject("group", group);
+			mav.addObject("members", userDao.getByGroupId(groupID));
+			mav.addObject("userHasEditAuth", userHasEditAuth(groupID, session));
+			if (userIsMember(groupID, session)) {
+				mav.addObject("userIsMember", true);
+				mav.addObject("feed", postDao.getByGroupId(groupID));
+			}
+		} else {
+			viewName = "redirect:/404.do";
 		}
 
 		mav.setViewName(viewName);
@@ -69,7 +72,7 @@ public class SocialGroupController {
 		}
 		return redirect;
 	}
-	
+
 	@PostMapping({ "/leave-group", "leaveGroup.do" })
 	public String leaveSocialGroup(@RequestParam(name = "groupID") int groupId, HttpSession session, ModelAndView mav) {
 		String redirect = "redirect:/login.do";
@@ -82,6 +85,39 @@ public class SocialGroupController {
 				redirect = "redirect:/error.do";
 			}
 		}
+		return redirect;
+	}
+
+	@GetMapping({ "/create-group", "createGroup.do" })
+	public String createSocialGroup(HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		return loggedUser == null || loggedUser.getRole().equals("admin") ? "redirect:/home.do" : "createGroup";
+	}
+
+	@PostMapping({ "/create-group", "createGroup.do" })
+	public String createSocialGroupPOST(@ModelAttribute SocialGroup group, HttpSession session) {
+		String redirect;
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		if (loggedUser == null || loggedUser.getRole().equals("admin")) {
+			redirect = "redirect:/error.do";
+		} else {
+			group.setOwner(loggedUser);
+			group = groupDao.create(group);
+			redirect = "redirect:/group.do?groupID=" + group.getId();
+		}
+
+		return redirect;
+	}
+
+	@PostMapping({ "/update-group", "updateGroup.do" })
+	public String updateGroupPOST(@ModelAttribute SocialGroup group, HttpSession session) {
+		String redirect = "redirect:/error.do";
+
+		if (userHasEditAuth(group.getId(), session)) {
+			groupDao.update(group);
+			redirect = "redirect:/group.do?groupID=" + group.getId();
+		}
+
 		return redirect;
 	}
 

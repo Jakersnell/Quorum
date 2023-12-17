@@ -15,7 +15,7 @@
 			</button>
 		</div>
 		<div class="col-2 d-flex justify-content-center">
-			<a class="nav-link" aria-current="page" href="home.do"><img
+			<a class="nav-link" aria-current="page" href="home.do"><img 
 				id="navbar-logo-img" alt="logo image" src="img/logo.png"></a>
 		</div>
 		<div class="col-2">
@@ -47,6 +47,7 @@
 											href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
 										<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
 										<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
+										<li><a class="dropdown-item nav-link" href="createGroup.do">Create A Group</a></li>
 										<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
 									</ul>
 								</li>

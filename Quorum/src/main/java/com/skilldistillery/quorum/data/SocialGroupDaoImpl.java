@@ -1,5 +1,6 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -69,7 +70,7 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 		SocialGroup managed = em.find(SocialGroup.class, group.getId());
 		if (managed != null) {
 			managed.setName(group.getName());
-			managed.setName(group.getDescription());
+			managed.setDescription(group.getDescription());
 			managed.setEnabled(group.isEnabled());
 		}
 		return success;
@@ -78,6 +79,7 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 	@Override
 	public SocialGroup create(SocialGroup group) {
 		em.persist(group);
+		group.setMembers(Arrays.asList(group.getOwner()));
 		return group;
 	}
 
