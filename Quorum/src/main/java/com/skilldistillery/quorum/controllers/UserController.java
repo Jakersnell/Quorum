@@ -41,44 +41,36 @@ public class UserController {
 	}
 
 	@GetMapping({ "/profile", "userProfile.do" })
-	private ModelAndView userProfileGet(@RequestParam(name = "userID") 
-			int userID, 
-			HttpSession session,
+	private ModelAndView userProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
 			ModelAndView mv) {
-			String viewName;
-			
-		User logged = (User) session.getAttribute("loggedUser");
-		
-		if (isLoggedIn(session)) {
-			
-			User user = userDao.getUserById(userID);
-			
-			if (user != null && user.isEnabled() == true ||
-				user != null && logged.getRole().equals("admin")) {
-				
-				mv.addObject("user", user);
-				mv.addObject("feed", postDao.getByUserId(userID));
-				viewName = "profile";
-				List<Course> courses = courseDao.getCoursesByUser(userID);
-				mv.addObject("courses", courses);
+		String viewName;
 
-        if (hasAuth(userID, session)) {
-					mv.addObject("userEditAuth", true);
-				} else {
-					mv.addObject("userIsFollowingUser",
-							userDao.userIsFollowing(user, (User) session.getAttribute("loggedUser")));
-				}
-        
-			} else {
-				
-				viewName = "redirect:/error.do";
-			}
-			
+		User logged = (User) session.getAttribute("loggedUser");
+		User user = null;
+
+		if (isLoggedIn(session)) {
+			user = userDao.getUserById(userID);
 		} else {
-			
 			viewName = "redirect:/login.do";
 		}
 
+		if (user != null && user.isEnabled() == true || user != null && logged.getRole().equals("admin")) {
+			mv.addObject("user", user);
+			mv.addObject("feed", postDao.getByUserId(userID));
+			viewName = "profile";
+			List<Course> courses = courseDao.getCoursesByUser(userID);
+			mv.addObject("courses", courses);
+		} else {
+			viewName = "redirect:/error.do";
+		}
+		
+		if (hasAuth(userID, session)) {
+			mv.addObject("userEditAuth", true);
+		} else {
+			mv.addObject("userIsFollowingUser",
+					userDao.userIsFollowing(user, (User) session.getAttribute("loggedUser")));
+		}
+		
 		mv.setViewName(viewName);
 
 		return mv;
@@ -127,18 +119,19 @@ public class UserController {
 		}
 		return mv;
 	}
-	
+
 	@GetMapping({ "/delete", "delete.do" })
-	private ModelAndView userEditProfilePOST(@RequestParam(name="userID")int userID, HttpSession session, ModelAndView mv) {
-		
+	private ModelAndView userEditProfilePOST(@RequestParam(name = "userID") int userID, HttpSession session,
+			ModelAndView mv) {
+
 		mv.setViewName("redirect:/error.do");
-		
+
 		User user = (User) session.getAttribute("loggedUser");
-		
+
 		if (user.getId() == userID || user.getRole().equals("admin")) {
 			userDao.setEnabled(userID, false);
 			mv.setViewName("redirect:/profile?userID=" + user.getId());
-			if(user.getId() == userID) {
+			if (user.getId() == userID) {
 				session.invalidate();
 			}
 		}
@@ -163,8 +156,9 @@ public class UserController {
 		String redirect = "redirect:/error.do";
 		if (hasAuth(userID, session)) {
 			userDao.removeFollowing(userID, removeID);
-			
-			redirect = (fromProfile == null ? "redirect:/getFollow.do?userID=" + userID : "redirect:/userProfile.do?userID=" + removeID);
+
+			redirect = (fromProfile == null ? "redirect:/getFollow.do?userID=" + userID
+					: "redirect:/userProfile.do?userID=" + removeID);
 		}
 		return redirect;
 	}

@@ -34,36 +34,36 @@
 				<div class="col-1"></div>
 				<div class="col-2">
 					<div class="card">
-						<button class="btn card-header" data-toggle="collapse"
+						<button class="btn card-header search-selector-btn" data-toggle="collapse"
 							data-target="#collapseOne" aria-expanded="true"
 							aria-controls="collapseOne">Users</button>
 					</div>
 					<div class="search-selector-spacer"></div>
-					<c:if test="${not empty schools}">
-						<div class="card">
-							<button class="btn collapsed card-header" data-toggle="collapse"
-								data-target="#collapseTwo" aria-expanded="false"
-								aria-controls="collapseTwo">Schools</button>
-						</div>
-					</c:if>
-					<div class="search-selector-spacer"></div>
 					<div class="card">
-						<button class="btn collapsed card-header" data-toggle="collapse"
+						<button class="btn collapsed card-header search-selector-btn" data-toggle="collapse"
 							data-target="#collapseThree" aria-expanded="false"
 							aria-controls="collapseThree">Groups</button>
 					</div>
 					<div class="search-selector-spacer"></div>
 					<div class="card">
-						<button class="btn collapsed card-header" data-toggle="collapse"
+						<button class="btn collapsed card-header search-selector-btn" data-toggle="collapse"
 							data-target="#collapseFour" aria-expanded="false"
 							aria-controls="collapseFour">Posts</button>
 					</div>
 					<div class="search-selector-spacer"></div>
 					<div class="card">
-						<button class="btn collapsed card-header" data-toggle="collapse"
+						<button class="btn collapsed card-header search-selector-btn" data-toggle="collapse"
 							data-target="#collapseFive" aria-expanded="false"
 							aria-controls="collapseFive">Professors</button>
 					</div>
+					<div class="search-selector-spacer"></div>
+					<c:if test="${not empty schools}">
+						<div class="card">
+							<button class="btn collapsed card-header search-selector-btn" data-toggle="collapse"
+								data-target="#collapseTwo" aria-expanded="false"
+								aria-controls="collapseTwo">Schools</button>
+						</div>
+					</c:if>
 				</div>
 				<div class="col-8">
 					<div id="collapseOne" class="collapse show"

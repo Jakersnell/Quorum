@@ -32,23 +32,25 @@ public class SocialGroupController {
 	public ModelAndView getSocialGroup(@RequestParam(name = "groupID") int groupID, HttpSession session,
 			ModelAndView mav) {
 		String viewName;
-		SocialGroup group;
+		SocialGroup group = null;
+
 		if (session.getAttribute("loggedUser") != null) {
 			group = groupDao.getById(groupID);
-			if (group != null) {
-				viewName = "socialGroup";
-				mav.addObject("group", group);
-				if (userIsMember(groupID, session)) {
-					mav.addObject("userIsMember", true);
-					mav.addObject("members", userDao.getByGroupId(groupID));
-					mav.addObject("feed", postDao.getByGroupId(groupID));
-					mav.addObject("userHasEditAuth", userHasEditAuth(groupID, session));
-				}
-			} else {
-				viewName = "redirect:/404.do";
-			}
 		} else {
 			viewName = "redirect:/login.do";
+		}
+
+		if (group != null) {
+			viewName = "socialGroup";
+			mav.addObject("group", group);
+			mav.addObject("members", userDao.getByGroupId(groupID));
+			mav.addObject("userHasEditAuth", userHasEditAuth(groupID, session));
+			if (userIsMember(groupID, session)) {
+				mav.addObject("userIsMember", true);
+				mav.addObject("feed", postDao.getByGroupId(groupID));
+			}
+		} else {
+			viewName = "redirect:/404.do";
 		}
 
 		mav.setViewName(viewName);
@@ -103,7 +105,19 @@ public class SocialGroupController {
 			group = groupDao.create(group);
 			redirect = "redirect:/group.do?groupID=" + group.getId();
 		}
-			
+
+		return redirect;
+	}
+
+	@PostMapping({ "/update-group", "updateGroup.do" })
+	public String updateGroupPOST(@ModelAttribute SocialGroup group, HttpSession session) {
+		String redirect = "redirect:/error.do";
+
+		if (userHasEditAuth(group.getId(), session)) {
+			groupDao.update(group);
+			redirect = "redirect:/group.do?groupID=" + group.getId();
+		}
+
 		return redirect;
 	}
 

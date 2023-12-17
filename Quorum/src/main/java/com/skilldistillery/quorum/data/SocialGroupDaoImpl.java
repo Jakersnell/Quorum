@@ -70,7 +70,7 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 		SocialGroup managed = em.find(SocialGroup.class, group.getId());
 		if (managed != null) {
 			managed.setName(group.getName());
-			managed.setName(group.getDescription());
+			managed.setDescription(group.getDescription());
 			managed.setEnabled(group.isEnabled());
 		}
 		return success;

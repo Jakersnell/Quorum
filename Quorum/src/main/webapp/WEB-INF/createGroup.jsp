@@ -25,8 +25,8 @@
 										required>
 								</div>
 								<div class="row mb-3">
-									<textarea class="form-control login-form rounded bg-white" id="postContents" rows="2"
-										name="contents" placeholder="Describe what your group is"></textarea>
+									<textarea class="form-control login-form rounded bg-white" id="groupDescription" rows="2"
+										name="description" placeholder="Describe what your group is"></textarea>
 								</div>
 								<div class="row mb-3">
 									<button class="btn form-control login-form rounded-pill"
