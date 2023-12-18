@@ -61,6 +61,14 @@ a:hover {
   font-size: 2rem;
 }
 
+#ratingcolor {
+	color: #F66E94 !important;
+}
+
+#ratedcolor {
+	color: #EF4079 !important;
+}
+
 #navbar-logo-img {
   height: 5rem;
 }
