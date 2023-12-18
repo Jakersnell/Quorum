@@ -75,6 +75,7 @@
 					</p>
 				</div>
 
+				<%-- Friends/Following School Clubs Section --%>
 				<div class="container mt-5">
 					<div class="row mb-4">
 						<%-- Friends/Following Section --%>
@@ -94,19 +95,19 @@
 
 							<%-- Followers Section --%>
 							<div class="row">
-									<h3>
-										<a href="getFollow.do?userID=${user.id}">FOLLOWERS</a>
-									</h3>
-									<div class="d-flex flex-row flex-wrap">
-										<c:forEach items="${user.followers}" var="follower" begin="0"
-											end="3">
-											<a href="userProfile.do?userID=${follower.id}" class="p-2">
-												<img src="${follower.profileImageUrl}"
-												alt="${follower.username} Image" class="rounded-circle"
-												style="width: 75px; height: 75px;">
-											</a>
-										</c:forEach>
-									</div>
+								<h3>
+									<a href="getFollow.do?userID=${user.id}">FOLLOWERS</a>
+								</h3>
+								<div class="d-flex flex-row flex-wrap">
+									<c:forEach items="${user.followers}" var="follower" begin="0"
+										end="3">
+										<a href="userProfile.do?userID=${follower.id}" class="p-2">
+											<img src="${follower.profileImageUrl}"
+											alt="${follower.username} Image" class="rounded-circle"
+											style="width: 75px; height: 75px;">
+										</a>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -127,6 +128,22 @@
 							</c:forEach>
 						</div>
 					</div>
+
+					<%-- Courses Section --%>
+					<h4>COURSES</h4>
+					<div>
+						<c:forEach items="${userCourseSchedules}" var="courseSchedule">
+							<div class="mb-2">
+								<strong><c:out value="${course.course.title}" /></strong><br>
+								<span>Time: <c:out value="${course.startTime}" /> - <c:out
+										value="${course.endTime}" /></span><br> <span>Professor:
+									<c:out
+										value="${course.course.professor.firstName} ${course.course.professor.lastName}" />
+								</span>
+							</div>
+						</c:forEach>
+					</div>
+
 				</div>
 			</div>
 
