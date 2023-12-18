@@ -18,7 +18,7 @@ public interface GroupPostDAO {
 
 	List<GroupPost> getUserFeed(int userId);
 
-	List<GroupPost> searchByQuery(String query);
+	List<GroupPost> searchByQuery(String query, User user);
 
 	boolean userIsOwner(int postId, int userId);
 

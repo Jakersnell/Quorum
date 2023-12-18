@@ -18,7 +18,7 @@ import com.skilldistillery.quorum.entities.User;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class PostController {
+public class GroupPostController {
 
 	@Autowired
 	private GroupPostDAO postDao;
@@ -27,8 +27,8 @@ public class PostController {
 	private SocialGroupDAO groupDao;
 
 	@PostMapping({ "/create-post", "createPost.do" })
-	public String createPostPOST(@ModelAttribute GroupPost post, @RequestParam(name = "groupId") int groupId,
-			HttpSession session) {
+	public String createPostPOST(@RequestParam(value = "fromUrl", required = false) final String fromUrl,
+			@ModelAttribute GroupPost post, @RequestParam(name = "groupId") int groupId, HttpSession session) {
 		String redirect;
 
 		User loggedUser = (User) session.getAttribute("loggedUser");
@@ -37,7 +37,7 @@ public class PostController {
 			post.setUser(loggedUser);
 			post.setSocialGroup(group);
 			postDao.create(post);
-			redirect = "redirect:/home.do";
+			redirect = "redirect:/" + ((fromUrl == null) ? "home.do" : fromUrl);
 		} else if (group == null) {
 			redirect = "redirect:/error.do";
 		} else {
@@ -48,7 +48,8 @@ public class PostController {
 	}
 
 	@GetMapping({ "/edit-post", "editPost.do" })
-	public ModelAndView postEditGET(@RequestParam(name = "postID") int postId, ModelAndView mav, HttpSession session) {
+	public ModelAndView postEditGET(@RequestParam(value = "fromUrl", required = false) final String fromUrl,
+			@RequestParam(name = "postID") int postId, ModelAndView mav, HttpSession session) {
 		GroupPost post = postDao.getById(postId);
 		if (post == null || !hasAuth(post.getUser().getId(), session)) {
 			mav.setViewName("redirect:/error.do");
@@ -56,17 +57,21 @@ public class PostController {
 			mav.setViewName("editPost");
 			mav.addObject("post", post);
 		}
-
+		
+		if (fromUrl != null) {
+			mav.addObject("fromUrl", fromUrl);
+		}
 		return mav;
 	}
 
 	@PostMapping({ "/edit-post", "editPost.do" })
-	public String postEditPOST(@ModelAttribute GroupPost post, HttpSession session) {
+	public String postEditPOST(@RequestParam(value = "fromUrl", required = false) final String fromUrl,
+			@ModelAttribute GroupPost post, HttpSession session) {
 		String redirect;
 		if (session.getAttribute("loggedUser") == null) {
 			redirect = "redirect:/login.do";
 		} else if (post != null && hasEditAuth(post.getId(), session) && postDao.update(post)) {
-			redirect = "redirect:/home.do";
+			redirect = "redirect:/" + (fromUrl != null ? fromUrl : "home.do");
 		} else {
 			redirect = "redirect:/error.do";
 		}

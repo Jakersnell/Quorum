@@ -142,7 +142,7 @@
 							data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 							tabindex="0">
 							<c:forEach var="resultPost" items="${postResults}">
-								<a class="wrapper-link" href="post.do?postID=${resultPost.id}">
+								<a class="wrapper-link" href="userProfile.do?userID=${resultPost.user.id}">
 									<div class="card-body result-card">
 										<div class="row">
 											<div class="col-6">

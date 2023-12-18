@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.Professor;
 import com.skilldistillery.quorum.entities.School;
+import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -32,20 +33,20 @@ public class SchoolDaoImpl implements SchoolDAO {
 	@Override
 	public School createSchool(School school) {
 		em.persist(school);
-        em.flush();
-        return school;
+		em.flush();
+		return school;
 	}
 
 	@Override
 	public School updateSchool(int id, School updatedSchool) {
 		School school = em.find(School.class, id);
-		
-		if(school != null) {
+
+		if (school != null) {
 			school.setName(updatedSchool.getName());
-            school.setDescription(updatedSchool.getDescription());
-            school.setFoundedIn(updatedSchool.getFoundedIn());
-            school.setImageUrl(updatedSchool.getImageUrl());
-            return school;
+			school.setDescription(updatedSchool.getDescription());
+			school.setFoundedIn(updatedSchool.getFoundedIn());
+			school.setImageUrl(updatedSchool.getImageUrl());
+			return school;
 		}
 		return null;
 	}
@@ -53,8 +54,8 @@ public class SchoolDaoImpl implements SchoolDAO {
 	@Override
 	public boolean deactivateSchool(int id) {
 		School school = em.find(School.class, id);
-		
-		if(school != null) {
+
+		if (school != null) {
 			school.setEnabled(false);
 			return true;
 		}
@@ -64,36 +65,47 @@ public class SchoolDaoImpl implements SchoolDAO {
 	@Override
 	public School getSchoolByName(String name) {
 		String jpql = "SELECT s FROM School s WHERE s.name = :name AND s.enabled = true";
-        return em.createQuery(jpql, School.class)
-                 .setParameter("name", name)
-                 .getSingleResult();
+		return em.createQuery(jpql, School.class).setParameter("name", name).getSingleResult();
 	}
 
 	@Override
 	public List<Course> getCoursesBySchool(int schoolId) {
-		//To get every course for each school returned from the initial query.
+		// To get every course for each school returned from the initial query.
 		String jpql = "SELECT c FROM Course c WHERE c.school.id = :schoolId";
-		return em.createQuery(jpql, Course.class)
-                .setParameter("schoolId", schoolId)
-                .getResultList();
+		return em.createQuery(jpql, Course.class).setParameter("schoolId", schoolId).getResultList();
 	}
 
 	@Override
 	public List<Professor> getProfessorsBySchool(int schoolId) {
-		//To get every professor for each school returned from the initial query.
+		// To get every professor for each school returned from the initial query.
 		String jpql = "SELECT p FROM Professor p WHERE p.school.id = :schoolId";
-        return em.createQuery(jpql, Professor.class)
-                 .setParameter("schoolId", schoolId)
-                 .getResultList();
+		return em.createQuery(jpql, Professor.class).setParameter("schoolId", schoolId).getResultList();
 	}
 
 	@Override
-	public List<School> searchByQuery(String query) {
+	public List<School> searchByQuery(String query, User user) {
 		query = "%" + query + "%";
-		String jpql = "SELECT s FROM School s WHERE s.name LIKE :query OR s.description LIKE :query AND s.enabled = true";
-        return em.createQuery(jpql, School.class)
-                .setParameter("query", query)
-                .getResultList();
+		String jpql = """
+				SELECT
+				    s
+				FROM
+				    School s
+				WHERE(
+
+				    s.name LIKE :query
+				    OR s.description LIKE :query)
+
+				""";
+		if (!user.isAdmin()) {
+			jpql += """
+				AND 
+					s.enabled = true
+				AND 
+					s.id = 
+				""" + user.getSchool().getId();
+			
+		}
+		return em.createQuery(jpql, School.class).setParameter("query", query).getResultList();
 	}
 
 }

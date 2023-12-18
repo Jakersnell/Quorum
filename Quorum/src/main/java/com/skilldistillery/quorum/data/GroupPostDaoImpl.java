@@ -22,7 +22,7 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	public GroupPost getById(int id) {
 		return em.find(GroupPost.class, id);
 	}
-	
+
 	@Override
 	public List<GroupPost> getAll() {
 		String jpql = "SELECT p FROM GroupPost p";
@@ -32,11 +32,18 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	@Override
 	public List<GroupPost> getByUserId(int id) {
 		String jpql = """
-				SELECT p
-				FROM GroupPost p
-				WHERE p.user.id = :id
-				AND p.enabled = true
-				""";
+				SELECT
+				    p
+				FROM
+				    GroupPost p
+				WHERE
+				    p.user.id = :id
+				    AND p.enabled = true
+				    AND p.socialGroup.enabled = true
+				    AND p.user.enabled = true
+				ORDER BY
+				    p.lastUpdate DESC
+					""";
 		return em.createQuery(jpql, GroupPost.class).setParameter("id", id).getResultList();
 	}
 
@@ -50,7 +57,11 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 				WHERE
 				    p.socialGroup.id = :groupId
 				    AND p.enabled = true
-				""";
+				    AND p.socialGroup.enabled = true
+				    AND p.user.enabled = true
+				ORDER BY
+				    p.lastUpdate DESC
+					""";
 
 		return em.createQuery(jpql, GroupPost.class).setParameter("groupId", groupId).getResultList();
 	}
@@ -77,55 +88,65 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 	@Override
 	public List<GroupPost> getUserFeed(int userId) {
 		String jpql = """
-				SELECT
-				    post
-				FROM
-				    GroupPost post
-				WHERE
-				    (
-				        EXISTS (
-				            SELECT
-				                1
-				            FROM
-				                post.user.followers f
-				            WHERE
-				                f.id = :userId
-				                AND post = post
-				        )
-				        OR EXISTS (
-				            SELECT
-				                1
-				            FROM
-				                post.socialGroup.members member
-				            WHERE
-				                member.id = :userId
-				                AND post = post
-				        )
-				        OR post.user.id = :userId
-				    )
-				    AND post.enabled = true
-				ORDER BY
-				    post.lastUpdate
-				    DESC
-								""";
+					SELECT
+					    post
+					FROM
+					    GroupPost post
+					WHERE
+					    (
+					        EXISTS (
+					            SELECT
+					                1
+					            FROM
+					                post.user.followers f
+					            WHERE
+					                f.id = :userId
+					                AND post = post
+					        )
+					        OR EXISTS (
+					            SELECT
+					                1
+					            FROM
+					                post.socialGroup.members member
+					            WHERE
+					                member.id = :userId
+					                AND post = post
+					        )
+					        OR post.user.id = :userId
+					    )
+					    AND post.enabled = true
+					    AND post.user.enabled = true
+					    AND post.socialGroup.enabled = true
+					ORDER BY
+					    post.lastUpdate DESC
+				""";
 		return em.createQuery(jpql, GroupPost.class).setParameter("userId", userId).getResultList();
 	}
-
+	
 	@Override
-	public List<GroupPost> searchByQuery(String query) {
+	public List<GroupPost> searchByQuery(String query, User user) {
 		query = "%" + query + "%";
 		String jpql = """
-				SELECT post FROM GroupPost post
-				WHERE
-				(
-					post.title LIKE :query
-					OR
-					post.contents LIKE :query
-				)
-				AND
-				post.enabled = true
-
+					SELECT post FROM GroupPost post
+					WHERE
+					(
+						post.title LIKE :query
+						OR
+						post.contents LIKE :query
+					)
 				""";
+		if (user.isAdmin()) {
+			jpql += """
+					AND
+						post.enabled = true
+					AND 
+						post.socialGroup.enabled = true
+					AND 
+						post.user.enabled = true
+					AND 
+						post.user.school.id =
+					""" + user.getSchool().getId();
+		}
 		return em.createQuery(jpql, GroupPost.class).setParameter("query", query).getResultList();
 
 	}
@@ -148,6 +169,4 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 		}
 	}
 
-
-	
 }

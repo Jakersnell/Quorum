@@ -62,21 +62,16 @@ public class GeneralController {
 		if (user == null) {
 			mav.setViewName("redirect:/login.do");
 		} else {
-			mav.addObject("postResults", postDao.searchByQuery(query));
+			mav.addObject("postResults", postDao.searchByQuery(query, user));
 			mav.addObject("userResults", userDao.searchByQuery(query, user));
-			if (userIsAdmin(session)) {
-				mav.addObject("schoolResults", schoolDao.searchByQuery(query));
-			}
-			mav.addObject("professorResults", professorDao.searchByQuery(query));
-			mav.addObject("groupResults", groupDao.searchByQuery(query));
+			mav.addObject("schoolResults", schoolDao.searchByQuery(query, user));
+			mav.addObject("professorResults", professorDao.searchByQuery(query, user));
+			mav.addObject("groupResults", groupDao.searchByQuery(query, user));
 			mav.addObject("query", query);
 		}
 
 		return mav;
 	}
-	
-	private boolean userIsAdmin(HttpSession session) {
-		return ((User) session.getAttribute("loggedUser")).getRole().equals("admin");
-	}
+
 
 }
