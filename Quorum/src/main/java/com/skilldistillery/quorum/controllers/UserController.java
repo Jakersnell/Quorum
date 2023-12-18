@@ -31,14 +31,6 @@ public class UserController {
 	@Autowired
 	private GroupPostDAO postDao;
 
-	@GetMapping({ "/account", "account.do" })
-	private String myProfileGet(HttpSession session) {
-		String view = "account";
-		if (session.getAttribute("loggedUser") == null) {
-			return "redirect:/login.do";
-		}
-		return view;
-	}
 
 	@GetMapping({ "/profile", "userProfile.do" })
 	private ModelAndView userProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
