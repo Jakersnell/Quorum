@@ -5,6 +5,7 @@ import java.util.List;
 import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.Professor;
 import com.skilldistillery.quorum.entities.School;
+import com.skilldistillery.quorum.entities.User;
 
 public interface SchoolDAO {
 
@@ -16,6 +17,6 @@ public interface SchoolDAO {
 	public School getSchoolByName(String name);
 	public List<Course> getCoursesBySchool(int schoolId);
 	public List<Professor> getProfessorsBySchool(int schoolId);
-	public List<School> searchByQuery(String query);
+	public List<School> searchByQuery(String query, User user);
 	
 }

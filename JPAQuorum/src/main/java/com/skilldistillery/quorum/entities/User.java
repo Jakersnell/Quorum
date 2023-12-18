@@ -84,6 +84,10 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
 	private List<SocialGroup> groups;
+	
+	public boolean isAdmin() {
+		return role.equals("admin");
+	}
 
 	public User() {
 		enabled = true;

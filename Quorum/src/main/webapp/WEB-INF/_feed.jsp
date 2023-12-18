@@ -19,7 +19,7 @@
 			</div>
 			<div class="col-3">
 				<c:if test="${loggedUser.id == post.user.id}">
-					<a class="btn post-edit-btn" href="editPost.do?postID=${post.id}">Edit</a>
+					<a class="btn post-edit-btn" href="editPost.do?postID=${post.id}<c:if test="${not empty fromUrl}">&fromUrl=${fromUrl}</c:if>">Edit</a>
 				</c:if>
 			</div>
 		</div>

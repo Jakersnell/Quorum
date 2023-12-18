@@ -84,7 +84,7 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 	}
 
 	@Override
-	public List<SocialGroup> searchByQuery(String query) {
+	public List<SocialGroup> searchByQuery(String query, User user) {
 		query = "%" + query + "%";
 		String jpql = """
 				SELECT
@@ -92,10 +92,22 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 				FROM
 				    SocialGroup sg
 				WHERE
-				    (sg.name LIKE :query)
-				    OR (sg.description LIKE :query)
-				    AND sg.enabled = true
+				    (
+				        (sg.name LIKE :query)
+				        OR (sg.description LIKE :query)
+				    )
 				""";
+		if (!user.isAdmin()) {
+			jpql += """
+				AND 
+					sg.enabled = true
+				AND 
+					sg.owner.enabled = true
+				AND 
+					sg.owner.school.id = 
+				""" + user.getSchool().getId();
+		}
+		
 		return em.createQuery(jpql, SocialGroup.class).setParameter("query", query).getResultList();
 	}
 
@@ -107,6 +119,18 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 	@Override
 	public boolean userIsInGroup(int groupId, int userId) {
 		return em.find(SocialGroup.class, groupId).getMembers().stream().anyMatch(member -> member.getId() == userId);
+	}
+
+	@Override
+	public void setEnabled(int groupId, boolean status) {
+		em.find(SocialGroup.class, groupId).setEnabled(status);
+	}
+
+	@Override
+	public boolean groupIsAccessable(int groupId, int userId) {
+		SocialGroup group = em.find(SocialGroup.class, groupId);
+		User user = em.find(User.class, userId);
+		return group.isEnabled() || user.getRole().equals("admin");
 	}
 
 }

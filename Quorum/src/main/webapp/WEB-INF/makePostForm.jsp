@@ -19,6 +19,11 @@
 					name="contents" placeholder="Whats on your mind?"></textarea>
 			</div>
 
+			<c:if test="${not empty fromUrl}">
+				<input class="form-control" type="hidden" name="fromUrl"
+					value="${fromUrl}" />
+			</c:if>
+
 			<c:choose>
 				<c:when test="${not empty group}">
 					<input class="form-control" type="hidden" name="groupId"
