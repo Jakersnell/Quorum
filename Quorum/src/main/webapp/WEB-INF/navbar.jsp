@@ -28,7 +28,6 @@
 									<button class="btn btn-light nav-link dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false">Pages</button>
 									<ul class="dropdown-menu dropdown-menu-light">
-										<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
 										<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
 										<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>
 									</ul>
@@ -45,7 +44,6 @@
 									<ul class="dropdown-menu dropdown-menu-light">
 										<li><a class="dropdown-item nav-link"
 											href="userProfile.do?userID=${loggedUser.id}">Profile</a></li>
-										<li><a class="dropdown-item nav-link" href="account.do">Account</a></li>
 										<li><a class="dropdown-item nav-link" href="messages.do">Messages</a></li>
 										<li><a class="dropdown-item nav-link" href="createGroup.do">Create A Group</a></li>
 										<li><a class="dropdown-item nav-link" href="logout.do">Logout</a></li>

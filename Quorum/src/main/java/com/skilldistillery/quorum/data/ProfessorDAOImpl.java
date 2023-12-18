@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.Professor;
 import com.skilldistillery.quorum.entities.ProfessorRating;
+import com.skilldistillery.quorum.entities.ProfessorRatingId;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
@@ -85,6 +86,16 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		List<ProfessorRating> ratings = em.createQuery(jpql, ProfessorRating.class).setParameter("profId", professorId)
 				.getResultList();
 		return ratings;
+	}
+	
+	public ProfessorRating addRating(int userID, int profID, String content, boolean enabled, int rating) {
+		String comment = content;
+		User rater = em.find(User.class, userID);
+		Professor receiver = em.find(Professor.class, profID);
+		ProfessorRatingId id = new ProfessorRatingId(userID, profID);
+		ProfessorRating newRating = new ProfessorRating(id, rater, receiver, rating, comment, enabled);
+		em.persist(newRating);
+		return newRating;
 	}
 
 }

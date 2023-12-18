@@ -14,4 +14,5 @@ public interface ProfessorDAO  {
 	Professor update(Professor professor);
 	double getAverageRating(int professorId);
 	List<ProfessorRating> getAllRatingsByProfessorId(int professorId);
+	public ProfessorRating addRating(int userID, int profID, String content, boolean enabled, int rating);
 }

@@ -40,8 +40,6 @@ public class MessageDaoImpl implements MessageDAO {
 		List<Message> messages = em.createQuery(jpql, Message.class).setParameter("senderID", sender)
 				.setParameter("receiverID", receiver).getResultList();
 
-		System.out.println(messages);
-
 		return messages;
 	}
 
@@ -56,7 +54,6 @@ public class MessageDaoImpl implements MessageDAO {
 			messagees.add(message.getSender());
 		}
 		messagees.remove(user);
-		System.out.println(messagees);
 		return messagees;
 	}
 }
