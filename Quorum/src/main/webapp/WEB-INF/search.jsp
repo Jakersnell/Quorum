@@ -44,7 +44,8 @@
 								<button class="btn collapsed card-header search-selector-btn"
 									data-toggle="collapse" data-target="#collapseThree"
 									aria-expanded="false" aria-controls="collapseThree">
-									<i class="fa-solid fa-user-group"></i> Groups</button>
+									<i class="fa-solid fa-user-group"></i> Groups
+								</button>
 							</div>
 						</c:if>
 						<c:if test="${!postResults.isEmpty()}">
@@ -53,7 +54,8 @@
 								<button class="btn collapsed card-header search-selector-btn"
 									data-toggle="collapse" data-target="#collapseFour"
 									aria-expanded="false" aria-controls="collapseFour">
-									<i class="fa-regular fa-newspaper"></i> Posts</button>
+									<i class="fa-regular fa-newspaper"></i> Posts
+								</button>
 							</div>
 						</c:if>
 						<c:if test="${!professorResults.isEmpty()}">
@@ -62,7 +64,8 @@
 								<button class="btn collapsed card-header search-selector-btn"
 									data-toggle="collapse" data-target="#collapseFive"
 									aria-expanded="false" aria-controls="collapseFive">
-									<i class="fa-solid fa-chalkboard-user"></i> Professors</button>
+									<i class="fa-solid fa-chalkboard-user"></i> Professors
+								</button>
 							</div>
 						</c:if>
 						<c:if test="${!schoolResults.isEmpty()}">
@@ -71,20 +74,20 @@
 								<button class="btn collapsed card-header search-selector-btn"
 									data-toggle="collapse" data-target="#collapseTwo"
 									aria-expanded="false" aria-controls="collapseTwo">
-									<i class="fa-solid fa-school"></i> Schools</button>
+									<i class="fa-solid fa-school"></i> Schools
+								</button>
 							</div>
 						</c:if>
 					</div>
 				</div>
 				<div class="col-8 display-container">
-
-					<div id="collapseOne" class="collapse show"
-						data-parent="#accordion">
-						<div class="search-div">
-							<div class="result-header">
-								<h3>Search Results For: "${query}"</h3>
-							</div>
-							<hr>
+					<div class="search-div">
+						<div class="result-header">
+							<h3>Search Results For: "${query}"</h3>
+						</div>
+						<hr>
+						<div id="collapseOne" class="collapse show"
+							data-parent="#accordion">
 							<h4>Users</h4>
 							<div class="card-body scrollable-card" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
@@ -108,29 +111,27 @@
 								</c:forEach>
 							</div>
 						</div>
-						<c:if test="${not empty schools}">
-							<div id="collapseTwo" class="collapse" data-parent="#accordion">
-								<h4>Schools</h4>
-								<div class="card-body scrollable-card" data-bs-spy="scroll"
-									data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-									tabindex="0">
-									<c:forEach var="resultSchool" items="${schoolResults}">
-										<a class="wrapper-link"
-											href="school.do?schoolID=${resultSchool.id}">
-											<div class="card-body result-card">
-												<div class="row">
-													<div class="col-4">${resultSchool.name}</div>
-													<div class="col-8">
-														<p class="card-text result-card-description">${resultSchool.description}
-														</p>
-													</div>
+						<div id="collapseTwo" class="collapse" data-parent="#accordion">
+							<h4>Schools</h4>
+							<div class="card-body scrollable-card" data-bs-spy="scroll"
+								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
+								tabindex="0">
+								<c:forEach var="resultSchool" items="${schoolResults}">
+									<a class="wrapper-link"
+										href="school.do?schoolID=${resultSchool.id}">
+										<div class="card-body result-card">
+											<div class="row">
+												<div class="col-4">${resultSchool.name}</div>
+												<div class="col-8">
+													<p class="card-text result-card-description">${resultSchool.description}
+													</p>
 												</div>
 											</div>
-										</a>
-									</c:forEach>
-								</div>
+										</div>
+									</a>
+								</c:forEach>
 							</div>
-						</c:if>
+						</div>
 						<div id="collapseThree" class="collapse" data-parent="#accordion">
 							<h4>Groups</h4>
 							<div class="card-body scrollable-card" data-bs-spy="scroll"
@@ -179,7 +180,6 @@
 								</c:forEach>
 							</div>
 						</div>
-
 						<div id="collapseFive" class="collapse" data-parent="#accordion">
 							<h4>Proffesors</h4>
 							<div class="card-body">
