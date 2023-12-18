@@ -33,20 +33,6 @@ public class AdminController {
 		
 	}
 	
-//	@GetMapping({ "/delete", "delete.do" })
-//	public String deleteGet(@RequestParam(name="userID")int userID, HttpSession session) {
-//		String redirect = "redirect:/error.do";
-//		
-//		User loggedUser = (User) session.getAttribute("loggedUser");
-//
-//		if (loggedUser.getRole().equals("admin")) {
-//			adminDao.deleteUser(userID);
-//			redirect = "redirect:/admin.do";
-//		}
-//
-//		return redirect;
-//	}
-	
 	@GetMapping({ "/activate", "activate.do" })
 	public String activateGet(@RequestParam(name="userID")int userID, HttpSession session) {
 		String redirect = "redirect:/error.do";

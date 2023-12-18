@@ -51,13 +51,15 @@ public class GroupPostController {
 	public ModelAndView postEditGET(@RequestParam(value = "fromUrl", required = false) final String fromUrl,
 			@RequestParam(name = "postID") int postId, ModelAndView mav, HttpSession session) {
 		GroupPost post = postDao.getById(postId);
-		if (post == null || !hasAuth(post.getUser().getId(), session)) {
+		if (post == null) {
 			mav.setViewName("redirect:/error.do");
+		} else if (!hasAuth(post.getUser().getId(), session)) {
+			mav.setViewName("redirect:/login.do");
 		} else {
 			mav.setViewName("editPost");
 			mav.addObject("post", post);
 		}
-		
+
 		if (fromUrl != null) {
 			mav.addObject("fromUrl", fromUrl);
 		}

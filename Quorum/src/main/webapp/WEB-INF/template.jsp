@@ -7,7 +7,9 @@
 
 <body>
 	<jsp:include page="navbar.jsp" />
-	<div class="container wrapper"></div>
+	<div class="container wrapper">
+		<!-- content here -->
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 
