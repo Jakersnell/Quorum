@@ -19,8 +19,8 @@
 					<div class="col-3"></div>
 					<div class="col-3">
 						<form action="deletePost.do" method="post">
-							<input class="form-control" type="hidden" class="id" name="postID"
-								id="postIdInput" value="${post.id}" />
+							<input class="form-control" type="hidden" class="id"
+								name="postID" id="postIdInput" value="${post.id}" />
 							<button type="submit"
 								class="btn btn-danger form-control post-delete-btn">Delete</button>
 						</form>
@@ -28,10 +28,12 @@
 				</div>
 				<div class="row make-post-form">
 					<form action="editPost.do" method="post">
-						<div class="row mb-3 title-input">
-							<input class="form-control" type="hidden" class="id" name="id"
-								id="postIdInput" value="${post.id}" />
-						</div>
+						<c:if test="${not empty fromUrl}">
+							<input class="form-control" type="hidden" class="fromUrl" name="fromUrl"
+								id="fromUrl" value="${fromUrl}" />
+						</c:if>
+						<input class="form-control" type="hidden" class="id" name="id"
+							id="postIdInput" value="${post.id}" />
 						<div class="row mb-3 post-update-field">
 							<label class="form-label" for="postTitle">title</label> <input
 								class="form-control" type="text" class="update-post-input"

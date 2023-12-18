@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.quorum.data.GroupPostDAO;
 import com.skilldistillery.quorum.data.SocialGroupDAO;
@@ -18,6 +19,11 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SocialGroupController {
+
+	private static String REDIRECT_404 = "redirect:/404.do";
+	private static String REDIRECT_LOGIN = "redirect:/login.do";
+	private static String REDIRECT_ERROR = "redirect:/error.do";
+	private static String REDIRECT_GROUP = "redirect:/group.do?groupID=";
 
 	@Autowired
 	private UserDAO userDao;
@@ -31,26 +37,28 @@ public class SocialGroupController {
 	@GetMapping({ "/group", "group.do" })
 	public ModelAndView getSocialGroup(@RequestParam(name = "groupID") int groupID, HttpSession session,
 			ModelAndView mav) {
+
 		String viewName;
-		SocialGroup group = null;
+		SocialGroup group = groupDao.getById(groupID);
 
-		if (session.getAttribute("loggedUser") != null) {
-			group = groupDao.getById(groupID);
+		if (session.getAttribute("loggedUser") == null) {
+
+			viewName = REDIRECT_LOGIN;
+
+		} else if (!groupDao.groupIsAccessable(groupID, ((User) session.getAttribute("loggedUser")).getId())) {
+
+			viewName = REDIRECT_404;
+
 		} else {
-			viewName = "redirect:/login.do";
-		}
 
-		if (group != null) {
 			viewName = "socialGroup";
 			mav.addObject("group", group);
 			mav.addObject("members", userDao.getByGroupId(groupID));
 			mav.addObject("userHasEditAuth", userHasEditAuth(groupID, session));
-			if (userIsMember(groupID, session)) {
-				mav.addObject("userIsMember", true);
-				mav.addObject("feed", postDao.getByGroupId(groupID));
-			}
-		} else {
-			viewName = "redirect:/404.do";
+			mav.addObject("userIsMember", userIsMember(groupID, session));
+			mav.addObject("feed", postDao.getByGroupId(groupID));
+			mav.addObject("fromUrl", "group.do?groupID=" + groupID);
+
 		}
 
 		mav.setViewName(viewName);
@@ -65,9 +73,9 @@ public class SocialGroupController {
 		if (user != null) {
 			if (groupDao.addUser(groupId, user.getId())) {
 				user.addGroup(groupDao.getById(groupId));
-				redirect = "redirect:/group.do?groupID=" + groupId;
+				redirect = REDIRECT_GROUP + groupId;
 			} else {
-				redirect = "redirect:/error.do";
+				redirect = REDIRECT_ERROR;
 			}
 		}
 		return redirect;
@@ -82,7 +90,7 @@ public class SocialGroupController {
 			if (groupDao.removeUser(groupId, user.getId())) {
 				redirect = "redirect:/group.do?groupID=" + groupId;
 			} else {
-				redirect = "redirect:/error.do";
+				redirect = REDIRECT_ERROR;
 			}
 		}
 		return redirect;
@@ -99,7 +107,7 @@ public class SocialGroupController {
 		String redirect;
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		if (loggedUser == null || loggedUser.getRole().equals("admin")) {
-			redirect = "redirect:/error.do";
+			redirect = REDIRECT_ERROR;
 		} else {
 			group.setOwner(loggedUser);
 			group = groupDao.create(group);
@@ -110,14 +118,26 @@ public class SocialGroupController {
 	}
 
 	@PostMapping({ "/update-group", "updateGroup.do" })
-	public String updateGroupPOST(@ModelAttribute SocialGroup group, HttpSession session) {
-		String redirect = "redirect:/error.do";
+	public String updateSocialGroup(@ModelAttribute SocialGroup group, HttpSession session) {
+		String redirect = REDIRECT_ERROR;
 
 		if (userHasEditAuth(group.getId(), session)) {
 			groupDao.update(group);
 			redirect = "redirect:/group.do?groupID=" + group.getId();
 		}
 
+		return redirect;
+	}
+
+	@PostMapping({ "deleteGroup.do" })
+	public String deleteSocialGroup(@RequestParam(name = "groupID") int groupId, HttpSession session,
+			RedirectAttributes redirectAttributes) {
+		String redirect = REDIRECT_ERROR;
+		if (userHasEditAuth(groupId, session)) {
+			groupDao.setEnabled(groupId, false);
+			redirectAttributes.addFlashAttribute("msg", "Your group was successfully deleted.");
+			redirect = "redirect:/home.do";
+		}
 		return redirect;
 	}
 
