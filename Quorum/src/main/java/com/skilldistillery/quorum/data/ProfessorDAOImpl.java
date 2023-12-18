@@ -26,7 +26,14 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
 	@Override
 	public List<Professor> getAllBySchoolId(int id) {
-		String jpql = "SELECT p FROM Professor p WHERE school.id = :id";
+		String jpql = """
+				SELECT 
+					p 
+				FROM 
+					Professor p 
+				WHERE 
+					school.id = :id
+				""";
 		return em.createQuery(jpql, Professor.class).setParameter("id", id).getResultList();
 	}
 
