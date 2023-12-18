@@ -69,6 +69,7 @@ public class SchoolController {
 		Professor professor = professorDAO.getById(professorId);
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		boolean hasRated = false;
+		mv.setViewName("redirect:/404.do");
 
 		if (loggedUser != null) {
 
@@ -86,7 +87,8 @@ public class SchoolController {
 				}
 				
 				double avgRating = professorDAO.getAverageRating(professorId);
-				professor.setAverageRating(avgRating);
+				double truncated = Math.floor(avgRating * 100) / 100;
+				professor.setAverageRating(truncated);
 				mv.addObject("rated", hasRated);
 				mv.addObject("professor", professor);
 				mv.setViewName("professorview");
