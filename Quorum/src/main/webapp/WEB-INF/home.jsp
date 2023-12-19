@@ -41,7 +41,7 @@ body {
 									<h1>
 										Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 									</h1>
-									<div class="scroll-home-feed ">
+									<div class="scroll-home-feed stylized-scroll">
 										<jsp:include page="makePostForm.jsp"></jsp:include>
 										<jsp:include page="_feed.jsp" />
 									</div>

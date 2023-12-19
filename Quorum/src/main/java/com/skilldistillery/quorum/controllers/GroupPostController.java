@@ -36,8 +36,8 @@ public class GroupPostController {
 	private GroupPostCommentDAO commentDao;
 
 	@PostMapping({ "/create-post", "createPost.do" })
-	public String createPostPOST(@RequestParam(value = "fromUrl", required = false) final String fromUrl,
-			@ModelAttribute GroupPost post, @RequestParam(name = "groupId") int groupId, HttpSession session) {
+	public String createPostPOST(@ModelAttribute GroupPost post, @RequestParam(name = "groupId") int groupId,
+			HttpSession session) {
 		String redirect;
 
 		User loggedUser = (User) session.getAttribute("loggedUser");
@@ -45,8 +45,8 @@ public class GroupPostController {
 		if (loggedUser != null && group != null) {
 			post.setUser(loggedUser);
 			post.setSocialGroup(group);
-			postDao.create(post);
-			redirect = "redirect:/" + ((fromUrl == null) ? "home.do" : fromUrl);
+			post = postDao.create(post);
+			redirect = "redirect:/post.do?postID=" + post.getId();
 		} else if (group == null) {
 			redirect = REDIRECT_ERROR;
 		} else {
@@ -57,8 +57,7 @@ public class GroupPostController {
 	}
 
 	@GetMapping({ "/edit-post", "editPost.do" })
-	public ModelAndView postEditGET(@RequestParam(value = "fromUrl", required = false) final String fromUrl,
-			@RequestParam(name = "postID") int postId, ModelAndView mav, HttpSession session) {
+	public ModelAndView postEditGET(@RequestParam(name = "postID") int postId, ModelAndView mav, HttpSession session) {
 		GroupPost post = postDao.getById(postId);
 		if (post == null) {
 			mav.setViewName(REDIRECT_ERROR);
@@ -69,9 +68,6 @@ public class GroupPostController {
 			mav.addObject("post", post);
 		}
 
-		if (fromUrl != null) {
-			mav.addObject("fromUrl", fromUrl);
-		}
 		return mav;
 	}
 
@@ -82,7 +78,7 @@ public class GroupPostController {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect = REDIRECT_LOGIN;
 		} else if (post != null && hasEditAuth(post.getId(), session) && postDao.update(post)) {
-			redirect = "redirect:/" + (fromUrl != null ? fromUrl : "home.do");
+			redirect = "redirect:/" + (fromUrl != null ? fromUrl : "post.do?postID=" + post.getId());
 		} else {
 			redirect = REDIRECT_ERROR;
 		}
