@@ -35,7 +35,13 @@ body {
   font-weight: bold;
 }
 
+#editbtn {
+  background-color: #c6faf5;
+}
 
+#editbtn2 {
+  background-color: #90fbf0;
+}
 
 a {
   text-decoration: none;
@@ -61,11 +67,15 @@ a:hover {
 }
 
 #logincard {
-  background-color: rgb(228, 228, 228) !important;
+  background-color:#eadcff;
 }
 
 #loginbtn {
-  background-color: rgb(239, 153, 217);
+  background-color: #bb8eff;
+}
+
+#loginbtn:hover {
+  background-color: #b17dfe;
 }
 
 #signuplink {
@@ -235,7 +245,7 @@ main {
 }
 .post-list,
 .make-post-form {
-  background-color: #d9d9d9;
+  background-color: #eadcff;
 }
 
 #searchResultBody {
@@ -286,12 +296,27 @@ main {
 .post-edit-btn,
 .post-btn-secondary {
   margin-top: 0.7rem;
-  background-color: #d998d3;
+  background-color: #bb8eff;
   width: 10rem;
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;
 }
+.post-btn:hover,
+.post-edit-btn:hover,
+.post-btn-secondary:hover {
+  margin-top: 0.7rem;
+  background-color: #b17dfe;
+  width: 10rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
+  border-radius: 2rem;
+}
+
+
+
+
+
 .post-btn-secondary {
   background-color: #1d3753;
   font-size: small;
@@ -304,10 +329,10 @@ main {
   color: white;
 }
 .post-btn-secondary:hover {
-  background-color: rgb(192, 192, 192);
+  background-color: #25486e;
 }
 .post-btn:hover {
-  background-color: #d998d3;
+  background-color: #25486e;
   opacity: 80%;
 }
 

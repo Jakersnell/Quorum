@@ -26,12 +26,12 @@
 
 					<div class="d-flex justify-content-start mb-3">
 						<c:if test="${loggedUser.id == user.id}">
-							<a class="btn btn-info" role="button"
+							<a class="shadow btn" id="editbtn" role="button"
 								href="editProfile.do?userID=${user.id}">Edit Profile</a>
 						</c:if>
 
 						<c:if test="${loggedUser.id != user.id}">
-							<a class="btn btn-info" role="button"
+							<a class="shadow btn" id="editbtn" role="button"
 								href="message.do?userID=${user.id}">Message</a>
 						</c:if>
 
@@ -48,7 +48,7 @@
 											type="hidden" name="fromProfile" id="fromProfile"
 											value="true" />
 
-										<button type="submit" class="btn btn-secondary">Unfollow</button>
+										<button type="submit" class="shadow btn" id="editbtn2">Unfollow</button>
 
 									</form>
 
@@ -62,7 +62,7 @@
 											name="followID" id="followID" value="${user.id}" />
 
 
-										<button type="submit" class="btn btn-secondary">Follow</button>
+										<button type="submit" class="shadow btn" id="editbtn2">Follow</button>
 									</form>
 								</c:otherwise>
 
