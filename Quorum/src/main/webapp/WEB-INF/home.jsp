@@ -35,10 +35,8 @@
 								<h1>
 									Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 								</h1>
-								<div class="scroll-feed">
-									<jsp:include page="makePostForm.jsp"></jsp:include>
-									<jsp:include page="_feed.jsp" />
-								</div>
+								<jsp:include page="makePostForm.jsp"></jsp:include>
+								<jsp:include page="_feed.jsp" />
 								<div class="sm-spacer"></div>
 							</c:otherwise>
 						</c:choose>
