@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
-<c:if test="${!user.groups.isEmpty()}">
+<c:if test="${!user.groups.isEmpty() && loggedUser.role != 'admin'}">
 	<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
 		align="center">
 		<div class="row text-center container">

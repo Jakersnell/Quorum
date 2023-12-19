@@ -33,7 +33,7 @@
 												<small class="embedded-small">Posted in </small>${post.socialGroup.name}</h5></span>
 									</div>
 								</div> <c:if
-									test="${not empty loggedUser && post.user.equals(loggedUser)}">
+									test="${not empty loggedUser && post.user.equals(loggedUser) || loggedUser.role == 'admin'}">
 									<div class="row">
 										<div class="col-3"></div>
 										<div class="col-6">
