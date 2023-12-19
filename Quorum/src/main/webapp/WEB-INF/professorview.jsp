@@ -36,6 +36,7 @@
 								<div class="shadow-sm card-body">
 									<h5>${rating.content}</h5>
 									<p>Rating: <span id="ratingcolor">${rating.rating}</span></p>
+									
 								</div>
 							</div>
 						</c:when>
@@ -58,49 +59,51 @@
 			</div>
 				
 		
-		
-		<div class="card mt-2 mb-2 pb-5">
-			<div class="card-header bg-white">
-				<h4>Enter your rating for Professor <c:out value="${professor.lastName}">:</c:out></h4>
-			</div>
-			<div class="card-body">
-				<form action="professorview.do" method="POST">
-					<div class="mb-3 mt-1">
-						<label for="content" class="form-label">Comment</label>
-						<textarea class="form-control" id="content" name="content"
-						rows="3" required></textarea>
-					</div>
-					<input type="hidden" name="userID" id="userID" value="${loggedUser.id}">
-					<input type="hidden" name="profID" id="profID" value="${professor.id}">
-					<div class="row">
-						<div class="col-auto">
-							<select class="form-select" aria-label="Rating" name="rating" required>
-								<option selected>Rating</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</div>
-						<div class="col-auto">
-							<c:choose>
-								<c:when test="${rated}">
-									<button type="submit" class="btn btn-primary" disabled>Submit</button>
-								</div>
-								<div class="col-auto">
-									<p class="fw-light opacity-75"><em>You have already submitted a rating.</em><p>
-								</div>
-									
-								</c:when>
-								<c:otherwise>
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</div>
-									</c:otherwise>
-								</c:choose>
-					</div>
-					</form>
+		<c:if test="${loggedUser.role != 'admin'}">
+			<div class="card mt-2 mb-2 pb-5">
+				<div class="card-header bg-white">
+					<h4>Enter your rating for Professor <c:out value="${professor.lastName}">:</c:out></h4>
 				</div>
+				<div class="card-body">
+					<form action="professorview.do" method="POST">
+						<div class="mb-3 mt-1">
+							<label for="content" class="form-label">Comment</label>
+							<textarea class="form-control" id="content" name="content"
+							rows="3" required></textarea>
+						</div>
+						<input type="hidden" name="userID" id="userID" value="${loggedUser.id}">
+						<input type="hidden" name="profID" id="profID" value="${professor.id}">
+						<div class="row">
+							<div class="col-auto">
+								<select class="form-select" aria-label="Rating" name="rating" required>
+									<option selected>Rating</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<div class="col-auto">
+								<c:choose>
+									<c:when test="${rated}">
+										<button type="submit" class="btn btn-primary" disabled>Submit</button>
+									</div>
+									<div class="col-auto">
+										<p class="fw-light opacity-75"><em>You have already submitted a rating.</em><p>
+										</div>
+										
+									</c:when>
+									<c:otherwise>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</form>
+			</div>
+		</c:if>
+
 			</div>
 			
 		</div>
