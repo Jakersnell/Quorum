@@ -157,7 +157,7 @@
 
 			<%-- Right Column: User Posts Feed --%>
 			<div class="col-md-7">
-				<div class="profile-container">
+				<div class="profile-container stylized-scroll">
 					<h3>POSTS</h3>
 					<hr>
 					<jsp:include page="makePostForm.jsp" />
