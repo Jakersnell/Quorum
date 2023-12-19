@@ -85,6 +85,14 @@ public class User {
 	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
 	private List<SocialGroup> groups;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+	  name = "course_schedule",
+	  joinColumns = @JoinColumn(name = "user_id"),
+	  inverseJoinColumns = @JoinColumn(name = "course_id")
+	)
+	private List<Course> courses;
+	
 	public User() {
 		enabled = true;
 	}
@@ -249,6 +257,14 @@ public class User {
 		this.groups = groups;
 	}
 	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	public void addGroup(SocialGroup group) {
 		if (groups != null && !groups.contains(group)) {
 			groups.add(group);

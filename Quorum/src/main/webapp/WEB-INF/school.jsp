@@ -11,15 +11,15 @@
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="../img/school-campus.jpg" class="d-block w-100"
+					<img src="/img/school-campus.jpg" class="d-block w-100"
 						alt="A school campus">
 				</div>
 				<div class="carousel-item">
-					<img src="../img/school-dark-wave.jpg" class="d-block w-100"
+					<img src="/img/school-dark-wave.jpg" class="d-block w-100"
 						alt="A school campus entrance">
 				</div>
 				<div class="carousel-item">
-					<img src="../img/school-library.jpg" class="d-block w-100"
+					<img src="/img/school-library.jpg" class="d-block w-100"
 						alt="A school library">
 				</div>
 			</div>
