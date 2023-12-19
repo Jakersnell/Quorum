@@ -17,12 +17,11 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-	
 	private static String REDIRECT = "redirect:/";
 	private static String REDIRECT_LOGIN = REDIRECT + "login.do";
 	private static String REDIRECT_404 = REDIRECT + "404.do";
 	private static String REDIRECT_ERROR = REDIRECT + "error.do";
-
+	
 	@Autowired
 	private UserDAO userDao;
 
@@ -93,7 +92,7 @@ public class UserController {
 		if (hasAuth(userID, session)) {
 			mv.addObject("user", userDao.getUserById(userID, true));
 		} else {
-			mv.setViewName("redirect:/notFound.do");
+			mv.setViewName(REDIRECT_404);
 		}
 
 		return mv;

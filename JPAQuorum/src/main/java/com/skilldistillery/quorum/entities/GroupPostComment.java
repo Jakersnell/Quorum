@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,18 +34,30 @@ public class GroupPostComment {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_post_id")
+	private GroupPost groupPost;
+
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name = "group_post_id")
-	private GroupPost groupPostId;
-
 	@Column(nullable = false)
-	private Boolean enabled;
+	private Boolean enabled = true;
 
 	public GroupPostComment() {
+	}
+
+	public GroupPost getGroupPost() {
+		return groupPost;
+	}
+
+	public void setGroupPost(GroupPost groupPost) {
+		this.groupPost = groupPost;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
 	public int getId() {
@@ -87,15 +100,7 @@ public class GroupPostComment {
 		this.user = user;
 	}
 
-	public GroupPost getGroupPostId() {
-		return groupPostId;
-	}
-
-	public void setGroupPostId(GroupPost groupPostId) {
-		this.groupPostId = groupPostId;
-	}
-
-	public Boolean getEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
@@ -106,7 +111,7 @@ public class GroupPostComment {
 	@Override
 	public String toString() {
 		return "GroupPostComment [id=" + id + ", contents=" + contents + ", createdOn=" + createdOn + ", lastUpdate="
-				+ lastUpdate + ", user=" + user.getId() + ", groupPostId=" + groupPostId + ", enabled=" + enabled + "]";
+				+ lastUpdate + ", user.getId()=" + user.getId() + ", enabled=" + enabled + "]";
 	}
 
 	@Override

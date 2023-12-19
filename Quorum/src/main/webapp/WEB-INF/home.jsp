@@ -9,7 +9,7 @@
 	<jsp:include page="navbar.jsp" />
 	<div class="container wrapper">
 		<div class="row">
-			<div class="col-3">
+			<div class="col-3 home-side">
 				<c:if test="${not empty loggedUser}">
 					<div class="side-banner">
 						<img class="side-banner-image" alt="side banner image"
@@ -17,7 +17,7 @@
 					</div>
 				</c:if>
 			</div>
-			<div class="col-6" align="center">
+			<div class="col-6 home-center" align="center">
 				<c:choose>
 					<c:when test="${empty loggedUser}">
 						<div class="xl-spacer"></div>
@@ -52,7 +52,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div class="col-3">
+			<div class="col-3 home-side">
 				<c:if test="${not empty loggedUser}">
 					<div class="side-banner">
 						<img class="side-banner-image" alt="side banner image"

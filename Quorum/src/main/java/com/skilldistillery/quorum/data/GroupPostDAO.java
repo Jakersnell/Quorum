@@ -3,6 +3,7 @@ package com.skilldistillery.quorum.data;
 import java.util.List;
 
 import com.skilldistillery.quorum.entities.GroupPost;
+import com.skilldistillery.quorum.entities.GroupPostComment;
 import com.skilldistillery.quorum.entities.User;
 
 public interface GroupPostDAO {
@@ -25,5 +26,5 @@ public interface GroupPostDAO {
 	void setEnabled(int postId, boolean status);
 
 	List<GroupPost> getAll();
-
+		
 }
