@@ -21,7 +21,7 @@
 					</h3>
 				</div>
 				<hr>
-				<div class="scroll-container mt-3 group-description">
+				<div class="scroll-container mt-3 group-description stylized-scroll">
 					<c:forEach var="member" items="${members}">
 						<a href="userProfile.do?userID=${member.id}">
 							<div class="row container">

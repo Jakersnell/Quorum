@@ -32,8 +32,7 @@ body {
 					<div class="col-6 home-center" align="center">
 						<c:choose>
 							<c:when test="${loggedUser.isAdmin()}">
-								<h1 id="administrator>">01000001 01000100 01001101 01001001
-									01001110</h1>
+								<h1 id="administrator>">Welcom Quorum Admin</h1>
 							</c:when>
 							<c:otherwise>
 
@@ -41,7 +40,7 @@ body {
 									<h1>
 										Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 									</h1>
-									<div class="scroll-home-feed ">
+									<div class="scroll-home-feed stylized-scroll">
 										<jsp:include page="makePostForm.jsp"></jsp:include>
 										<jsp:include page="_feed.jsp" />
 									</div>

@@ -4,16 +4,11 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
-<style>
-body {
-	background-color: #40BEC5;
-}
-</style>
 <body>
 	<jsp:include page="navbar.jsp" />
 	<div class="xs-spacer"></div>
 	<div class="container wrapper">
-		<div id="post-container" class="row">
+		<div class="row">
 			<div class="col-3 post-side"></div>
 			<div class="col-6 post-center">
 				<div class="post-detail-card text-center align-middle">
@@ -37,13 +32,14 @@ body {
 										<span><h5>
 												<small class="embedded-small">Posted in </small>${post.socialGroup.name}</h5></span>
 									</div>
-								</div> <c:if test="${not empty loggedUser}">
+								</div> <c:if
+									test="${not empty loggedUser && post.user.equals(loggedUser)}">
 									<div class="row">
 										<div class="col-3"></div>
 										<div class="col-6">
 											<div class="post-edit-btn-div">
-												<button class="btn post-btn-secondary form-control"
-													type="submit">Edit</button>
+												<a href="editPost.do?postID=${post.id}"
+													class="btn post-btn-secondary form-control">Edit</a>
 											</div>
 										</div>
 										<div class="col-3"></div>
@@ -67,7 +63,7 @@ body {
 						</div>
 					</div>
 				</div>
-				<div class="comments mt-3">
+				<div id="comments" class="comments mt-3">
 					<div class="comments-header">
 						<c:if test="${userIsInGroup}">
 							<div class="row">
@@ -108,45 +104,61 @@ body {
 							</div>
 							<br>
 						</c:if>
-						<h3>Comments</h3>
+
 					</div>
-					<c:forEach var="comment" items="${post.comments}">
-						<c:if test="${comment.enabled || loggedUser.isAdmin()}">
-							<div class="comment">
-								<div class="comment-header row">
-									<div class="col-6">
-										<h5>
-											<strong>@${comment.user.username}</strong>
-										</h5>
-									</div>
-									<div class="col-4"></div>
-									<div class="col-2">
-										<c:if
-											test="${loggedUser.equals(comment.user) || loggedUser.isAdmin()}">
-											<form action="setCommentStatus.do" method="POST">
-												<input type="hidden" name="commentID" value="${comment.id}">
-												<input type="hidden" name="status" value="false">
-												<button type="submit"
-													class="btn btn-danger delete-comment-btn">delete</button>
-											</form>
-										</c:if>
-										<c:if test="${!comment.enabled && loggedUser.isAdmin()}">
-											<form action="setCommentStatus.do" method="POST">
-												<input type="hidden" name="commentID" value="${comment.id}">
-												<input type="hidden" name="status" value="true">
-												<button type="submit"
-													class="btn btn-danger delete-comment-btn">re-enable</button>
-											</form>
-										</c:if>
-									</div>
-								</div>
-								<hr class="mt-0 mb-1">
-								<div class="comment-body">
-									<p>${comment.contents}</p>
-								</div>
+					<c:choose>
+						<c:when
+							test="${post.comments != null && !post.comments.isEmpty()}">
+							<div class="comments-header ml-4">
+								<h3>Comments</h3>
 							</div>
-						</c:if>
-					</c:forEach>
+
+							<c:forEach var="comment" items="${post.comments}">
+								<c:if test="${comment.enabled || loggedUser.isAdmin()}">
+									<div class="comment">
+										<div class="comment-header row">
+											<div class="col-6">
+												<h5>
+													<strong>@${comment.user.username}</strong>
+												</h5>
+											</div>
+											<div class="col-4"></div>
+											<div class="col-2">
+												<c:if
+													test="${loggedUser.equals(comment.user) || loggedUser.isAdmin()}">
+													<form action="setCommentStatus.do" method="POST">
+														<input type="hidden" name="commentID"
+															value="${comment.id}"> <input type="hidden"
+															name="status" value="false">
+														<button type="submit"
+															class="btn btn-danger delete-comment-btn">delete</button>
+													</form>
+												</c:if>
+												<c:if test="${!comment.enabled && loggedUser.isAdmin()}">
+													<form action="setCommentStatus.do" method="POST">
+														<input type="hidden" name="commentID"
+															value="${comment.id}"> <input type="hidden"
+															name="status" value="true">
+														<button type="submit"
+															class="btn btn-danger delete-comment-btn">re-enable</button>
+													</form>
+												</c:if>
+											</div>
+										</div>
+										<hr class="mt-0 mb-1">
+										<div class="comment-body">
+											<p>${comment.contents}</p>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<div class="comments-header ml-4">
+								<h3>This post has no comments.</h3>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="col-3 post-side"></div>

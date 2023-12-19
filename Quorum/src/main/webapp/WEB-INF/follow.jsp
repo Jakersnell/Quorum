@@ -26,13 +26,15 @@
 								<h5>${follower.firstName}&nbsp;${follower.lastName}</h5>
 							</div>
 							<div class="col-2">
-								<form action="removeFollower.do" method="post">
-									<input type="hidden" id="removeFollowerID" name="removeID"
-										value="${follower.id}" /> <input type="hidden"
-										id="removeFollowerID" name="userID" value="${user.id}" />
-									<button type="submit"
-										class="form-control btn btn-secondary remove-follow-btn">X</button>
-								</form>
+								<c:if test="${loggedUser.equals(user) || user.isAdmin()}">
+									<form action="removeFollower.do" method="post">
+										<input type="hidden" id="removeFollowerID" name="removeID"
+											value="${follower.id}" /> <input type="hidden"
+											id="removeFollowerID" name="userID" value="${user.id}" />
+										<button type="submit"
+											class="form-control btn btn-secondary remove-follow-btn">X</button>
+									</form>
+								</c:if>
 							</div>
 						</div>
 						<hr>
@@ -55,13 +57,15 @@
 								<h5>${follow.firstName}&nbsp;${follow.lastName}</h5>
 							</div>
 							<div class="col-2">
-								<form action="removeFollowing.do" method="post">
-									<input type="hidden" id="removeFollowID" name="removeID"
-										value="${follow.id}" /> <input type="hidden"
-										id="removeFollowID" name="userID" value="${user.id}" />
-									<button type="submit"
-										class="form-control btn btn-secondary remove-follow-btn">X</button>
-								</form>
+								<c:if test="${loggedUser.equals(user) || user.isAdmin()}">
+									<form action="removeFollowing.do" method="post">
+										<input type="hidden" id="removeFollowID" name="removeID"
+											value="${follow.id}" /> <input type="hidden"
+											id="removeFollowID" name="userID" value="${user.id}" />
+										<button type="submit"
+											class="form-control btn btn-secondary remove-follow-btn">X</button>
+									</form>
+								</c:if>
 							</div>
 						</div>
 						<hr>
