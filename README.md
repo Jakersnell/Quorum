@@ -1,6 +1,6 @@
 <h2 align="center">
     <a href="#" target="blank_">
-        <img height="100" alt="Quorum Logo" src="/main/webapp/img/logo.png"/>
+        <img height="100" alt="Quorum Logo" src="https://raw.githubusercontent.com/Deonnaa/MidtermProject/blob/develop/Quorum/src/main/webapp/img/quorum.png"/>
     </a>
     <br>
     Quorum: Explore. Connect. Grow.
