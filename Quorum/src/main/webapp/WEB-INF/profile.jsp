@@ -136,17 +136,26 @@
 
 					<%-- Courses Section --%>
 					<h4>COURSES</h4>
+					<a class="btn btn-info" role="button"
+						href="editCourse?schoolID=${user.school.id}">Edit Courses</a>
 					<div>
 						<c:if test="${empty courses}">
 							<p>No courses found.</p>
 						</c:if>
 						<c:forEach items="${courses}" var="course">
 							<div class="mb-2">
-								<strong><c:out value="${course.title}" /></strong><br> <span>Time:
-									<c:out value="${course.dateStart}" /> - <c:out
+								<strong><c:out value="${course.title}" /></strong> <br> <span>Class
+									Dates: <c:out value="${course.dateStart}" /> - <c:out
 										value="${course.dateEnd}" />
-								</span><br> <span>Professor: <c:out
-										value="${course.professor.firstName} ${course.professor.lastName}" /></span>
+								</span> <br> <span>Professor: <a
+									href="professorview?professorId=${course.professor.id}"> <c:out
+											value="${course.professor.firstName} ${course.professor.lastName}" /></a>
+								</span> <br> <span>Days of Week: <c:forEach
+										items="${course.daysOfWeek}" var="day">
+										<c:out value="${day} " />
+									</c:forEach>
+								</span> <br>
+
 							</div>
 						</c:forEach>
 					</div>
