@@ -15,7 +15,7 @@
 			<div class="col-md-5">
 
 				<%-- User Image, Name, and Bio in one vertical column --%>
-				<div class="col-md-4">
+				<div class="profile-container">
 					<img src="<c:out value='${user.profileImageUrl}'/>"
 						alt="Profile Picture" class="img-thumbnail mb-3">
 					<h2>
@@ -73,10 +73,7 @@
 					<p>
 						<c:out value="${user.biography}" />
 					</p>
-				</div>
 
-				<%-- Friends/Following School Clubs Section --%>
-				<div class="container mt-5">
 					<div class="row mb-4">
 						<%-- Friends/Following Section --%>
 						<div class="col-md-6">
@@ -152,14 +149,15 @@
 
 			<%-- Right Column: User Posts Feed --%>
 			<div class="col-md-7">
-				<h3>POSTS</h3>
-				<jsp:include page="makePostForm.jsp" />
-				<jsp:include page="_feed.jsp" />
+				<div class="profile-container">
+					<h3>POSTS</h3>
+					<jsp:include page="makePostForm.jsp" />
+					<jsp:include page="_feed.jsp" />
+				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-
+	<div class="spacer"></div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

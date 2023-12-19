@@ -9,6 +9,10 @@
 #navbar-logo-img {
 	display: none;
 }
+
+body {
+	background-image: linear-gradient(to right, #eadcff, #c6faf5);
+}
 </style>
 </c:if>
 
@@ -17,6 +21,7 @@
 	<div class="container wrapper">
 		<c:choose>
 			<c:when test="${not empty loggedUser}">
+				<div class="sm-spacer"></div>
 				<div class="row">
 					<div class="col-3 home-side">
 						<div class="side-banner">
@@ -31,13 +36,16 @@
 									01001110</h1>
 							</c:when>
 							<c:otherwise>
-								<div class="sm-spacer"></div>
-								<h1>
-									Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
-								</h1>
-								<jsp:include page="makePostForm.jsp"></jsp:include>
-								<jsp:include page="_feed.jsp" />
-								<div class="sm-spacer"></div>
+
+								<div class="profile-container">
+									<h1>
+										Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
+									</h1>
+									<div class="scroll-home-feed ">
+										<jsp:include page="makePostForm.jsp"></jsp:include>
+										<jsp:include page="_feed.jsp" />
+									</div>
+								</div>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -48,6 +56,7 @@
 						</div>
 					</div>
 				</div>
+				<div class="sm-spacer"></div>
 			</c:when>
 			<c:otherwise>
 				<div class="row" id="homeRow">
