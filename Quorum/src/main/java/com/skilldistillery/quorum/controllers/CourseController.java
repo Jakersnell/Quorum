@@ -43,7 +43,7 @@ public class CourseController {
 	}
 
 	@PostMapping({ "/addCourse", "addCourse.do" })
-	private String addCourseToUser(@RequestParam(name = "courseID") int courseID, HttpSession session) {
+	private String addCourseToUser(@RequestParam(name = "courseID") int courseID, @RequestParam(name = "studentID") int studentID, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
         if (loggedUser == null) {
             return REDIRECT_LOGIN;
@@ -54,7 +54,7 @@ public class CourseController {
             return REDIRECT_404;
         }
 
-        boolean success = courseDao.addCourseToUser(loggedUser.getId(), courseID);
+        boolean success = courseDao.addCourseToUser(studentID, courseID);
         if (success) {
             return "redirect:/profile?userID=" + loggedUser.getId();
         } else {
