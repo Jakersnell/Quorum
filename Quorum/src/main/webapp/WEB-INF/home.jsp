@@ -6,12 +6,12 @@
 <jsp:include page="head.jsp" />
 <c:if test="${empty loggedUser}">
 	<style>
-#navbar-logo-img {
-	display: none;
+body {
+	background-image: linear-gradient(90deg, rgba(242,229,246,1) 0%, rgba(248,236,238,1) 38%, rgba(243,244,238,1) 69%, rgba(216,254,252,1) 100%);
 }
 
-body {
-	background-image: linear-gradient(to right, #eadcff, #c6faf5);
+#navbar-logo-img {
+	display: none;
 }
 </style>
 </c:if>
