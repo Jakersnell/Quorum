@@ -88,6 +88,10 @@
 										class="rounded-circle" style="width: 75px; height: 75px;">
 									</a>
 								</c:forEach>
+								<c:if
+									test="${user.following == null || user.following.isEmpty()}">
+									<small><strong>not following anyone</strong></small>
+								</c:if>
 							</div>
 
 							<%-- Followers Section --%>
@@ -104,6 +108,10 @@
 											style="width: 75px; height: 75px;">
 										</a>
 									</c:forEach>
+									<c:if
+										test="${user.followers == null || user.followers.isEmpty()}">
+										<small><strong>has no followers</strong></small>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -151,8 +159,23 @@
 			<div class="col-md-7">
 				<div class="profile-container">
 					<h3>POSTS</h3>
+					<hr>
 					<jsp:include page="makePostForm.jsp" />
-					<jsp:include page="_feed.jsp" />
+					<c:choose>
+						<c:when test="${feed != null && !feed.isEmpty()}"><jsp:include
+								page="_feed.jsp" /></c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${user.equals(loggedUser)}">
+									<h5>You haven't made any posts yet.</h5>
+								</c:when>
+								<c:otherwise>
+									<h5>This user hasn't made any posts yet.</h5>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 			</div>
 		</div>

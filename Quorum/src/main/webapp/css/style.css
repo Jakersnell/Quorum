@@ -24,7 +24,6 @@ body {
   min-height: 100vh;
 }
 
-
 .wrapper {
   /* min-height: 60vh; */
   flex-grow: 1;
@@ -68,7 +67,7 @@ a:hover {
 }
 
 #logincard {
-  background-color:#eadcff;
+  background-color: #eadcff;
 }
 
 #loginbtn {
@@ -145,13 +144,11 @@ a:hover {
   flex: 1;
 }
 
-
 /*
 .scrollable-card::-webkit-scrollbar {
   display: none;
 }
 */
-
 
 /*
 body {
@@ -219,6 +216,8 @@ main {
 .vert-middle {
   vertical-align: middle;
 }
+#comments,
+.post-detail-card,
 .post-list,
 .make-post-form {
   background-color: #eadcff;
@@ -281,6 +280,7 @@ main {
 .post-btn:hover,
 .post-edit-btn:hover,
 .post-btn-secondary:hover {
+  z-index: 99;
   margin-top: 0.7rem;
   background-color: #b17dfe;
   width: 10rem;
@@ -288,10 +288,9 @@ main {
   margin-bottom: 0.7rem;
   border-radius: 2rem;
 }
-
-
-
-
+.post-edit-btn:hover {
+  margin-left: -1.6rem;
+}
 
 .post-btn-secondary {
   background-color: #1d3753;
@@ -439,7 +438,6 @@ textarea {
   width: 30rem;
 }
 
-
 .xs-spacer {
   height: 2rem;
 }
@@ -485,7 +483,6 @@ textarea {
 }
 
 .post-detail-card {
-  background-color: white;
   padding: 1rem;
   min-height: 20rem;
   border-radius: 0.5rem;
@@ -502,10 +499,9 @@ textarea {
   color: darkblue;
 }
 
-
-.post-detail-card, #comments {
+.post-detail-card,
+#comments {
   border-radius: 0.5rem;
-  background-color: rgb(225, 225, 225);
   padding: 0.6rem;
 }
 
@@ -572,7 +568,8 @@ footer {
   width: 10rem;
 }
 
-.profile-container { /* comment out this div to remove white background*/
+.profile-container {
+  /* comment out this div to remove white background*/
   box-shadow: 0 0 1rem 0.2rem rgb(237, 237, 237);
   background-color: white;
   height: 100%;
@@ -586,7 +583,6 @@ footer {
   overflow-x: hidden;
 }
 
-
 .scroll-home-feed {
   box-shadow: 0 0 0.2rem 0.2rem whitesmoke;
   background-color: whitesmoke;
@@ -597,7 +593,7 @@ footer {
   border-radius: 1rem;
 }
 .stylized-scroll::-webkit-scrollbar {
-  width: 0.5rem; 
+  width: 0.5rem;
 }
 
 .stylized-scroll::-webkit-scrollbar-track {
@@ -605,8 +601,8 @@ footer {
 }
 
 .stylized-scroll::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 0.3rem; 
+  background: #888;
+  border-radius: 0.3rem;
 }
 
 .stylized-scroll::-webkit-scrollbar-thumb:hover {
@@ -646,4 +642,3 @@ footer {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-
