@@ -507,11 +507,6 @@ textarea {
   color: darkblue;
 }
 
-.scroll-container {
-  height: 23rem;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 
 .post-center {
   border-radius: 0.5rem;
@@ -579,3 +574,47 @@ body {
   background-image: linear-gradient(to right, #eadcff, #c6faf5);
 }
 
+.img-thumbnail {
+  width: 10rem;
+}
+
+.profile-container { /* comment out this div to remove white background*/
+  box-shadow: 0 0 1rem 0.2rem rgb(237, 237, 237);
+  background-color: white;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.scroll-container {
+  height: 23rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
+.scroll-home-feed {
+  box-shadow: 0 0 0.2rem 0.2rem whitesmoke;
+  background-color: whitesmoke;
+  height: 40rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.scroll-home-feed::-webkit-scrollbar {
+  width: 0.5rem; 
+}
+
+.scroll-home-feed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-home-feed::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 0.3rem; 
+}
+
+.scroll-home-feed::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
