@@ -43,6 +43,13 @@
 							<span class="mx-2 my-2">
 								<h5>${rating.content}</h5>
 								<p>Rating: ${rating.rating}</p>
+								<c:if test="${loggedUser.role == 'admin'}">
+									<form action="deleteReview.do" method="Get">
+										<input type="hidden" name="userID" value="${rating.user.id}"/>
+										<input type="hidden" name="professorId" value="${rating.professor.id}"/>
+										<button class="btn btn-danger">Delete</button>
+									</form>
+								</c:if>
 							</span>
 								
 						</c:otherwise>
