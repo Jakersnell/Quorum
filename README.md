@@ -1,3 +1,11 @@
+<h2 align="center">
+    <a href="#" target="blank_">
+        <img height="100" alt="Quorum Logo" src="/main/webapp/img/logo.png"/>
+    </a>
+    <br>
+    Quorum: Explore. Connect. Grow.
+</h2>
+
 ## Quorum
 
 #### Mid-term Team Project for Skill Distillery
