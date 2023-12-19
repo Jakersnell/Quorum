@@ -78,7 +78,7 @@ public class GroupPostController {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect = REDIRECT_LOGIN;
 		} else if (post != null && hasEditAuth(post.getId(), session) && postDao.update(post)) {
-			redirect = "redirect:/" + (fromUrl != null ? fromUrl : "post.do?postID=" + post.getId());
+			redirect = "redirect:post.do?postID=" + post.getId();
 		} else {
 			redirect = REDIRECT_ERROR;
 		}

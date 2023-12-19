@@ -42,7 +42,15 @@ body {
 									</h1>
 									<div class="scroll-home-feed stylized-scroll">
 										<jsp:include page="makePostForm.jsp"></jsp:include>
-										<jsp:include page="_feed.jsp" />
+										<c:choose>
+											<c:when test="${empty feed}">
+												<h3>Your feed is empty!</h3>
+												<h5>Try following some Users or Joining some groups!</h5>
+											</c:when>
+											<c:otherwise>
+												<jsp:include page="_feed.jsp" />
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</c:otherwise>
