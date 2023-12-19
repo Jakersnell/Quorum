@@ -18,6 +18,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class GeneralController {
 
+	private static String REDIRECT = "redirect:/";
+	private static String REDIRECT_LOGIN = REDIRECT + "login.do";
+
 	@Autowired
 	private GroupPostDAO postDao;
 
@@ -60,7 +63,7 @@ public class GeneralController {
 		User user = (User) session.getAttribute("loggedUser");
 
 		if (user == null) {
-			mav.setViewName("redirect:/login.do");
+			mav.setViewName(REDIRECT_LOGIN);
 		} else {
 			mav.addObject("postResults", postDao.searchByQuery(query, user));
 			mav.addObject("userResults", userDao.searchByQuery(query, user));
@@ -72,6 +75,5 @@ public class GeneralController {
 
 		return mav;
 	}
-
 
 }

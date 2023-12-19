@@ -133,7 +133,6 @@ CREATE TABLE IF NOT EXISTS `social_group` (
   `owner_id` INT NOT NULL,
   `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   INDEX `owner_idx` (`owner_id` ASC),
   CONSTRAINT `owner`
     FOREIGN KEY (`owner_id`)
@@ -284,12 +283,10 @@ CREATE TABLE IF NOT EXISTS `group_post_comment` (
   `last_update` DATETIME NULL,
   `user_id` INT NOT NULL,
   `group_post_id` INT NOT NULL,
-  `in_reply_to_id` INT NULL,
-  `enabled` TINYINT NULL,
+  `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_group_post_comment_user1_idx` (`user_id` ASC),
   INDEX `fk_group_post_comment_group_post1_idx` (`group_post_id` ASC),
-  INDEX `fk_group_post_comment_group_post_comment1_idx` (`in_reply_to_id` ASC),
   CONSTRAINT `fk_group_post_comment_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
@@ -298,11 +295,6 @@ CREATE TABLE IF NOT EXISTS `group_post_comment` (
   CONSTRAINT `fk_group_post_comment_group_post1`
     FOREIGN KEY (`group_post_id`)
     REFERENCES `group_post` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_group_post_comment_group_post_comment1`
-    FOREIGN KEY (`in_reply_to_id`)
-    REFERENCES `group_post_comment` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -664,10 +656,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quorum`;
-INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `in_reply_to_id`, `enabled`) VALUES (1, 'This is going to be so exciting!', '2023-02-11 06:10:08', '2023-02-19 06:10:08', 3, 1, NULL, 1);
-INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `in_reply_to_id`, `enabled`) VALUES (2, 'Great initiative!', '2023-01-10 20:13:09', '2023-01-17 20:13:09', 8, 2, NULL, 1);
-INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `in_reply_to_id`, `enabled`) VALUES (3, 'Great initiative!', '2023-06-28 21:15:17', '2023-07-05 21:15:17', 1, 20, NULL, 1);
-INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `in_reply_to_id`, `enabled`) VALUES (4, 'Like it!', '2023-06-28 21:30:17', '2023-06-28 21:30:17', 1, 20, 3, 1);
+INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `enabled`) VALUES (1, 'This is going to be so exciting!', '2023-02-11 06:10:08', '2023-02-19 06:10:08', 3, 1, 1);
+INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `enabled`) VALUES (2, 'Great initiative!', '2023-01-10 20:13:09', '2023-01-17 20:13:09', 8, 2, 1);
+INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `enabled`) VALUES (3, 'Great initiative!', '2023-06-28 21:15:17', '2023-07-05 21:15:17', 1, 20, 1);
+INSERT INTO `group_post_comment` (`id`, `contents`, `created_on`, `last_update`, `user_id`, `group_post_id`, `enabled`) VALUES (4, 'Like it!', '2023-06-28 21:30:17', '2023-06-28 21:30:17', 1, 20, 1);
 
 COMMIT;
 

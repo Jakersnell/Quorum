@@ -12,8 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.quorum.data.SchoolDAO;
+import com.skilldistillery.quorum.data.SocialGroupDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.School;
+import com.skilldistillery.quorum.entities.SocialGroup;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +28,7 @@ public class LoginController {
 
 	@Autowired
 	private SchoolDAO schoolDao;
+
 
 	@GetMapping({ "/login", "login.do" })
 	public String loginGet(HttpSession session) {
@@ -43,12 +46,12 @@ public class LoginController {
 			if (searchedUser != null) {
 				if (searchedUser.isEnabled() == false) {
 					session.setAttribute("userID", searchedUser.getId());
-					redirect = "reactivate";
-					
+					redirect = "redirect:/reactivate.do";
+
 				} else {
 					session.setAttribute("loggedUser", searchedUser);
 				}
-				
+
 			} else {
 				redirectAttributes.addFlashAttribute("msg", "Sorry! Incorrect username/password!");
 				redirect = "redirect:/login.do";
@@ -99,9 +102,9 @@ public class LoginController {
 		model.addObject("msg", msg);
 		return model;
 	}
-	
+
 	@GetMapping({ "/reactivate", "reactivate.do" })
-	public ModelAndView logout(@RequestParam(name="userID")int userID, HttpSession session, ModelAndView mv) {
+	public ModelAndView logout(@RequestParam(name = "userID") int userID, HttpSession session, ModelAndView mv) {
 		String msg = "Success!";
 		session.invalidate();
 		userDao.activateUser(userID);

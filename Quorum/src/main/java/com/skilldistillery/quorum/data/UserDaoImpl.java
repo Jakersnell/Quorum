@@ -1,6 +1,7 @@
 package com.skilldistillery.quorum.data;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class UserDaoImpl implements UserDAO {
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("username", username)
 					.setParameter("password", password).getSingleResult();
+			List<SocialGroup> userGroups =  user.getGroups().stream().filter(SocialGroup::isEnabled).collect(Collectors.toList());
+			user.setGroups(userGroups);
 		} catch (Exception e) {
 			System.err.print("Invalid user: " + username + "\n");
 			e.printStackTrace();
@@ -52,10 +55,12 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User getUserById(int id, boolean loadFollows) {
 		User user = em.find(User.class, id);
+		List<SocialGroup> userGroups =  user.getGroups().stream().filter(SocialGroup::isEnabled).collect(Collectors.toList());
 
 		if (loadFollows) {
 			user.getFollowers().size();
 			user.getFollowing().size();
+			user.setGroups(userGroups);
 		}
 
 		return user;
@@ -192,7 +197,7 @@ public class UserDaoImpl implements UserDAO {
 					    )
 				""";
 
-		if (!user.getRole().equals("admin")) {
+		if (!user.isAdmin()) {
 			jpql += """
 					AND
 					    u.enabled = true
