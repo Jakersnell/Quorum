@@ -6,8 +6,8 @@
 <jsp:include page="head.jsp" />
 <c:if test="${empty loggedUser}">
 	<style>
-body {
-	background-image: linear-gradient(to right, #EADCFF, #C6FAF5);
+#navbar-logo-img {
+	display: none;
 }
 </style>
 </c:if>
