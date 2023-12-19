@@ -21,7 +21,7 @@ public class UserController {
 	private static String REDIRECT_LOGIN = REDIRECT + "login.do";
 	private static String REDIRECT_404 = REDIRECT + "404.do";
 	private static String REDIRECT_ERROR = REDIRECT + "error.do";
-	
+
 	@Autowired
 	private UserDAO userDao;
 
@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	private GroupPostDAO postDao;
 
-	@GetMapping({ "/account", "account.do" })
+	@GetMapping({ "account.do" })
 	private String myProfileGet(HttpSession session) {
 		String view = "account";
 		if (session.getAttribute("loggedUser") == null) {
@@ -40,26 +40,69 @@ public class UserController {
 		return view;
 	}
 
-	@GetMapping({ "/profile", "userProfile.do" })
+	@GetMapping({ "userProfile.do" })
 	private ModelAndView userProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
 			ModelAndView mv) {
 		String viewName;
 
-		User logged = (User) session.getAttribute("loggedUser");
-		User user = userDao.getUserById(userID);
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		User profileUser = userDao.getUserById(userID);
 
-		if (!isLoggedIn(session)) {
+		if (loggedUser == null) {
 			viewName = REDIRECT_LOGIN;
-		} else if (user == null) {
+		} else if (profileUser == null) {
 			viewName = REDIRECT_404;
 		} else {
 			viewName = "profile";
-			mv.addObject("user", user);
+			mv.addObject("user", profileUser);
 			mv.addObject("feed", postDao.getByUserId(userID));
 			mv.addObject("courses", courseDao.getCoursesByUser(userID));
-			mv.addObject("userEditAuth", hasAuth(userID, session));
-			mv.addObject("userIsFollowingUser", userDao.userIsFollowing(user, logged));
+			mv.addObject("userEditAuth", hasAuth(userID, loggedUser));
+			mv.addObject("userIsFollowingUser", userDao.userIsFollowing(profileUser, loggedUser));
 			mv.addObject("fromUrl", "userProfile.do?userID=" + userID);
+		}
+		System.out.println("\n\n\n\n" + user.getGroups() + "\n\n\n\n");
+		mv.setViewName(viewName);
+
+		return mv;
+	}
+
+	@GetMapping({ "editProfile.do" })
+	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
+			ModelAndView mv) {
+
+		String viewName;
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		User userToEdit = userDao.getUserById(userID);
+
+		if (loggedUser == null) {
+			viewName = REDIRECT_LOGIN;
+		} else if (userToEdit == null || !hasAuth(userID, loggedUser)) {
+			viewName = REDIRECT_ERROR;
+		} else {
+			viewName = "editProfile";
+			mv.addObject("user", userToEdit);
+		}
+
+		mv.setViewName(viewName);
+		return mv;
+	}
+
+	@GetMapping({ "getFollow.do" })
+	private ModelAndView userProfileGetFollow(@RequestParam(name = "userID") int userID, HttpSession session,
+			ModelAndView mv) {
+		String viewName;
+
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		User profileUser = userDao.getUserById(userID, true);
+
+		if (loggedUser == null) {
+			viewName = REDIRECT_LOGIN;
+		} else if (profileUser != null && !hasAuth(userID, loggedUser)) {
+			viewName = REDIRECT_404;
+		} else {
+			mv.addObject("user", profileUser);
+			viewName = "follow";
 		}
 
 		mv.setViewName(viewName);
@@ -67,51 +110,20 @@ public class UserController {
 		return mv;
 	}
 
-	@GetMapping({ "/editProfile", "editProfile.do" })
-	private ModelAndView userEditProfileGet(@RequestParam(name = "userID") int userID, HttpSession session,
-			ModelAndView mv) {
-		mv.setViewName(REDIRECT_LOGIN);
-
-		if (hasAuth(userID, session)) {
-			User accEdit = userDao.getUserById(userID);
-			mv.addObject("user", accEdit);
-			mv.setViewName("editProfile");
-		} else {
-			mv.setViewName(REDIRECT_ERROR);
-		}
-
-		return mv;
-	}
-
-	@GetMapping({ "/follow", "getFollow.do" })
-	private ModelAndView userProfileGetFollow(@RequestParam(name = "userID") int userID, HttpSession session,
-			ModelAndView mv) {
-
-		mv.setViewName("follow");
-
-		if (hasAuth(userID, session)) {
-			mv.addObject("user", userDao.getUserById(userID, true));
-		} else {
-			mv.setViewName(REDIRECT_404);
-		}
-
-		return mv;
-	}
-
-	@GetMapping({ "/update", "update.do" })
+	@GetMapping({ "update.do" })
 	private ModelAndView userEditProfilePOST(@ModelAttribute User user, HttpSession session, ModelAndView mv) {
 
 		mv.setViewName(REDIRECT_ERROR);
 
 		if (hasAuth(user.getId(), session)) {
 
-			mv.setViewName("redirect:/profile?userID=" + user.getId());
+			mv.setViewName("redirect:/userProfile.do?userID=" + user.getId());
 			user = userDao.update(user);
 		}
 		return mv;
 	}
 
-	@GetMapping({ "/delete", "delete.do" })
+	@GetMapping({ "delete.do" })
 	private ModelAndView userEditProfilePOST(@RequestParam(name = "userID") int userID, HttpSession session,
 			ModelAndView mv) {
 
@@ -121,7 +133,7 @@ public class UserController {
 
 		if (user.getId() == userID || user.getRole().equals("admin")) {
 			userDao.setEnabled(userID, false);
-			mv.setViewName("redirect:/profile?userID=" + user.getId());
+			mv.setViewName("redirect:/userProfile.do?userID=" + user.getId());
 			if (user.getId() == userID) {
 				session.invalidate();
 			}
@@ -129,7 +141,7 @@ public class UserController {
 		return mv;
 	}
 
-	@PostMapping({ "/removeFollower", "removeFollower.do" })
+	@PostMapping({ "removeFollower.do" })
 	private String userRemoveFollower(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "removeID") int removeID, HttpSession session) {
 		String redirect = REDIRECT_ERROR;
@@ -140,7 +152,7 @@ public class UserController {
 		return redirect;
 	}
 
-	@PostMapping({ "/removeFollowing", "removeFollowing.do" })
+	@PostMapping({ "removeFollowing.do" })
 	private String userRemoveFollowing(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "removeID") int removeID, HttpSession session,
 			@RequestParam(name = "fromProfile", required = false) Boolean fromProfile) {
@@ -154,7 +166,7 @@ public class UserController {
 		return redirect;
 	}
 
-	@PostMapping({ "/addFollowing", "addFollowing.do" })
+	@PostMapping({ "addFollowing.do" })
 	private String userAddFollowing(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "followID") int followID, HttpSession session) {
 		String redirect = "redirect:/userProfile.do?userID=" + followID;
@@ -164,13 +176,14 @@ public class UserController {
 		return redirect;
 	}
 
-	private boolean hasAuth(int accessUserId, HttpSession session) {
-		User user = (User) session.getAttribute("loggedUser");
-		return user != null && (accessUserId == user.getId() || user.getRole().equals("admin"));
+	private boolean hasAuth(int targetUserId, User user) {
+		return user != null && (targetUserId == user.getId() || user.getRole().equals("admin"));
+	}
+	
+	private boolean hasAuth(int targetUserId, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		return hasAuth(targetUserId, loggedUser);
 	}
 
-	private boolean isLoggedIn(HttpSession session) {
-		return session.getAttribute("loggedUser") != null;
-	}
 
 }

@@ -8,7 +8,7 @@
 <jsp:include page="head.jsp" />
 </head>
 
-<body id="searchResultBody">
+<body>
 	<jsp:include page="navbar.jsp" />
 	<div class="wrapper container">
 		<div class="sm-spacer"></div>
@@ -16,7 +16,7 @@
 			<div class="row">
 				<div class="col-1"></div>
 				<div class="col-2">
-					<div class="search-div">
+					<div class="search-div profile-container">
 						<c:if test="${!userResults.isEmpty()}">
 							<div class="card result-btn">
 								<button class="btn card-header search-selector-btn"
@@ -68,7 +68,7 @@
 						</c:if>
 					</div>
 				</div>
-				<div class="col-8 display-container">
+				<div class="col-8 display-container profile-container">
 					<div class="search-div">
 						<div class="result-header">
 							<h3>Search Results For: "${query}"</h3>
@@ -77,7 +77,7 @@
 						<div id="collapseOne" class="collapse show"
 							data-parent="#accordion">
 							<h4>Users</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="resultUser" items="${userResults}">
@@ -101,7 +101,7 @@
 						</div>
 						<div id="collapseTwo" class="collapse" data-parent="#accordion">
 							<h4>Schools</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="resultSchool" items="${schoolResults}">
@@ -122,7 +122,7 @@
 						</div>
 						<div id="collapseThree" class="collapse" data-parent="#accordion">
 							<h4>Groups</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="group" items="${groupResults}">
@@ -144,7 +144,7 @@
 
 						<div id="collapseFour" class="collapse" data-parent="#accordion">
 							<h4>Posts</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="resultPost" items="${postResults}">
@@ -171,7 +171,7 @@
 						<div id="collapseFive" class="collapse" data-parent="#accordion">
 							<h4>Proffesors</h4>
 							<div class="card-body">
-								<div class="card-body scrollable-card" data-bs-spy="scroll"
+								<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 									data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 									tabindex="0">
 									<c:forEach var="professor" items="${professorResults}">

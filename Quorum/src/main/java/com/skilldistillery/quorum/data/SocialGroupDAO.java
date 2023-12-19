@@ -6,7 +6,7 @@ import com.skilldistillery.quorum.entities.SocialGroup;
 import com.skilldistillery.quorum.entities.User;
 
 public interface SocialGroupDAO {
-	SocialGroup create(SocialGroup group);
+	SocialGroup create(SocialGroup group, int ownerId);
 
 	SocialGroup getById(int id);
 

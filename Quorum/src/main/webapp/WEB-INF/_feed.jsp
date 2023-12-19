@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
 <c:forEach var="post" items="${feed}" varStatus="status">
 	<div
 		class="shadow p-1 mb-5 rounded container post-list home-post-color-${status.index % 4}">
@@ -9,7 +10,6 @@
 				<h6>
 					<a class="post-link" href="userProfile.do?userID=${post.user.id}">@${post.user.username}</a>
 				</h6>
-				<small>${post.lastUpdate}</small>
 			</div>
 			<div class="col-3">
 				<h6>
@@ -23,6 +23,7 @@
 				</c:if>
 			</div>
 		</div>
+		<hr class="l80">
 		<a href="post.do?postID=${post.id}">
 			<div class="link-group">
 				<div class="row">
@@ -31,7 +32,7 @@
 				<div class="row">
 					<p>${post.contents}</p>
 				</div>
-			</div>
+			</div> <small>${post.lastUpdate}</small>
 		</a>
 	</div>
 	<c:if test="${!status.last}">

@@ -30,6 +30,7 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 				FROM SocialGroup sg
 				JOIN sg.members m
 				WHERE m.id = :userId
+				AND sg.enabled = true
 				""";
 		return em.createQuery(jpql, SocialGroup.class).setParameter("userId", userId).getResultList();
 	}
@@ -77,7 +78,9 @@ public class SocialGroupDaoImpl implements SocialGroupDAO {
 	}
 
 	@Override
-	public SocialGroup create(SocialGroup group) {
+	public SocialGroup create(SocialGroup group, int ownerId) {
+		User owner = em.find(User.class, ownerId);
+		group.setOwner(owner);
 		em.persist(group);
 		group.setMembers(Arrays.asList(group.getOwner()));
 		return group;

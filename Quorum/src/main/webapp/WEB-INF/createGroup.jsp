@@ -6,8 +6,8 @@
 <jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navbar.jsp" />
+	<div class="container wrapper">
 	<main>
-		<div class="container wrapper">
 
 			<div class="row">
 				<div class="col-3"></div>
@@ -39,9 +39,9 @@
 				</div>
 				<div class="col-3"></div>
 			</div>
-		</div>
-		<div class="spacer"></div>
-	</main>
+			<div class="spacer"></div>
+		</main>
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

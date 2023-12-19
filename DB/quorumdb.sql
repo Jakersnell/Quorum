@@ -133,7 +133,6 @@ CREATE TABLE IF NOT EXISTS `social_group` (
   `owner_id` INT NOT NULL,
   `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   INDEX `owner_idx` (`owner_id` ASC),
   CONSTRAINT `owner`
     FOREIGN KEY (`owner_id`)
@@ -414,7 +413,6 @@ INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_u
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (23, 'ethanjohnson', 'password123', '2023-01-23 08:00:00', 'ethan.johnson@email.com', '2023-04-01 10:00:00', 1, 'student', 'Ethan', 'Johnson', 0xF09F94AC2042696F6D65646963616C20536369656E63652073747564656E74206F6E2061207061746820746F207265766F6C7574696F6E697A65206865616C7468636172652E204E6578742073746F703A204D6564205363686F6F6C212023467574757265446F6320F09FA9BA, '2003-07-28', 'https://bostonportrait.com/wp-content/uploads/sites/11977/2021/03/Hecht-Ana-731x1024.jpg', 5);
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (24, 'madisonsmith', 'password123', '2023-01-24 08:00:00', 'madison.smith@email.com', '2023-04-01 10:30:00', 1, 'student', 'Madison', 'Smith', 0xF09F8C9020536F63696F6C6F6779206D616A6F722070617373696F6E6174652061626F7574206D616B696E67206120646966666572656E63652E20576F726B696E6720746F776172647320736F6369616C206A7573746963652C206F6E6520636F6D6D756E6974792070726F6A65637420617420612074696D652E20234368616E67654D616B657220F09FA49D, '2004-06-02', 'https://bostonportrait.com/wp-content/uploads/sites/11977/2021/03/Hecht-Ana-731x1024.jpg', 5);
 INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (25, 'oliverwilliams', 'password123', '2023-01-25 08:00:00', 'oliver.williams@email.com', '2023-04-01 11:00:00', 1, 'student', 'Oliver', 'Williams', 0xF09F8C8C20417374726F7068797369637320656E7468757369617374202D2063686173696E6720737461727320616E6420756E726176656C696E672074686520756E6976657273652773206D79737465726965732E20235374617267617A657220F09F8CA0, '2005-05-08', 'https://bostonportrait.com/wp-content/uploads/sites/11977/2021/03/Hecht-Ana-731x1024.jpg', 5);
-INSERT INTO `user` (`id`, `username`, `password`, `created_on`, `email`, `last_update`, `enabled`, `role`, `first_name`, `last_name`, `biography`, `date_of_birth`, `profile_image_url`, `school_id`) VALUES (26, 'admin', 'admin', '2023-01-25 08:00:00', NULL, '2023-01-25 08:00:00', 1, 'admin', NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 

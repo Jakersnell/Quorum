@@ -2,17 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
-
-<nav class="navbar navbar-expand-lg bg-light" id="gradientbackground">
-	<div class="container-fluid nav-container row">
+<nav class="navbar navbar-expand-lg" id="gradientbackground">
+	<div class="container-fluid nav-container row pt-3">
 		<div class="col-5 text-center">
 			<a class="navbar-brand" href="home.do">Quorum</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-				aria-controls="navbarNavDropdown" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 		</div>
 		<div class="col-2 d-flex justify-content-center">
 			<a class="nav-link" aria-current="page" href="home.do"><img
