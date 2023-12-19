@@ -569,8 +569,7 @@ textarea {
 /* <h1 class="welcome-header">Quorum</h1>
 								<h3 class="welcome-subheader">Explore. Connect. Grow.</h3> */
 nav,
-footer,
-body {
+footer {
   background-image: linear-gradient(to right, #eadcff, #c6faf5);
 }
 

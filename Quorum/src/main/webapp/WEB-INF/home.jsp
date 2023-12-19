@@ -9,6 +9,10 @@
 #navbar-logo-img {
 	display: none;
 }
+
+body {
+	background-image: linear-gradient(to right, #eadcff, #c6faf5);
+}
 </style>
 </c:if>
 
