@@ -37,12 +37,19 @@
 				<c:choose>
 					<c:when test="${userIsMember}">
 						<jsp:include page="makePostForm.jsp"></jsp:include>
-						<c:if test="${!feed.isEmpty()}">
-							<div class="row text-center container">
-								<h2 class="content-header">Posts in ${group.name}</h2>
-							</div>
-						</c:if>
-						<jsp:include page="_feed.jsp" />
+						<c:choose>
+							<c:when test="${!feed.isEmpty()}">
+								<div class="row text-center container">
+									<h2 class="content-header">Posts in ${group.name}</h2>
+								</div>
+								<jsp:include page="_feed.jsp" />
+							</c:when>
+							<c:otherwise>
+								<div class="row text-center container">
+									<h2 class="content-header">This group has no posts yet!</h2>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</c:when>
 					<c:otherwise>
 						<div class="row mt-1 mb-1 text-center">

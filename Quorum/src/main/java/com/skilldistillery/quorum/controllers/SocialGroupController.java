@@ -110,6 +110,7 @@ public class SocialGroupController {
 			redirect = REDIRECT_ERROR;
 		} else {
 			group.setOwner(loggedUser);
+			loggedUser.addGroup(group);
 			group = groupDao.create(group);
 			redirect = "redirect:/group.do?groupID=" + group.getId();
 		}
