@@ -1,7 +1,6 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -82,6 +81,7 @@ public class User {
 	@OneToMany(mappedBy = "receiver")
 	private List<Message> receivedMessages;
 
+<<<<<<< HEAD
 	@ManyToMany
 	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
 	private List<SocialGroup> groups;
@@ -92,6 +92,18 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "course_schedule", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+=======
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+	private List<SocialGroup> groups;
+	
+	@ManyToMany
+	@JoinTable(
+	  name = "user_course",
+	  joinColumns = @JoinColumn(name = "user_id"),
+	  inverseJoinColumns = @JoinColumn(name = "course_id")
+	)
+>>>>>>> 32a0ead309b4e37339f6697b10cdddd976802580
 	private List<Course> courses;
 
 	public User() {
@@ -253,6 +265,7 @@ public class User {
 	public List<SocialGroup> getGroups() {
 		return groups;
 	}
+<<<<<<< HEAD
 
 	public void setGroups(List<SocialGroup> groups) {
 		this.groups = groups;
@@ -275,12 +288,30 @@ public class User {
 		}
 	}
 
+=======
+	
+	public void setGroups(List<SocialGroup> groups) {
+		this.groups = groups;
+	}
+	
+	public void addGroup(SocialGroup group) {
+		if (groups != null && !groups.contains(group)) {
+			groups.add(group);
+		}
+	}
+	
+>>>>>>> 32a0ead309b4e37339f6697b10cdddd976802580
 	public void removeGroup(SocialGroup group) {
 		if (groups != null && !groups.contains(group)) {
 			groups.add(group);
 		}
 	}
+<<<<<<< HEAD
 
+=======
+	
+	
+>>>>>>> 32a0ead309b4e37339f6697b10cdddd976802580
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -298,6 +329,10 @@ public class User {
 		return id == other.id;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 32a0ead309b4e37339f6697b10cdddd976802580
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createdOn=" + createdOn
