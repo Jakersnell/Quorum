@@ -1,15 +1,15 @@
 /* style reset */
 
 @font-face {
-  font-family: 'Old Standard TT';
-  src: url('fonts/Old_Standard_TT/OldStandardTT-Regular.ttf') format('truetype');
+  font-family: "Old Standard TT";
+  src: url("fonts/Old_Standard_TT/OldStandardTT-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Old Standard TT';
-  src: url('fonts/Old_Standard_TT/OldStandardTT-Bold.ttf') format('truetype');
+  font-family: "Old Standard TT";
+  src: url("fonts/Old_Standard_TT/OldStandardTT-Bold.ttf") format("truetype");
   font-weight: bold;
 }
 
@@ -35,9 +35,7 @@ body {
   font-weight: bold;
 }
 
-#gradientbackground{
-  background-image: linear-gradient(90deg, rgba(242,229,246,1) 0%, rgba(248,236,238,1) 38%, rgba(243,244,238,1) 69%, rgba(216,254,252,1) 100%);
-}
+
 
 a {
   text-decoration: none;
@@ -80,11 +78,11 @@ a:hover {
 }
 
 #ratingcolor {
-	color: #F66E94 !important;
+  color: #f66e94 !important;
 }
 
 #ratedcolor {
-	color: #EF4079 !important;
+  color: #ef4079 !important;
 }
 
 #navbar-logo-img {
@@ -548,12 +546,12 @@ textarea {
 
 .logo-div img {
   width: 8rem;
-  margin:0;
+  margin: 0;
   margin-bottom: -1rem;
 }
 
 .home-image img {
-  width: 60rem;
+  width: 63rem;
   margin-left: -16rem;
 }
 
@@ -567,7 +565,7 @@ textarea {
 }
 
 .welcome-header {
-  font-family: 'Old Standard TT';
+  font-family: "Old Standard TT";
 }
 
 .welcome-header h1 {
@@ -575,10 +573,9 @@ textarea {
 }
 /* <h1 class="welcome-header">Quorum</h1>
 								<h3 class="welcome-subheader">Explore. Connect. Grow.</h3> */
-nav, footer {
-  background-image: linear-gradient(to right, #EADCFF, #C6FAF5);
+nav,
+footer,
+body {
+  background-image: linear-gradient(to right, #eadcff, #c6faf5);
 }
 
-body {
-	background-image: linear-gradient(to right, #EADCFF, #C6FAF5);
-}
