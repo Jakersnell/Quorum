@@ -27,7 +27,7 @@ public class SocialGroup {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable = false, length = 45)
+	@Column(nullable = false)
 	private String name;
 
 	private String description;

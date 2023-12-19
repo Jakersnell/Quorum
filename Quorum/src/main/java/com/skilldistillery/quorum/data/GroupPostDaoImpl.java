@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.GroupPost;
+import com.skilldistillery.quorum.entities.GroupPostComment;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
@@ -135,7 +136,7 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 						post.contents LIKE :query
 					)
 				""";
-		if (user.isAdmin()) {
+		if (!user.isAdmin()) {
 			jpql += """
 					AND
 						post.enabled = true

@@ -21,6 +21,10 @@ body {
   font-weight: bold;
 }
 
+#gradientbackground{
+  background-image: linear-gradient(90deg, rgba(242,229,246,1) 0%, rgba(248,236,238,1) 38%, rgba(243,244,238,1) 69%, rgba(216,254,252,1) 100%);
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -151,11 +155,6 @@ a:hover {
   -webkit-box-orient: vertical;
 }
 
-.searchbar,
-.search-btn {
-  box-shadow: 0.1rem 0.1rem 8px rgba(0, 0, 0, 0.2);
-}
-
 /*
 body {
   display: flex;
@@ -194,8 +193,6 @@ main {
   margin-bottom: 1.2rem;
 }
 
-
-
 #postDeleteBtn {
   margin-right: -1.3rem;
 }
@@ -230,21 +227,21 @@ main {
 }
 
 #searchResultBody {
-	background-color: #1D3753;
-} 
+  background-color: #1d3753;
+}
 
 .search-div {
-	background-color: white;
-	padding: 0.5rem;
-	border-radius: 0.5rem;
-	height: 30rem;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  height: 30rem;
 }
 
 .header-row h3 {
-	background-color: white;
-	width: 90.8%;
-	padding: 0.5rem;
-	border-radius: 1rem;
+  background-color: white;
+  width: 90.8%;
+  padding: 0.5rem;
+  border-radius: 1rem;
 }
 /* .display-container {
 	padding: 1rem;
@@ -258,23 +255,24 @@ main {
 	border-radius: 1rem;
 } */
 .search-selector-btn {
-	border: none;
-	font-weight: bold;
-	background-color: transparent;
+  border: none;
+  font-weight: bold;
+  background-color: transparent;
 }
 
 .result-btn {
-	border-radius: 3rem;
-	background-color: #d9d9d9;
-	border-color: transparent;
+  border-radius: 3rem;
+  background-color: #d9d9d9;
+  border-color: transparent;
 }
 
 #accordian {
-	background-color: white;
+  background-color: white;
 }
 
 .post-btn,
-.post-edit-btn {
+.post-edit-btn,
+.post-btn-secondary {
   margin-top: 0.7rem;
   background-color: #d998d3;
   width: 10rem;
@@ -282,7 +280,20 @@ main {
   margin-bottom: 0.7rem;
   border-radius: 2rem;
 }
-
+.post-btn-secondary {
+  background-color: #1d3753;
+  font-size: small;
+  box-shadow: 0rem 0.3rem 0.3rem 0 rgb(203, 203, 203);
+  border: none;
+  color: white;
+}
+.btn-secondary {
+  background-color: #1d3753;
+  color: white;
+}
+.post-btn-secondary:hover {
+  background-color: rgb(192, 192, 192);
+}
 .post-btn:hover {
   background-color: #d998d3;
   opacity: 80%;
@@ -423,5 +434,100 @@ textarea {
 }
 
 .xs-spacer {
-	height: 2rem;
+  height: 2rem;
+}
+
+.searchbar {
+  border-radius: 2rem;
+}
+
+.searchbar,
+.search-btn {
+  box-shadow: 0.1rem 0.1rem 8px rgba(0, 0, 0, 0.2);
+}
+
+#navbarNavDarkDropdown {
+  float: left;
+}
+
+.search-btn {
+  margin-left: -3rem;
+  box-shadow: none;
+  z-index: 10;
+}
+
+.search-btn i {
+  background-color: transparent;
+  border: none;
+}
+.dropdown-menu {
+  margin-left: -7.5rem;
+}
+
+@media (max-width: 1200px) {
+  .side-banner {
+    display: none;
+  }
+  .home-side {
+    display: none;
+  }
+  .home-center {
+    justify-self: center;
+    width: 90vw;
+  }
+}
+
+.post-detail-card {
+  background-color: white;
+  padding: 1rem;
+  min-height: 20rem;
+  border-radius: 0.5rem;
+}
+
+.post-author-full-name {
+  margin: 0;
+}
+
+.post-author-username {
+  margin-top: -0.8rem;
+}
+.post-author-username small {
+  color: darkblue;
+}
+
+.scroll-container {
+  height: 23rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.post-center {
+  border-radius: 0.5rem;
+  background-color: rgb(225, 225, 225);
+  padding: 0.6rem;
+}
+
+.comments {
+  padding: 1rem;
+  background-color: white;
+  align-content: center;
+  border-radius: 0.5rem;
+}
+
+.comment {
+  margin-top: 1rem;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+.delete-comment-btn {
+  font-size: x-small;
+}
+
+.link-group:hover {
+  background-color: #eaeaea;
+  border-radius: 0.5rem;
+}
+.link-group:hover h3 {
+  text-decoration: underline;
 }

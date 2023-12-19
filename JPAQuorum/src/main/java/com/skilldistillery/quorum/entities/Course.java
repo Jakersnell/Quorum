@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,6 +17,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -54,7 +56,10 @@ public class Course {
 	@Column(name = "days_of_week")
 	@Convert(converter = DayOfWeekConverter.class)
 	private HashSet<DayOfWeek> daysOfWeek;
-
+	
+	@ManyToMany(mappedBy = "courses")
+	private List<User> users;
+	
 	public Course() {
 
 	}
@@ -162,6 +167,14 @@ public class Course {
 
 	public void setDaysOfWeek(HashSet<DayOfWeek> daysOfWeek) {
 		this.daysOfWeek = daysOfWeek;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

@@ -192,7 +192,7 @@ public class UserDaoImpl implements UserDAO {
 					    )
 				""";
 
-		if (!user.getRole().equals("admin")) {
+		if (!user.isAdmin()) {
 			jpql += """
 					AND
 					    u.enabled = true

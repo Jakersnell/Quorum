@@ -132,14 +132,16 @@
 					<%-- Courses Section --%>
 					<h4>COURSES</h4>
 					<div>
-						<c:forEach items="${userCourseSchedules}" var="courseSchedule">
+						<c:if test="${empty courses}">
+							<p>No courses found.</p>
+						</c:if>
+						<c:forEach items="${courses}" var="course">
 							<div class="mb-2">
-								<strong><c:out value="${course.course.title}" /></strong><br>
-								<span>Time: <c:out value="${course.startTime}" /> - <c:out
-										value="${course.endTime}" /></span><br> <span>Professor:
-									<c:out
-										value="${course.course.professor.firstName} ${course.course.professor.lastName}" />
-								</span>
+								<strong><c:out value="${course.title}" /></strong><br> <span>Time:
+									<c:out value="${course.dateStart}" /> - <c:out
+										value="${course.dateEnd}" />
+								</span><br> <span>Professor: <c:out
+										value="${course.professor.firstName} ${course.professor.lastName}" /></span>
 							</div>
 						</c:forEach>
 					</div>
