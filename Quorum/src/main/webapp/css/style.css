@@ -1,4 +1,18 @@
 /* style reset */
+
+@font-face {
+  font-family: 'Old Standard TT';
+  src: url('fonts/Old_Standard_TT/OldStandardTT-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Old Standard TT';
+  src: url('fonts/Old_Standard_TT/OldStandardTT-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -512,10 +526,40 @@ textarea {
   font-size: x-small;
 }
 
-.link-group:hover {
-  background-color: #eaeaea;
-  border-radius: 0.5rem;
-}
 .link-group:hover h3 {
   text-decoration: underline;
 }
+
+.l80 {
+  width: 80%;
+}
+
+.logo-div img {
+  width: 8rem;
+  margin:0;
+  margin-bottom: -1rem;
+}
+
+.home-image img {
+  width: 60rem;
+  margin-left: -16rem;
+}
+
+.home-image {
+  overflow: hidden;
+}
+
+.header-div {
+  margin-right: -10rem;
+  align-items: center;
+}
+
+.welcome-header {
+  font-family: 'Old Standard TT';
+}
+
+.welcome-header h1 {
+  font-size: 3rem;
+}
+/* <h1 class="welcome-header">Quorum</h1>
+								<h3 class="welcome-subheader">Explore. Connect. Grow.</h3> */
