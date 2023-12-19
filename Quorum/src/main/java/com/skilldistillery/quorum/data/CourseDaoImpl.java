@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.Course;
+import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -76,5 +77,33 @@ public class CourseDaoImpl implements CourseDAO {
 	             .setParameter("userId", userID)
 	             .getResultList();
 	}
+
+	@Override
+	public boolean addCourseToUser(int userId, int courseId) {
+		User user = em.find(User.class, userId);
+        Course course = em.find(Course.class, courseId);
+        
+        if (user != null && course != null) {
+            user.getCourses().add(course);
+            em.persist(user);
+            return true;
+        }
+        return false;
+		
+	}
+
+	@Override
+	public boolean removeCourseFromUser(int userId, int courseId) {
+		User user = em.find(User.class, userId);
+	    Course course = em.find(Course.class, courseId);
+
+	    if (user != null && course != null && user.getCourses().contains(course)) {
+	        user.getCourses().remove(course);
+	        em.persist(user);
+	        return true;
+	    }
+	    return false;
+	}
+
 
 }

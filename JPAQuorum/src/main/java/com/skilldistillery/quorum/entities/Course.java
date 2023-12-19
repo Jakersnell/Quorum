@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.TreeSet;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -55,11 +56,11 @@ public class Course {
 
 	@Column(name = "days_of_week")
 	@Convert(converter = DayOfWeekConverter.class)
-	private HashSet<DayOfWeek> daysOfWeek;
-	
+	private TreeSet<DayOfWeek> daysOfWeek;
+
 	@ManyToMany(mappedBy = "courses")
 	private List<User> users;
-	
+
 	public Course() {
 
 	}
@@ -161,11 +162,11 @@ public class Course {
 		this.enabled = enabled;
 	}
 
-	public HashSet<DayOfWeek> getDaysOfWeek() {
+	public TreeSet<DayOfWeek> getDaysOfWeek() {
 		return daysOfWeek;
 	}
 
-	public void setDaysOfWeek(HashSet<DayOfWeek> daysOfWeek) {
+	public void setDaysOfWeek(TreeSet<DayOfWeek> daysOfWeek) {
 		this.daysOfWeek = daysOfWeek;
 	}
 

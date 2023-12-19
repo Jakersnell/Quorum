@@ -38,8 +38,10 @@
 										<div class="col-3"></div>
 										<div class="col-6">
 											<div class="post-edit-btn-div">
+
 												<a href="editPost.do?postID=${post.id}"
 													class="btn post-btn-secondary form-control">Edit</a>
+
 											</div>
 										</div>
 										<div class="col-3"></div>
@@ -69,7 +71,7 @@
 							<div class="row">
 								<div class="col-2"></div>
 								<div class="col-8">
-									<button type="button" class="btn btn-secondary form-control"
+									<button type="button" class="btn form-control" id="editbtn"
 										data-bs-toggle="modal" data-bs-target="#editGroupModal">
 										Make A Comment</button>
 								</div>
