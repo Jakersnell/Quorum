@@ -7,6 +7,16 @@
     Quorum: Explore. Connect. Grow.
 </h2>
 
+<div align="center">
+    
+![Static Badge](https://img.shields.io/badge/Quorum-AWS-yellow?link=http%3A%2F%2F52.86.229.80%3A8080%2FQuorum%2Flogin.do)
+![Static Badge](https://img.shields.io/badge/Deonna-Repo_Owner-green?link=https%3A%2F%2Fgithub.com%2FDeonnaa)
+![Static Badge](https://img.shields.io/badge/Jake-DBA-blue?link=https%3A%2F%2Fgithub.com%2FJakersnell)
+![Static Badge](https://img.shields.io/badge/Parris-SCRUM-orange?link=https%3A%2F%2Fgithub.com%2FParrisu)
+
+</div>
+
+
 ## Quorum
 
 #### Mid-term Team Project for Skill Distillery
