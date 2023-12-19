@@ -277,8 +277,13 @@ main {
 .post-edit-btn,
 .post-btn-secondary {
   margin-top: 0.7rem;
+<<<<<<< HEAD
+  background-color: #bb8eff;
+  min-width: 6rem;
+=======
   background-color: #eadcff;
   width: 10rem;
+>>>>>>> 72a219dbe1bc47cd992bfed9ad0a15c80cbf084d
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;
@@ -288,30 +293,35 @@ main {
 .post-btn-secondary:hover {
   z-index: 99;
   margin-top: 0.7rem;
+<<<<<<< HEAD
+  background-color: #b17dfe;
+=======
   background-color: #e1cdff;
   width: 10rem;
+>>>>>>> 72a219dbe1bc47cd992bfed9ad0a15c80cbf084d
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;
 }
-.post-edit-btn:hover {
-  margin-left: -1.6rem;
-}
 
-.post-btn-secondary {
+p.group-description {
+  word-wrap: break-word;
+  overflow-y: scroll;
+}
+/* .post-btn-secondary {
   background-color: #1d3753;
   font-size: small;
   box-shadow: 0rem 0.3rem 0.3rem 0 rgb(203, 203, 203);
   border: none;
   color: white;
-}
+} */
 .btn-secondary {
   background-color: #1d3753;
   color: white;
 }
-.post-btn-secondary:hover {
-  background-color: #25486e;
-}
+/* .post-btn-secondary:hover {
+  width: 14rem;
+} */
 .post-btn:hover {
   background-color: #25486e;
   opacity: 80%;
@@ -433,7 +443,8 @@ textarea {
   padding-top: 0.5rem;
   background-color: whitesmoke;
   border-radius: 0.5rem;
-  height: 30rem;
+  height: 100%;
+  padding-bottom: 1rem;
 }
 
 #navbar-logo-img {
@@ -583,8 +594,12 @@ footer {
   border-radius: 0.5rem;
 }
 
+.group-side {
+  min-height: 30rem;
+  max-height: 50rem;
+}
 .scroll-container {
-  height: 23rem;
+  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
