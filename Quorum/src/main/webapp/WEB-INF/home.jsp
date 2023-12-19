@@ -9,6 +9,11 @@
 body {
 	background-image: linear-gradient(90deg, rgba(242,229,246,1) 0%, rgba(248,236,238,1) 38%, rgba(243,244,238,1) 69%, rgba(216,254,252,1) 100%);
 }
+
+#navbar-logo-img {
+	display: none;
+}
+
 </style>
 </c:if>
 
@@ -35,10 +40,8 @@ body {
 								<h1>
 									Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 								</h1>
-								<div class="scroll-feed">
-									<jsp:include page="makePostForm.jsp"></jsp:include>
-									<jsp:include page="_feed.jsp" />
-								</div>
+								<jsp:include page="makePostForm.jsp"></jsp:include>
+								<jsp:include page="_feed.jsp" />
 								<div class="sm-spacer"></div>
 							</c:otherwise>
 						</c:choose>
