@@ -1,17 +1,17 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.DayOfWeek;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
-public class DayOfWeekConverter implements AttributeConverter<HashSet<DayOfWeek>, String> {
+public class DayOfWeekConverter implements AttributeConverter<TreeSet<DayOfWeek>, String> {
 
 	@Override
-	public String convertToDatabaseColumn(HashSet<DayOfWeek> attribute) {
+	public String convertToDatabaseColumn(TreeSet<DayOfWeek> attribute) {
 		if (attribute != null) {
 			return attribute.stream().map(Enum::name).collect(Collectors.joining("/"));
 		} else {
@@ -20,9 +20,9 @@ public class DayOfWeekConverter implements AttributeConverter<HashSet<DayOfWeek>
 	}
 
 	@Override
-	public HashSet<DayOfWeek> convertToEntityAttribute(String dbData) {
+	public TreeSet<DayOfWeek> convertToEntityAttribute(String dbData) {
 		if (dbData != null) {
-			HashSet<DayOfWeek> daysOfWeek = new HashSet<>();
+			TreeSet<DayOfWeek> daysOfWeek = new TreeSet<>();
 			for (String day : dbData.split("/")) {
 				daysOfWeek.add(DayOfWeek.valueOf(day));
 			}

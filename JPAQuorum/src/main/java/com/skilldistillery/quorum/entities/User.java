@@ -1,6 +1,7 @@
 package com.skilldistillery.quorum.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,16 +82,16 @@ public class User {
 	@OneToMany(mappedBy = "receiver")
 	private List<Message> receivedMessages;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "social_group_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
 	private List<SocialGroup> groups;
-	
+
+	public boolean isAdmin() {
+		return role.equals("admin");
+	}
+
 	@ManyToMany
-	@JoinTable(
-	  name = "user_course",
-	  joinColumns = @JoinColumn(name = "user_id"),
-	  inverseJoinColumns = @JoinColumn(name = "course_id")
-	)
+	@JoinTable(name = "course_schedule", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private List<Course> courses;
 
 	public User() {
@@ -252,24 +253,34 @@ public class User {
 	public List<SocialGroup> getGroups() {
 		return groups;
 	}
-	
+
 	public void setGroups(List<SocialGroup> groups) {
 		this.groups = groups;
 	}
-	
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	public void addGroup(SocialGroup group) {
-		if (groups != null && !groups.contains(group)) {
+		if (groups == null) {
+			groups = new ArrayList<>();
+		}
+		if (!groups.contains(group)) {
 			groups.add(group);
 		}
 	}
-	
+
 	public void removeGroup(SocialGroup group) {
 		if (groups != null && !groups.contains(group)) {
 			groups.add(group);
 		}
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -286,7 +297,6 @@ public class User {
 		User other = (User) obj;
 		return id == other.id;
 	}
-
 
 	@Override
 	public String toString() {

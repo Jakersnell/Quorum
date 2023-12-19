@@ -32,7 +32,7 @@ public class ProfessorRating {
 	private Professor professor;
 
 	private int rating;
-
+	
 	private String content;
 
 	@Column(name = "created_on")
@@ -48,6 +48,20 @@ public class ProfessorRating {
 	public ProfessorRating() {
 
 	}
+	
+	
+
+	public ProfessorRating(ProfessorRatingId id, User user, Professor professor, int rating, String content, boolean enabled) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.professor = professor;
+		this.rating = rating;
+		this.content = content;
+		this.enabled = enabled;
+	}
+
+
 
 	@Override
 	public int hashCode() {

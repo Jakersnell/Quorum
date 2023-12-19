@@ -4,11 +4,13 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
+
 <body>
-<jsp:include page="navbar.jsp" />
-
-//Content
-
-<jsp:include page="footer.jsp" />
+	<jsp:include page="navbar.jsp" />
+	<div class="container wrapper">
+		<!-- content here -->
+	</div>
+	<jsp:include page="footer.jsp" />
 </body>
+
 </html>

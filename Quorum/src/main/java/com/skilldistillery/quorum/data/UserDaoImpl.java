@@ -1,7 +1,11 @@
 package com.skilldistillery.quorum.data;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.quorum.entities.SocialGroup;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
@@ -17,12 +21,15 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User authenticateUser(String username, String password) {
-		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password AND u.enabled = true";
+		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password and enabled = true";
 		User user = null;
 
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("username", username)
 					.setParameter("password", password).getSingleResult();
+			List<SocialGroup> userGroups = user.getGroups().stream().filter(SocialGroup::isEnabled)
+					.collect(Collectors.toList());
+			user.setGroups(userGroups);
 		} catch (Exception e) {
 			System.err.print("Invalid user: " + username + "\n");
 			e.printStackTrace();
@@ -49,7 +56,9 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User getUserById(int id, boolean loadFollows) {
 		User user = em.find(User.class, id);
-
+		List<SocialGroup> userGroups = user.getGroups().stream().filter(SocialGroup::isEnabled)
+				.collect(Collectors.toList());
+		user.setGroups(userGroups);
 		if (loadFollows) {
 			user.getFollowers().size();
 			user.getFollowing().size();
@@ -60,7 +69,7 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User getUserByUsername(String username) {
-		String jpql = "SELECT u FROM User u WHERE username = :username";
+		String jpql = "SELECT u FROM User u WHERE username = :username AND u.enabled = true";
 		User user = null;
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("username", username)
@@ -71,11 +80,27 @@ public class UserDaoImpl implements UserDAO {
 		}
 		return user;
 	}
-	
+
 	@Override
 	public void updateUser(int id, User user) {
 		User managedUser = em.find(User.class, id);
 		managedUser = user;
+		em.persist(managedUser);
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		User managedUser = em.find(User.class, id);
+		managedUser.setEnabled(false);
+		;
+		em.persist(managedUser);
+	}
+
+	@Override
+	public void activateUser(int id) {
+		User managedUser = em.find(User.class, id);
+		managedUser.setEnabled(true);
+		;
 		em.persist(managedUser);
 	}
 
@@ -152,6 +177,49 @@ public class UserDaoImpl implements UserDAO {
 	public void changeRole(int id, String role) {
 		User user = em.find(User.class, id);
 		user.setRole(role);
+	}
+
+	@Override
+	public List<User> searchByQuery(String query, User user) {
+		query = "%" + query + "%";
+		String jpql = """
+					SELECT
+					    u
+					FROM
+					    User u
+					WHERE
+					    (
+					        (u.username LIKE :query)
+					    OR
+					        (u.firstName LIKE :query)
+					    OR
+					    	(u.lastName LIKE :query)
+					    )
+				""";
+
+		if (!user.isAdmin()) {
+			jpql += """
+					AND
+					    u.enabled = true
+					AND
+						u.role <> 'admin'
+					AND
+						u.school.id =
+					""" + user.getSchool().getId();
+		}
+
+		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
+	}
+
+	@Override
+	public List<User> getByGroupId(int groupId) {
+		SocialGroup group = em.find(SocialGroup.class, groupId);
+		return group.getMembers();
+	}
+
+	@Override
+	public boolean userIsFollowing(User followed, User following) {
+		return followed.getFollowers().contains(following);
 	}
 
 }

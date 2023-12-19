@@ -9,12 +9,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Professor {
@@ -37,7 +39,7 @@ public class Professor {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "school_id")
 	private School school;
 
@@ -47,6 +49,9 @@ public class Professor {
 	@OneToMany(mappedBy = "professor")
 	private List<ProfessorRating> ratings;
 
+	@Transient
+	private double averageRating;
+	
 	private boolean enabled;
 
 	public Professor() {
@@ -139,6 +144,14 @@ public class Professor {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+
+	public double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(double averageRating) {
+		this.averageRating = averageRating;
 	}
 
 	public boolean isEnabled() {

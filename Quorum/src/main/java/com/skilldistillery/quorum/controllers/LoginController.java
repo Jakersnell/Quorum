@@ -4,16 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.quorum.data.SchoolDAO;
+import com.skilldistillery.quorum.data.SocialGroupDAO;
 import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.School;
+import com.skilldistillery.quorum.entities.SocialGroup;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,10 +29,6 @@ public class LoginController {
 	@Autowired
 	private SchoolDAO schoolDao;
 
-	@GetMapping({ "/", "home.do" })
-	public String home(Model model) {
-		return "home";
-	}
 
 	@GetMapping({ "/login", "login.do" })
 	public String loginGet(HttpSession session) {
@@ -38,7 +36,7 @@ public class LoginController {
 	}
 
 	@PostMapping({ "/login", "login.do" })
-	public String loginPost(@ModelAttribute User user, HttpSession session) {
+	public String loginPost(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
 		String redirect = "redirect:/home.do";
 
 		if (session.getAttribute("loggedUser") == null) {
@@ -46,8 +44,16 @@ public class LoginController {
 			User searchedUser = userDao.authenticateUser(user.getUsername(), user.getPassword());
 
 			if (searchedUser != null) {
-				session.setAttribute("loggedUser", searchedUser);
+				if (searchedUser.isEnabled() == false) {
+					session.setAttribute("userID", searchedUser.getId());
+					redirect = "redirect:/reactivate.do";
+
+				} else {
+					session.setAttribute("loggedUser", searchedUser);
+				}
+
 			} else {
+				redirectAttributes.addFlashAttribute("msg", "Sorry! Incorrect username/password!");
 				redirect = "redirect:/login.do";
 			}
 
@@ -69,14 +75,16 @@ public class LoginController {
 	}
 
 	@PostMapping({ "/signup", "signup.do" })
-	public String signupPost(@ModelAttribute User user, HttpSession session, @RequestParam(name="schoolID") int schoolID) {
+	public String signupPost(@ModelAttribute User user, HttpSession session,
+			@RequestParam(name = "schoolID") int schoolID) {
 		String redirect = "redirect:/signup.do";
 
 		if (session.getAttribute("loggedUser") == null) {
-			
+
 			School selectedSchool = schoolDao.getById(schoolID);
 			user.setSchool(selectedSchool);
-			
+			user.setRole("student");
+
 			User createdUser = userDao.createUser(user);
 			session.setAttribute("loggedUser", createdUser);
 			redirect = "redirect:/home.do";
@@ -84,13 +92,24 @@ public class LoginController {
 
 		return redirect;
 	}
-	
+
 	@GetMapping({ "/logout", "logout.do" })
 	public ModelAndView logout(HttpSession session, ModelAndView model) {
 		session.removeAttribute("loggedUser");
 		String msg = "Thanks for coming!";
 		session.invalidate();
 		model.setViewName("redirect:/home.do");
+		model.addObject("msg", msg);
 		return model;
+	}
+
+	@GetMapping({ "/reactivate", "reactivate.do" })
+	public ModelAndView logout(@RequestParam(name = "userID") int userID, HttpSession session, ModelAndView mv) {
+		String msg = "Success!";
+		session.invalidate();
+		userDao.activateUser(userID);
+		mv.setViewName("redirect:/login.do");
+		mv.addObject("msg", msg);
+		return mv;
 	}
 }

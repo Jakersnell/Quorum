@@ -7,7 +7,7 @@
 <body>
 	<jsp:include page="navbar.jsp" />
 
-	<div class="container follow-container mt-4">
+	<div class="container follow-container mt-4 wrapper">
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-4">
@@ -26,7 +26,7 @@
 								<h5>${follower.firstName}&nbsp;${follower.lastName}</h5>
 							</div>
 							<div class="col-2">
-								<c:if test="${userEditAuth}">
+								<c:if test="${loggedUser.equals(user) || user.isAdmin()}">
 									<form action="removeFollower.do" method="post">
 										<input type="hidden" id="removeFollowerID" name="removeID"
 											value="${follower.id}" /> <input type="hidden"
@@ -57,7 +57,7 @@
 								<h5>${follow.firstName}&nbsp;${follow.lastName}</h5>
 							</div>
 							<div class="col-2">
-								<c:if test="${userEditAuth}">
+								<c:if test="${loggedUser.equals(user) || user.isAdmin()}">
 									<form action="removeFollowing.do" method="post">
 										<input type="hidden" id="removeFollowID" name="removeID"
 											value="${follow.id}" /> <input type="hidden"
@@ -75,7 +75,7 @@
 			<div class="col-2"></div>
 		</div>
 	</div>
-
+	<div class="spacer"></div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

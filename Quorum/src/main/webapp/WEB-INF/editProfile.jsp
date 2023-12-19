@@ -6,8 +6,8 @@
 <jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navbar.jsp" />
-
-	<div class="container">
+	<div class="spacer"></div>
+	<div class="container wrapper">
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6">
@@ -45,7 +45,7 @@
 					</div>
 					<div class="row mb-3">
 						<input class="form-control" type="text" class="bio"
-							name="biography" id="bio" value="${user.biography }" required /><br />
+							name="biography" id="bio" value="${user.biography }" /><br />
 					</div>
 					<div class="row mb-3">
 						<input type="hidden" class="id" name="id" id="id"
@@ -60,7 +60,7 @@
 			<div class="col-3"></div>
 		</div>
 	</div>
-
+	<div class="spacer"></div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>
