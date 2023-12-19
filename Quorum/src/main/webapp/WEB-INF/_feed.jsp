@@ -13,22 +13,26 @@
 			</div>
 			<div class="col-3">
 				<h6>
-					<a class="post-link"
-						href="group.do?groupID=${post.socialGroup.id}">${post.socialGroup.name}</a>
+					<a class="post-link" href="group.do?groupID=${post.socialGroup.id}">${post.socialGroup.name}</a>
 				</h6>
 			</div>
 			<div class="col-3">
 				<c:if test="${loggedUser.id == post.user.id}">
-					<a class="btn post-edit-btn" href="editPost.do?postID=${post.id}<c:if test="${not empty fromUrl}">&fromUrl=${fromUrl}</c:if>">Edit</a>
+					<a class="btn post-edit-btn"
+						href="editPost.do?postID=${post.id}<c:if test="${not empty fromUrl}">&fromUrl=${fromUrl}</c:if>">Edit</a>
 				</c:if>
 			</div>
 		</div>
-		<div class="row">
-			<h3 class="card-title">${post.title}</h3>
-		</div>
-		<div class="row">
-			<p>${post.contents}</p>
-		</div>
+		<a href="post.do?postID=${post.id}">
+			<div class="link-group">
+				<div class="row">
+					<h3 class="card-title">${post.title}</h3>
+				</div>
+				<div class="row">
+					<p>${post.contents}</p>
+				</div>
+			</div>
+		</a>
 	</div>
 	<c:if test="${!status.last}">
 		<div class="xs-spacer"></div>
