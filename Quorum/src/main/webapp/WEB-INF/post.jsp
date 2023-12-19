@@ -6,7 +6,7 @@
 <jsp:include page="head.jsp" />
 <style>
 body {
-	background-color: #40BEC5;
+	background-color: #c6faf5;
 }
 </style>
 <body>
@@ -42,7 +42,7 @@ body {
 										<div class="col-3"></div>
 										<div class="col-6">
 											<div class="post-edit-btn-div">
-												<button class="btn post-btn-secondary form-control"
+												<button class="btn form-control" id="editbtn"
 													type="submit">Edit</button>
 											</div>
 										</div>
@@ -73,7 +73,7 @@ body {
 							<div class="row">
 								<div class="col-2"></div>
 								<div class="col-8">
-									<button type="button" class="btn btn-secondary form-control"
+									<button type="button" class="btn form-control" id="editbtn"
 										data-bs-toggle="modal" data-bs-target="#editGroupModal">
 										Make A Comment</button>
 								</div>
