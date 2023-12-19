@@ -1,5 +1,8 @@
 <h2 align="center">
-    ![Model](https://github.com/Deonnaa/MidtermProject/blob/develop/Quorum/src/main/webapp/img/quorum.png)
+    <a href="#" target="blank_">
+        <img height="100" alt="Quorum Logo" src=
+        "https://github.com/Deonnaa/MidtermProject/blob/develop/Quorum/src/main/webapp/img/quorum.png"/>
+    </a>
     <br>
     Quorum: Explore. Connect. Grow.
 </h2>
