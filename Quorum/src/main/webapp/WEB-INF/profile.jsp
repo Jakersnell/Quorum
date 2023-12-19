@@ -15,7 +15,7 @@
 			<div class="col-md-5">
 
 				<%-- User Image, Name, and Bio in one vertical column --%>
-				<div class="col-md-4">
+				<div class="profile-container">
 					<img src="<c:out value='${user.profileImageUrl}'/>"
 						alt="Profile Picture" class="img-thumbnail mb-3">
 					<h2>
@@ -26,12 +26,12 @@
 
 					<div class="d-flex justify-content-start mb-3">
 						<c:if test="${loggedUser.id == user.id}">
-							<a class="btn btn-info" role="button"
+							<a class="shadow btn" id="editbtn" role="button"
 								href="editProfile.do?userID=${user.id}">Edit Profile</a>
 						</c:if>
 
 						<c:if test="${loggedUser.id != user.id}">
-							<a class="btn btn-info" role="button"
+							<a class="shadow btn" id="editbtn" role="button"
 								href="message.do?userID=${user.id}">Message</a>
 						</c:if>
 
@@ -48,7 +48,7 @@
 											type="hidden" name="fromProfile" id="fromProfile"
 											value="true" />
 
-										<button type="submit" class="btn btn-secondary">Unfollow</button>
+										<button type="submit" class="shadow btn" id="editbtn2">Unfollow</button>
 
 									</form>
 
@@ -62,7 +62,7 @@
 											name="followID" id="followID" value="${user.id}" />
 
 
-										<button type="submit" class="btn btn-secondary">Follow</button>
+										<button type="submit" class="shadow btn" id="editbtn2">Follow</button>
 									</form>
 								</c:otherwise>
 
@@ -73,10 +73,7 @@
 					<p>
 						<c:out value="${user.biography}" />
 					</p>
-				</div>
 
-				<%-- Friends/Following School Clubs Section --%>
-				<div class="container mt-5">
 					<div class="row mb-4">
 						<%-- Friends/Following Section --%>
 						<div class="col-md-6">
@@ -91,6 +88,10 @@
 										class="rounded-circle" style="width: 75px; height: 75px;">
 									</a>
 								</c:forEach>
+								<c:if
+									test="${user.following == null || user.following.isEmpty()}">
+									<small><strong>not following anyone</strong></small>
+								</c:if>
 							</div>
 
 							<%-- Followers Section --%>
@@ -107,6 +108,10 @@
 											style="width: 75px; height: 75px;">
 										</a>
 									</c:forEach>
+									<c:if
+										test="${user.followers == null || user.followers.isEmpty()}">
+										<small><strong>has no followers</strong></small>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -165,14 +170,30 @@
 
 			<%-- Right Column: User Posts Feed --%>
 			<div class="col-md-7">
-				<h3>POSTS</h3>
-				<jsp:include page="makePostForm.jsp" />
-				<jsp:include page="_feed.jsp" />
+				<div class="profile-container stylized-scroll">
+					<h3>POSTS</h3>
+					<hr>
+					<jsp:include page="makePostForm.jsp" />
+					<c:choose>
+						<c:when test="${feed != null && !feed.isEmpty()}"><jsp:include
+								page="_feed.jsp" /></c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${user.equals(loggedUser)}">
+									<h5>You haven't made any posts yet.</h5>
+								</c:when>
+								<c:otherwise>
+									<h5>This user hasn't made any posts yet.</h5>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+
+				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-
+	<div class="spacer"></div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

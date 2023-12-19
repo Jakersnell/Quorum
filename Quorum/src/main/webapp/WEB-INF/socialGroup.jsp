@@ -21,7 +21,7 @@
 					</h3>
 				</div>
 				<hr>
-				<div class="scroll-container mt-3 group-description">
+				<div class="scroll-container mt-3 group-description stylized-scroll">
 					<c:forEach var="member" items="${members}">
 						<a href="userProfile.do?userID=${member.id}">
 							<div class="row container">
@@ -36,13 +36,40 @@
 			<div class="col-6 group-main container">
 				<c:choose>
 					<c:when test="${userIsMember}">
-						<jsp:include page="makePostForm.jsp"></jsp:include>
-						<c:if test="${!feed.isEmpty()}">
+						<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
+							align="center">
 							<div class="row text-center container">
-								<h2 class="content-header">Posts in ${group.name}</h2>
+								<h6 class="content-header">Make A Post</h6>
 							</div>
-						</c:if>
-						<jsp:include page="_feed.jsp" />
+							<form action="createPost.do" method="post">
+
+								<div class="title-input">
+									<input class="form-control" type="text" name="title"
+										id="Your posts title" placeholder="Title" required /><br />
+								</div>
+								<div class="post-content-input">
+									<textarea class="form-control" id="postContents" rows="2"
+										name="contents" placeholder="Whats on your mind?"></textarea>
+								</div>
+
+								<input class="form-control" type="hidden" name="groupId"
+									value="${group.id}" />
+								<button class="btn post-btn" type="submit">Post</button>
+							</form>
+						</div>
+						<c:choose>
+							<c:when test="${!feed.isEmpty()}">
+								<div class="row text-center container">
+									<h2 class="content-header">Posts in ${group.name}</h2>
+								</div>
+								<jsp:include page="_feed.jsp" />
+							</c:when>
+							<c:otherwise>
+								<div class="row text-center container">
+									<h2 class="content-header">This group has no posts yet!</h2>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</c:when>
 					<c:otherwise>
 						<div class="row mt-1 mb-1 text-center">

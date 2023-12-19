@@ -6,21 +6,9 @@
 
 <head>
 <jsp:include page="head.jsp" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-	integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z0I5TTZsxPhl5Q9hFL2K9I6IBh5Dw6d5V6e5qK"
-	crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"
-	integrity="sha384-oBqDVmMz9I2qC/0fNfBfVWUtvzByEXhLQzCLpAd/4tzf1zzen4M1Qv05orXvneYJ"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/ab8f17f45f.js"
-	crossorigin="anonymous"></script>
 </head>
 
-<body id="searchResultBody">
+<body>
 	<jsp:include page="navbar.jsp" />
 	<div class="wrapper container">
 		<div class="sm-spacer"></div>
@@ -28,7 +16,7 @@
 			<div class="row">
 				<div class="col-1"></div>
 				<div class="col-2">
-					<div class="search-div">
+					<div class="search-div profile-container">
 						<c:if test="${!userResults.isEmpty()}">
 							<div class="card result-btn">
 								<button class="btn card-header search-selector-btn"
@@ -80,7 +68,7 @@
 						</c:if>
 					</div>
 				</div>
-				<div class="col-8 display-container">
+				<div class="col-8 display-container profile-container">
 					<div class="search-div">
 						<div class="result-header">
 							<h3>Search Results For: "${query}"</h3>
@@ -89,7 +77,7 @@
 						<div id="collapseOne" class="collapse show"
 							data-parent="#accordion">
 							<h4>Users</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="resultUser" items="${userResults}">
@@ -113,7 +101,7 @@
 						</div>
 						<div id="collapseTwo" class="collapse" data-parent="#accordion">
 							<h4>Schools</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="resultSchool" items="${schoolResults}">
@@ -134,7 +122,7 @@
 						</div>
 						<div id="collapseThree" class="collapse" data-parent="#accordion">
 							<h4>Groups</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="group" items="${groupResults}">
@@ -156,12 +144,12 @@
 
 						<div id="collapseFour" class="collapse" data-parent="#accordion">
 							<h4>Posts</h4>
-							<div class="card-body scrollable-card" data-bs-spy="scroll"
+							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 								tabindex="0">
 								<c:forEach var="resultPost" items="${postResults}">
 									<a class="wrapper-link"
-										href="userProfile.do?userID=${resultPost.user.id}">
+										href="post.do?postID=${resultPost.id}">
 										<div class="card-body result-card">
 											<div class="row">
 												<div class="col-6">
@@ -183,7 +171,7 @@
 						<div id="collapseFive" class="collapse" data-parent="#accordion">
 							<h4>Proffesors</h4>
 							<div class="card-body">
-								<div class="card-body scrollable-card" data-bs-spy="scroll"
+								<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
 									data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
 									tabindex="0">
 									<c:forEach var="professor" items="${professorResults}">
