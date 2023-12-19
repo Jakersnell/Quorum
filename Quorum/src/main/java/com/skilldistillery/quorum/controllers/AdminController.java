@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.AdminDAO;
-import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -42,6 +41,23 @@ public class AdminController {
 		if (loggedUser.getRole().equals("admin")) {
 			adminDao.activateUser(userID);
 			redirect = "redirect:/admin.do";
+		}
+		
+		return redirect;
+	}
+	
+	@GetMapping({ "/deleteReview", "deleteReview.do" })
+	public String deleteReviewGet(
+			@RequestParam(name="userID")int userID,
+			@RequestParam(name="professorId") int profID,
+			HttpSession session) {
+		String redirect = "redirect:/error.do";
+		
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		
+		if (loggedUser.getRole().equals("admin")) {
+			adminDao.deleteReview(userID, profID);
+			redirect = "redirect:/professorview.do?professorId="+ profID;
 		}
 		
 		return redirect;
