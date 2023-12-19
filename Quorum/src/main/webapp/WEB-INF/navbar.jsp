@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
-
-<nav class="navbar navbar-expand-lg bg-light">
-	<div class="container-fluid nav-container row pt-3">
+<nav class="navbar navbar-expand-lg bg-light" id="gradientbackground">
+	<div class="container-fluid nav-container row">
 		<div class="col-5 text-center">
 			<a class="navbar-brand" href="home.do">Quorum</a>
 		</div>

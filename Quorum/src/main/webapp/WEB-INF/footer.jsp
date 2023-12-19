@@ -1,34 +1,21 @@
 
-<footer class="bg-light">
-	<div class="container py-4">
+<footer id="gradientbackground">
+	<div class="container py-2 text-center">
 		<div class="row">
 
 			<!-- Footer About -->
-			<div class="col-md-4 mb-3">
-				<h3>About Us</h3>
-				<p>Small about us sentence.</p>
+			<div class="col-md-4 mb-1">
+				<a href="#"><p>About Us</p></a>
 			</div>
-
 			<!-- Footer Links -->
-			<div class="col-md-4 mb-3">
-				<h3>Quick Links</h3>
-				<ul class="list-unstyled">
-					<li><a href="/home.do">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
+			<div class="col-md-4 mb-1">
+				<a href="#">Services</a>
 			</div>
-
 			<!-- Footer Contact -->
-			<div class="col-md-4 mb-3">
-				<h3>Contact Us</h3>
-				<p>Contact details or form.</p>
+			<div class="col-md-4 mb-1">
+				<a href="#"><p>Contact Us</p></a>
 			</div>
 		</div>
-	</div>
-	<div class="footer-bottom text-center py-3">
-		<h3>Quorum.com</h3>
 	</div>
 </footer>
 

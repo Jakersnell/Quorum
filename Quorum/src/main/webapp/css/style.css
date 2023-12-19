@@ -35,6 +35,10 @@ body {
   font-weight: bold;
 }
 
+#gradientbackground{
+  background-image: linear-gradient(90deg, rgba(242,229,246,1) 0%, rgba(248,236,238,1) 38%, rgba(243,244,238,1) 69%, rgba(216,254,252,1) 100%);
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -73,6 +77,14 @@ a:hover {
 .navbar-brand {
   font-weight: bolder;
   font-size: 2rem;
+}
+
+#ratingcolor {
+	color: #F66E94 !important;
+}
+
+#ratedcolor {
+	color: #EF4079 !important;
 }
 
 #navbar-logo-img {
