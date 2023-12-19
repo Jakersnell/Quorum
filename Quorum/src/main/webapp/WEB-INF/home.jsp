@@ -6,8 +6,8 @@
 <jsp:include page="head.jsp" />
 <c:if test="${empty loggedUser}">
 	<style>
-body {
-	background-image: linear-gradient(to right, #EADCFF, #C6FAF5);
+#navbar-logo-img {
+	display: none;
 }
 </style>
 </c:if>
@@ -35,10 +35,8 @@ body {
 								<h1>
 									Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 								</h1>
-								<div class="scroll-feed">
-									<jsp:include page="makePostForm.jsp"></jsp:include>
-									<jsp:include page="_feed.jsp" />
-								</div>
+								<jsp:include page="makePostForm.jsp"></jsp:include>
+								<jsp:include page="_feed.jsp" />
 								<div class="sm-spacer"></div>
 							</c:otherwise>
 						</c:choose>
