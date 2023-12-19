@@ -61,7 +61,7 @@ public class UserController {
 			mv.addObject("userIsFollowingUser", userDao.userIsFollowing(user, logged));
 			mv.addObject("fromUrl", "userProfile.do?userID=" + userID);
 		}
-
+		System.out.println("\n\n\n\n" + user.getGroups() + "\n\n\n\n");
 		mv.setViewName(viewName);
 
 		return mv;

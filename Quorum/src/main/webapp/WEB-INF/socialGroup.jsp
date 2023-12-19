@@ -36,7 +36,27 @@
 			<div class="col-6 group-main container">
 				<c:choose>
 					<c:when test="${userIsMember}">
-						<jsp:include page="makePostForm.jsp"></jsp:include>
+						<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
+							align="center">
+							<div class="row text-center container">
+								<h6 class="content-header">Make A Post</h6>
+							</div>
+							<form action="createPost.do" method="post">
+
+								<div class="title-input">
+									<input class="form-control" type="text" name="title"
+										id="Your posts title" placeholder="Title" required /><br />
+								</div>
+								<div class="post-content-input">
+									<textarea class="form-control" id="postContents" rows="2"
+										name="contents" placeholder="Whats on your mind?"></textarea>
+								</div>
+
+								<input class="form-control" type="hidden" name="groupId"
+									value="${group.id}" />
+								<button class="btn post-btn" type="submit">Post</button>
+							</form>
+						</div>
 						<c:choose>
 							<c:when test="${!feed.isEmpty()}">
 								<div class="row text-center container">

@@ -86,8 +86,8 @@ public class SocialGroupController {
 		String redirect = "redirect:/login.do";
 		User user = (User) session.getAttribute("loggedUser");
 		if (user != null) {
-			user.removeGroup(groupDao.getById(groupId));
 			if (groupDao.removeUser(groupId, user.getId())) {
+				user.removeGroup(groupDao.getById(groupId));
 				redirect = "redirect:/group.do?groupID=" + groupId;
 			} else {
 				redirect = REDIRECT_ERROR;
@@ -109,9 +109,8 @@ public class SocialGroupController {
 		if (loggedUser == null || loggedUser.getRole().equals("admin")) {
 			redirect = REDIRECT_ERROR;
 		} else {
-			group.setOwner(loggedUser);
 			loggedUser.addGroup(group);
-			group = groupDao.create(group);
+			group = groupDao.create(group, loggedUser.getId());
 			redirect = "redirect:/group.do?groupID=" + group.getId();
 		}
 
@@ -134,8 +133,10 @@ public class SocialGroupController {
 	public String deleteSocialGroup(@RequestParam(name = "groupID") int groupId, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 		String redirect = REDIRECT_ERROR;
+		User loggedUser = (User) session.getAttribute("loggedUser");
 		if (userHasEditAuth(groupId, session)) {
 			groupDao.setEnabled(groupId, false);
+			loggedUser.removeGroup(groupDao.getById(groupId));
 			redirectAttributes.addFlashAttribute("msg", "Your group was successfully deleted.");
 			redirect = "redirect:/home.do";
 		}
