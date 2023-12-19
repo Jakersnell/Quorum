@@ -38,9 +38,15 @@ body {
 #editbtn {
   background-color: #c6faf5;
 }
+#editbtn:hover {
+  background-color: #b7f8f2;
+}
 
 #editbtn2 {
   background-color: #90fbf0;
+}
+#editbtn2:hover {
+  background-color: #b7f8f2;
 }
 
 a {
@@ -71,11 +77,11 @@ a:hover {
 }
 
 #loginbtn {
-  background-color: #bb8eff;
+  background-color: #dec8ff;
 }
 
 #loginbtn:hover {
-  background-color: #b17dfe;
+  background-color: #d3b6ff;
 }
 
 #signuplink {
@@ -271,8 +277,13 @@ main {
 .post-edit-btn,
 .post-btn-secondary {
   margin-top: 0.7rem;
+<<<<<<< HEAD
   background-color: #bb8eff;
   min-width: 6rem;
+=======
+  background-color: #eadcff;
+  width: 10rem;
+>>>>>>> 72a219dbe1bc47cd992bfed9ad0a15c80cbf084d
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;
@@ -282,7 +293,12 @@ main {
 .post-btn-secondary:hover {
   z-index: 99;
   margin-top: 0.7rem;
+<<<<<<< HEAD
   background-color: #b17dfe;
+=======
+  background-color: #e1cdff;
+  width: 10rem;
+>>>>>>> 72a219dbe1bc47cd992bfed9ad0a15c80cbf084d
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;
@@ -627,6 +643,11 @@ footer {
   overflow-x: hidden;
 }
 
+
+.xs-spacer {
+	height: 2rem;
+}
+
 .result-card {
   padding-block: 1rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -647,3 +668,4 @@ footer {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+

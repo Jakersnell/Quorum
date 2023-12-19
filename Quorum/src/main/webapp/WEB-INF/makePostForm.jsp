@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
-<c:if test="${not empty user.groups && user.groups != null && !user.groups.isEmpty()}">
+<c:if test="${not empty user.groups && user.groups != null && !user.groups.isEmpty()} ">
+
 	<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
 		align="center">
 		<div class="row text-center container">
@@ -41,7 +42,7 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-			<button class="btn post-btn" type="submit">Post</button>
+			<button class="btn rounded-pill my-2" id="loginbtn" type="submit">Post</button>
 		</form>
 	</div>
 </c:if>
