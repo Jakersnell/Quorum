@@ -42,7 +42,7 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-			<button class="btn post-btn" type="submit">Post</button>
+			<button class="btn rounded-pill my-2" id="loginbtn" type="submit">Post</button>
 		</form>
 	</div>
 </c:if>

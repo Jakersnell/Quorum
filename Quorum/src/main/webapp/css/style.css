@@ -38,9 +38,15 @@ body {
 #editbtn {
   background-color: #c6faf5;
 }
+#editbtn:hover {
+  background-color: #b7f8f2;
+}
 
 #editbtn2 {
   background-color: #90fbf0;
+}
+#editbtn2:hover {
+  background-color: #b7f8f2;
 }
 
 a {
@@ -71,11 +77,11 @@ a:hover {
 }
 
 #loginbtn {
-  background-color: #bb8eff;
+  background-color: #dec8ff;
 }
 
 #loginbtn:hover {
-  background-color: #b17dfe;
+  background-color: #d3b6ff;
 }
 
 #signuplink {
@@ -271,7 +277,7 @@ main {
 .post-edit-btn,
 .post-btn-secondary {
   margin-top: 0.7rem;
-  background-color: #bb8eff;
+  background-color: #eadcff;
   width: 10rem;
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
@@ -282,7 +288,7 @@ main {
 .post-btn-secondary:hover {
   z-index: 99;
   margin-top: 0.7rem;
-  background-color: #b17dfe;
+  background-color: #e1cdff;
   width: 10rem;
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
