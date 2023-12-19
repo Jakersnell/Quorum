@@ -7,7 +7,7 @@
 <c:if test="${empty loggedUser}">
 	<style>
 body {
-	background-image: linear-gradient(to right, #EADCFF, #C6FAF5);
+	background-image: linear-gradient(90deg, rgba(242,229,246,1) 0%, rgba(248,236,238,1) 38%, rgba(243,244,238,1) 69%, rgba(216,254,252,1) 100%);
 }
 </style>
 </c:if>
