@@ -7,35 +7,26 @@
 <body>
 <jsp:include page="navbar.jsp" />
 
-<div class="container wrapper">
-	<div class="row">
-		<div class="col"></div>
-		<div class="col-6 text-center"><h2>Active Messages</h2></div>
-		<div class="col"></div>
-	</div>
-	
-	<div class="row">
-		<div class="col"></div>
-		<div class="col-6">
-			<table class="table">
-				<thead>
-				    <tr>
-				      <th scope="col">First</th>
-				      <th scope="col">Last</th>
-				    </tr>
-				</thead>
-				<tbody>
-				  <c:forEach items="${messagees}" var="m">
-					  <tr>
-					      <th scope="row"><a href="message.do?userID=${m.id}"><c:out value="${m.firstName}"></c:out></a></th>
-					      <td><c:out value="${m.lastName}"></c:out></td>
-					  </tr>
-				  </c:forEach>
-				</tbody>
-			</table>
+<div class="container wrapper my-5">
+		<div class="row my-5">
+			<div class="col"></div>
+			<div class="col-6 text-center"><h2>Active Messages</h2></div>
+			<div class="col"></div>
 		</div>
+		<div class="row my-5">
+			<div class="col"></div>
+			<div class="col-6">
+				<ul class="list-group">
+					<c:forEach items="${messagees}" var="m">
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+							<a href="message.do?userID=${m.id}"><c:out value="${m.firstName}"></c:out></a>
+							<span class="badge bg-primary rounded-pill">1</span>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
 		<div class="col"></div>
-	</div>
+		</div>
 </div>
 	
 

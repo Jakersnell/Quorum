@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public User authenticateUser(String username, String password) {
-		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password";
+		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password and enabled = true";
 		User user = null;
 
 		try {
@@ -81,18 +81,20 @@ public class UserDaoImpl implements UserDAO {
 		managedUser = user;
 		em.persist(managedUser);
 	}
-	
+
 	@Override
 	public void deleteUser(int id) {
 		User managedUser = em.find(User.class, id);
-		managedUser.setEnabled(false);;
+		managedUser.setEnabled(false);
+		;
 		em.persist(managedUser);
 	}
-	
+
 	@Override
 	public void activateUser(int id) {
 		User managedUser = em.find(User.class, id);
-		managedUser.setEnabled(true);;
+		managedUser.setEnabled(true);
+		;
 		em.persist(managedUser);
 	}
 
@@ -171,26 +173,37 @@ public class UserDaoImpl implements UserDAO {
 		user.setRole(role);
 	}
 
+
 	@Override
-	public void sendMessage(int senderId, int receiverId) {
-		User sender = em.find(User.class, senderId);
-
-	}
-
 	public List<User> searchByQuery(String query, User user) {
 		query = "%" + query + "%";
-		
-		
-		if (user.getRole().equals("admin")) {
-			String jpqlAdmin = "SELECT u FROM User u WHERE ((u.username LIKE :query) OR (u.firstName LIKE :query) OR (u.lastName LIKE :query)) AND (u.role <> 'admin')";
-			
-			return em.createQuery(jpqlAdmin, User.class).setParameter("query", query).getResultList();
-		} else {
-			String jpqlUser = "SELECT u FROM User u WHERE ((u.username LIKE :query) OR (u.firstName LIKE :query) OR (u.lastName LIKE :query)) AND (u.enabled = true AND u.role <> 'admin')";
-			
-			return em.createQuery(jpqlUser, User.class).setParameter("query", query).getResultList();
+		String jpql = """
+					SELECT
+					    u
+					FROM
+					    User u
+					WHERE
+					    (
+					        (u.username LIKE :query)
+					    OR
+					        (u.firstName LIKE :query)
+					    OR
+					    	(u.lastName LIKE :query)
+					    )
+				""";
+
+		if (!user.getRole().equals("admin")) {
+			jpql += """
+					AND
+					    u.enabled = true
+					AND
+						u.role <> 'admin'
+					AND
+						u.school.id =
+					""" + user.getSchool().getId();
 		}
-		
+
+		return em.createQuery(jpql, User.class).setParameter("query", query).getResultList();
 	}
 
 	@Override

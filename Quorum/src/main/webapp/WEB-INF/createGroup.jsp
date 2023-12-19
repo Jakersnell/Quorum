@@ -14,7 +14,7 @@
 				<div class="col-6 ">
 					<div class="spacer"></div>
 					<div class="card shadow p-3 mb-5 rounded" id="logincard">
-						<div class="card-header text-center">
+						<div class="card-header text-center" id="createGroupHeader">
 							<strong>Create A Group</strong>
 						</div>
 						<div class="card-body" id="logincard">

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quorum.entities.Professor;
 import com.skilldistillery.quorum.entities.ProfessorRating;
+import com.skilldistillery.quorum.entities.ProfessorRatingId;
+import com.skilldistillery.quorum.entities.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,14 +27,41 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
 	@Override
 	public List<Professor> getAllBySchoolId(int id) {
-		String jpql = "SELECT p FROM Professor p WHERE school.id = :id";
+		String jpql = """
+				SELECT 
+					p 
+				FROM 
+					Professor p 
+				WHERE 
+					school.id = :id
+				""";
 		return em.createQuery(jpql, Professor.class).setParameter("id", id).getResultList();
 	}
 
 	@Override
-	public List<Professor> searchByQuery(String query) {
+	public List<Professor> searchByQuery(String query, User user) {
 		query = "%" + query + "%";
-		String jpql = "SELECT p FROM Professor p WHERE ((firstName LIKE :query) OR (lastName LIKE :query)) AND enabled = true";
+		String jpql = """
+				SELECT
+				    p
+				FROM
+				    Professor p
+				WHERE
+				    (
+				        (firstName LIKE :query)
+				        OR (lastName LIKE :query)
+				    )
+				""";
+		if (!user.isAdmin()) {
+			jpql += """
+				AND 
+					p.enabled = true
+				AND
+					p.school.enabled = true
+				AND
+					p.school.id = 
+				""" + user.getSchool().getId();
+		}
 		return em.createQuery(jpql, Professor.class).setParameter("query", query).getResultList();
 	}
 
@@ -54,19 +83,26 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	@Override
 	public double getAverageRating(int professorId) {
 		String query = "SELECT AVG(r.rating) FROM ProfessorRating r WHERE r.professor.id = :profId";
-        Double average = em.createQuery(query, Double.class)
-                           .setParameter("profId", professorId)
-                           .getSingleResult();
-        return average != null ? average : 0.0;
+		Double average = em.createQuery(query, Double.class).setParameter("profId", professorId).getSingleResult();
+		return average != null ? average : 0.0;
 	}
 
 	@Override
 	public List<ProfessorRating> getAllRatingsByProfessorId(int professorId) {
 		String jpql = "SELECT r FROM ProfessorRating r WHERE r.professor.id = :profId AND r.enabled = true";
-	    List<ProfessorRating> ratings = em.createQuery(jpql, ProfessorRating.class)
-	                                      .setParameter("profId", professorId)
-	                                      .getResultList();
-	    return ratings;
+		List<ProfessorRating> ratings = em.createQuery(jpql, ProfessorRating.class).setParameter("profId", professorId)
+				.getResultList();
+		return ratings;
+	}
+	
+	public ProfessorRating addRating(int userID, int profID, String content, boolean enabled, int rating) {
+		String comment = content;
+		User rater = em.find(User.class, userID);
+		Professor receiver = em.find(Professor.class, profID);
+		ProfessorRatingId id = new ProfessorRatingId(userID, profID);
+		ProfessorRating newRating = new ProfessorRating(id, rater, receiver, rating, comment, enabled);
+		em.persist(newRating);
+		return newRating;
 	}
 
 }

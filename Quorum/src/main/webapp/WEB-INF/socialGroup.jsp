@@ -25,7 +25,7 @@
 					<c:forEach var="member" items="${members}">
 						<a href="userProfile.do?userID=${member.id}">
 							<div class="row container">
-								<h4 class="card-title username">${member.username}</h4>
+								<h4 class="card-title username">@${member.username}</h4>
 							</div>
 						</a>
 						<hr>
@@ -98,17 +98,29 @@
 							<div class="col-3"></div>
 						</div>
 					</c:if>
+					<c:if test="${userHasEditAuth}">
+						<div class="row mb-3">
+							<div class="col-3"></div>
+							<div class="col-6">
+								<form action="deleteGroup.do" method="post">
+									<input class="form-control" type="hidden" name="groupID"
+										value="${group.id}" />
+									<button class="btn btn-danger form-control">Delete
+										Group</button>
+								</form>
+							</div>
+							<div class="col-3"></div>
+						</div>
+					</c:if>
 				</div>
 				<div class="row">
 					<div class="col-3"></div>
 					<div class="col-6">
 						<c:if test="${userHasEditAuth}">
-							<!-- Button trigger modal -->
 							<button type="button" class="btn btn-secondary form-control"
 								data-bs-toggle="modal" data-bs-target="#editGroupModal">
 								Edit this group</button>
 
-							<!-- Modal -->
 							<div class="modal fade" id="editGroupModal" tabindex="-1"
 								aria-labelledby="editGroupModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
