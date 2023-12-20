@@ -57,7 +57,6 @@ public class SocialGroupController {
 			mav.addObject("userHasEditAuth", userHasEditAuth(groupID, session));
 			mav.addObject("userIsMember", userIsMember(groupID, session));
 			mav.addObject("feed", postDao.getByGroupId(groupID));
-			mav.addObject("fromUrl", "group.do?groupID=" + groupID);
 
 		}
 
