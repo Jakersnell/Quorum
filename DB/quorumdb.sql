@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_name` VARCHAR(45) NULL,
   `biography` BLOB NULL,
   `date_of_birth` DATE NULL,
-  `profile_image_url` VARCHAR(2000) NULL,
+  `profile_image_url` VARCHAR(5000) NULL,
   `school_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),

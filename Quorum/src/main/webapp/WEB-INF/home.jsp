@@ -20,6 +20,7 @@ body {
 
 <body id="homeBody">
 	<jsp:include page="navbar.jsp" />
+
 	<div class="container wrapper">
 		<c:choose>
 			<c:when test="${not empty loggedUser}">
@@ -34,7 +35,7 @@ body {
 					<div class="col-6 home-center" align="center">
 						<c:choose>
 							<c:when test="${loggedUser.isAdmin()}">
-								<h1 id="administrator>">Welcom Quorum Admin</h1>
+								<h1 id="administrator>">Welcome Quorum Admin</h1>
 							</c:when>
 							<c:otherwise>
 
@@ -43,13 +44,15 @@ body {
 										Hello, <strong><c:out value="${loggedUser.firstName}">!</c:out></strong>
 									</h1>
 									<div class="scroll-home-feed stylized-scroll">
-										<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
-											align="center">
-											<div class="row text-center container">
-												<h6 class="content-header">Make A Post</h6>
-											</div>
-											<c:if
-												test="${loggedUser.groups != null && !loggedUser.groups.isEmpty()}">
+
+										<c:if
+											test="${loggedUser.groups != null && !loggedUser.groups.isEmpty()}">
+											<div class="make-post-form shadow pt-3 pb-3 mb-5 rounded"
+												align="center">
+
+												<div class="row text-center container">
+													<h6 class="content-header">Make A Post</h6>
+												</div>
 												<form action="createPost.do" method="post">
 
 													<div class="title-input">
@@ -78,8 +81,9 @@ body {
 													<button class="btn rounded-pill my-2" id="loginbtn"
 														type="submit">Post</button>
 												</form>
-											</c:if>
-										</div>
+											</div>
+										</c:if>
+
 										<c:choose>
 											<c:when test="${empty feed}">
 												<h3>Your feed is empty!</h3>

@@ -23,12 +23,23 @@
 					</div>
 					<div class="col-3"></div>
 					<div class="col-3">
-						<form action="deletePost.do" method="post">
-							<input class="form-control" type="hidden" class="id"
-								name="postID" id="postIdInput" value="${post.id}" />
-							<button id="postDeleteBtn" type="submit"
-								class="btn btn-danger form-control post-delete-btn">Delete</button>
-						</form>
+					
+						<c:if test="${post.enabled}">
+							<form action="deletePost.do" method="post">
+								<input class="form-control" type="hidden" class="id"
+									name="postID" id="postIdInput" value="${post.id}" />
+								<button id="postDeleteBtn" type="submit"
+									class="btn btn-danger form-control post-delete-btn">Delete</button>
+							</form>
+						</c:if>
+						<c:if test="${!post.enabled && loggedUser.isAdmin()}">
+							<form action="reActivatePost.do" method="post">
+								<input class="form-control" type="hidden" class="id"
+									name="postID" id="postIdInput" value="${post.id}" />
+								<button id="postDeleteBtn" type="submit"
+									class="btn btn-danger form-control post-delete-btn">ReActivate</button>
+							</form>
+						</c:if>
 					</div>
 				</div>
 				<div class="row form-body">

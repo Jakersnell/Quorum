@@ -14,7 +14,7 @@
 	<div class="col-md-9">
 	  		<div class="card">
 	  		  <div class="card-header bg-white">
-			  	<h4><c:out value="${user.firstName}"></c:out></h4>
+			  	<h4><a href="userProfile.do?userID=${user.id}"><c:out value="${user.firstName}"></c:out></a></h4>
 			  </div>
 			  <div class="card-body">
 				  <c:forEach items="${messages}" var="m">

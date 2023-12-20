@@ -76,7 +76,7 @@
 						<div class="row">
 							<div class="col-auto">
 								<select class="form-select" aria-label="Rating" name="rating" required>
-									<option selected>Rating</option>
+									<option value="" disabled selected>Rating</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
