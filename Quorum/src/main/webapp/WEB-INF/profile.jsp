@@ -28,6 +28,9 @@
 						<c:if test="${loggedUser.id == user.id}">
 							<a class="shadow btn" id="editbtn" role="button"
 								href="editProfile.do?userID=${user.id}">Edit Profile</a>
+								<br>
+							<a class="shadow btn btn-danger" role="button"
+								href="delete.do?userID=${user.id}">Delete Profile</a>
 						</c:if>
 
 						<c:if test="${loggedUser.id != user.id}">

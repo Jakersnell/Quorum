@@ -39,5 +39,7 @@ public interface UserDAO {
 	void activateUser(int id);
 	
 	boolean userIsFollowing(User followed, User following);
+	
+	User authenticateUserLogin(String username, String password);
 
 }

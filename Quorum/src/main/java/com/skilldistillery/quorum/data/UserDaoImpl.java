@@ -37,6 +37,25 @@ public class UserDaoImpl implements UserDAO {
 
 		return user;
 	}
+	
+	@Override
+	public User authenticateUserLogin(String username, String password) {
+		String jpql = "SELECT u FROM User u WHERE username = :username AND password = :password";
+		User user = null;
+		
+		try {
+			user = em.createQuery(jpql, User.class).setParameter("username", username)
+					.setParameter("password", password).getSingleResult();
+			List<SocialGroup> userGroups = user.getGroups().stream().filter(SocialGroup::isEnabled)
+					.collect(Collectors.toList());
+			user.setGroups(userGroups);
+		} catch (Exception e) {
+			System.err.print("Invalid user: " + username + "\n");
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
 
 	@Override
 	public User createUser(User user) {

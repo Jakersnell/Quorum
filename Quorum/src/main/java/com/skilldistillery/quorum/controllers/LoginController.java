@@ -41,12 +41,12 @@ public class LoginController {
 
 		if (session.getAttribute("loggedUser") == null) {
 
-			User searchedUser = userDao.authenticateUser(user.getUsername(), user.getPassword());
+			User searchedUser = userDao.authenticateUserLogin(user.getUsername(), user.getPassword());
 
 			if (searchedUser != null) {
 				if (searchedUser.isEnabled() == false) {
 					session.setAttribute("userID", searchedUser.getId());
-					redirect = "redirect:/reactivate.do";
+					redirect = "reactivate";
 
 				} else {
 					session.setAttribute("loggedUser", searchedUser);
