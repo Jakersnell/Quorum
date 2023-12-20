@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.AdminDAO;
+import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,9 @@ public class AdminController {
 	@Autowired
 	private AdminDAO adminDao;
 	
+	@Autowired
+	private UserDAO userDao;
+	
 
 	@GetMapping({ "/admin", "admin.do" })
 	public ModelAndView adminGet(HttpSession session) {
@@ -25,7 +29,7 @@ public class AdminController {
 		mv.setViewName("error");
 		
 		if(loggedUser != null && loggedUser.getRole().equals("admin")) {
-			mv.setViewName("admin");
+			mv.setViewName("home");
 		}
 		
 		return mv;
@@ -33,17 +37,30 @@ public class AdminController {
 	}
 	
 	@GetMapping({ "/activate", "activate.do" })
-	public String activateGet(@RequestParam(name="userID")int userID, HttpSession session) {
+	public String activateGet(@RequestParam(name="userID")int userID, @RequestParam(name="query") String query, HttpSession session) {
 		String redirect = "redirect:/error.do";
 		
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		
 		if (loggedUser.getRole().equals("admin")) {
 			adminDao.activateUser(userID);
-			redirect = "redirect:/admin.do";
+			redirect = "redirect:/search.do?query="+query;
 		}
 		
 		return redirect;
+	}
+	
+	@GetMapping({ "deactivate.do" })
+	private ModelAndView userEditProfilePOST(@RequestParam(name = "userID") int userID,@RequestParam(name="query") String query, HttpSession session,
+			ModelAndView mv) {
+		mv.setViewName("redirect:/error.do");
+		User user = (User) session.getAttribute("loggedUser");
+
+		if (user.getId() == userID || user.getRole().equals("admin")) {
+			userDao.setEnabled(userID, false);
+			mv.setViewName("redirect:/search.do?query="+query);
+		}
+		return mv;
 	}
 	
 	@GetMapping({ "/deleteReview", "deleteReview.do" })
