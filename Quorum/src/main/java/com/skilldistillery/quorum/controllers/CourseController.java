@@ -52,7 +52,6 @@ public class CourseController {
 	private String addCourseToUser(@RequestParam(name = "courseID") int courseID,
 			@RequestParam(name = "studentID") int studentID, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
-System.out.println("**************************************");
 		if (loggedUser == null) {
 			return REDIRECT_LOGIN;
 		}
@@ -74,7 +73,7 @@ System.out.println("**************************************");
 	public String unenrollCourse(@RequestParam(name = "courseID") int courseID,
 			@RequestParam(name = "studentID") int studentID, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
-		if (loggedUser == null || !loggedUser.isAdmin()) {
+		if (loggedUser == null) {
 			return REDIRECT_LOGIN;
 		}
 
