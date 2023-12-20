@@ -10,7 +10,7 @@
 	<div class="container wrapper">
 		<div class="row mt-5 pt-20">
 			<div class="col-4 mb-5">
-				<img src="../img/profheadshot.jpg" class="img-fluid" alt="Professor Headshot"> <br>
+				<img src="img/profheadshot.jpg" class="img-fluid" alt="Professor Headshot"> <br>
 			</div>
 			<div class="col-6 mb-5 text-center">
 				<h2>${professor.firstName} ${professor.lastName}</h2>
