@@ -159,9 +159,6 @@ public class UserDaoImpl implements UserDAO {
 		User following = em.find(User.class, followingId);
 		if (!user.getFollowing().contains(following)) {
 			user.getFollowing().add(following);
-			if (!following.getFollowers().contains(user)) {
-				following.getFollowers().add(user);
-			}
 			success = true;
 		}
 		return success;

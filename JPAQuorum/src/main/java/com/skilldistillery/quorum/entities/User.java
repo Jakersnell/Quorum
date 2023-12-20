@@ -277,7 +277,7 @@ public class User {
 
 	public void removeGroup(SocialGroup group) {
 		if (groups != null && !groups.contains(group)) {
-			groups.add(group);
+			groups.remove(group);
 		}
 	}
 

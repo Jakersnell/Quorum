@@ -121,7 +121,7 @@
 										<div class="comment-header row">
 											<div class="col-6">
 												<h5>
-													<strong>@${comment.user.username}</strong>
+													<strong><a href="userProfile.do?userID=${comment.user.id}">@${comment.user.username}</a></strong>
 												</h5>
 											</div>
 											<div class="col-4"></div>
