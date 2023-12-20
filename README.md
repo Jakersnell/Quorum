@@ -86,7 +86,7 @@ _How a developer would download and set up, install DB, etc._
 
 To set up this project to run on your own computer follow the steps below.
 
- 1. Download the project <a href="https://github.com/Deonnaa/MidtermProject#:~:text=Download-,ZIP" target"_blank">here</a>.
+ 1. Download the project at the top of this project.
  2. Import the project.
         * Open your preferred IDE, and open an existing or new workspace.
         * Right click inside of your project explorer, click import, then `existing project into workspace`.
