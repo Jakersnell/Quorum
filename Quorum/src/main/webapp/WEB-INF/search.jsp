@@ -88,10 +88,24 @@
 												<div class="col-2">${resultUser.firstName}
 													${resultUser.lastName}</div>
 												<div class="col-2"></div>
-												<div class="col-4">${resultUser.username}</div>
-												<div class="col-4">${resultUser.school.name}</div>
+												<div class="col-2">${resultUser.username}</div>
+												<div class="col-2">${resultUser.school.name}</div>
 												<c:if test="${loggedUser.role == 'admin'}">
-													<div class="col-4">Active: ${resultUser.enabled}</div>
+													<div class="col-2">
+														Active: ${resultUser.enabled}
+													</div>
+													<c:choose>
+													<c:when test="${resultUser.enabled}">
+														<div class="col-2">
+															<a href="deactivate.do?userID=${resultUser.id}&query=${query}"><button class="btn btn-danger">Deactivate</button></a>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="col-2">
+															<a href="activate.do?userID=${resultUser.id}&query=${query}"><button class="btn btn-info">Activate</button></a>
+														</div>
+													</c:otherwise>
+													</c:choose>
 												</c:if>
 											</div>
 										</div>
