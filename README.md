@@ -86,24 +86,28 @@ _How a developer would download and set up, install DB, etc._
 
 To set up this project to run on your own computer follow the steps below.
 
-    1. Download the project <a href="https://github.com/Deonnaa/MidtermProject#:~:text=Download-,ZIP" target"_blank">here</a>.
-    2. Import the project.
+ 1. Download the project at the top of this project.
+ 2. Import the project.
         * Open your preferred IDE, and open an existing or new workspace.
         * Right click inside of your project explorer, click import, then `existing project into workspace`.
-    3. Install the DB.
+ 3. Install the DB.
         * Open terminal.
         * Navigate to your workspace that contains the db folder. 
             ex.
+            
             ```
             cd ~/SD41/Java/MidtermProject/DB
             ```
-        * Once here, run the command
+    
+     * Once here, run the command
+
             ```
             mysql -u root -p < quorumdb.sql
 
             root
             ```
-    4. Make sure MAMP is running on port 8085, and launch from the `Boot Dashboard`.
+       
+5. Make sure MAMP is running on port 8085, and launch from the `Boot Dashboard`.
         * Click on the globe after it's up and check out the site!
 
 Thanks for visiting!
