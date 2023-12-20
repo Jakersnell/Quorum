@@ -277,13 +277,10 @@ main {
 .post-edit-btn,
 .post-btn-secondary {
   margin-top: 0.7rem;
-<<<<<<< HEAD
-  background-color: #bb8eff;
-  min-width: 6rem;
-=======
+  /*background-color: #bb8eff;
+  min-width: 6rem;*/
   background-color: #eadcff;
   width: 10rem;
->>>>>>> 72a219dbe1bc47cd992bfed9ad0a15c80cbf084d
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;
@@ -293,12 +290,9 @@ main {
 .post-btn-secondary:hover {
   z-index: 99;
   margin-top: 0.7rem;
-<<<<<<< HEAD
-  background-color: #b17dfe;
-=======
+  /*background-color: #b17dfe;*/
   background-color: #e1cdff;
   width: 10rem;
->>>>>>> 72a219dbe1bc47cd992bfed9ad0a15c80cbf084d
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 2rem;

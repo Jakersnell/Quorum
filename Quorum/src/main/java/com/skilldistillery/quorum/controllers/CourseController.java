@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.quorum.data.CourseDAO;
+import com.skilldistillery.quorum.data.UserDAO;
 import com.skilldistillery.quorum.entities.Course;
 import com.skilldistillery.quorum.entities.User;
 
@@ -21,65 +22,73 @@ public class CourseController {
 	@Autowired
 	private CourseDAO courseDao;
 
+	@Autowired
+	private UserDAO userDao;
+
 	private static String REDIRECT = "redirect:/";
 	private static String REDIRECT_LOGIN = REDIRECT + "login.do";
 	private static String REDIRECT_404 = REDIRECT + "404.do";
 	private static String REDIRECT_ERROR = REDIRECT + "error.do";
 
-	@GetMapping({ "/editCourse", "editCourse.do" })
-	public ModelAndView showEditCoursePage(@RequestParam(name = "schoolID") int schoolID, HttpSession session,
-			ModelAndView mv) {
+	@GetMapping({ "editCourse.do" })
+	public ModelAndView showEditCoursePage(@RequestParam(name = "schoolID") int schoolID,
+			@RequestParam(name = "userID") int userID, HttpSession session, ModelAndView mv) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
+		User profileUser = userDao.getUserById(userID);
 		if (loggedUser == null) {
 			mv.setViewName(REDIRECT_LOGIN);
 			return mv;
 		}
 
+		session.setAttribute("user", profileUser);
+
 		List<Course> courses = courseDao.getCoursesBySchool(schoolID);
-		
 		mv.addObject("courses", courses);
 		mv.setViewName("editCourse");
 		return mv;
 	}
 
-	@PostMapping({ "/addCourse", "addCourse.do" })
-	private String addCourseToUser(@RequestParam(name = "courseID") int courseID, @RequestParam(name = "studentID") int studentID, HttpSession session) {
+	@PostMapping({ "addCourse.do" })
+	private String addCourseToUser(@RequestParam(name = "courseID") int courseID,
+			@RequestParam(name = "studentID") int studentID, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
-        if (loggedUser == null) {
-            return REDIRECT_LOGIN;
-        }
+System.out.println("**************************************");
+		if (loggedUser == null) {
+			return REDIRECT_LOGIN;
+		}
 
-        Course course = courseDao.getCourseById(courseID);
-        if (course == null) {
-            return REDIRECT_404;
-        }
+		Course course = courseDao.getCourseById(courseID);
+		if (course == null) {
+			return REDIRECT_404;
+		}
 
-        boolean success = courseDao.addCourseToUser(studentID, courseID);
-        if (success) {
-            return "redirect:/profile?userID=" + loggedUser.getId();
-        } else {
-            return REDIRECT_ERROR;
-        }
+		boolean success = courseDao.addCourseToUser(studentID, courseID);
+		if (success) {
+			return "redirect:/userProfile.do?userID=" + studentID;
+		} else {
+			return REDIRECT_ERROR;
+		}
 	}
-	
-	@PostMapping({ "/unenrollCourse", "unenrollCourse.do" })
-    public String unenrollCourse(@RequestParam(name = "courseID") int courseID, HttpSession session) {
-        User loggedUser = (User) session.getAttribute("loggedUser");
-        if (loggedUser == null) {
-            return REDIRECT_LOGIN;
-        }
 
-        Course course = courseDao.getCourseById(courseID);
-        if (course == null) {
-            return REDIRECT_404;
-        }
+	@PostMapping({ "unenrollCourse.do" })
+	public String unenrollCourse(@RequestParam(name = "courseID") int courseID,
+			@RequestParam(name = "studentID") int studentID, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		if (loggedUser == null || !loggedUser.isAdmin()) {
+			return REDIRECT_LOGIN;
+		}
 
-        boolean success = courseDao.removeCourseFromUser(loggedUser.getId(), courseID);
-        if (success) {
-            return "redirect:/profile?userID=" + loggedUser.getId();
-        } else {
-            return REDIRECT_ERROR;
-        }
-    }
+		Course course = courseDao.getCourseById(courseID);
+		if (course == null) {
+			return REDIRECT_404;
+		}
+
+		boolean success = courseDao.removeCourseFromUser(studentID, courseID);
+		if (success) {
+			return "redirect:/userProfile.do?userID=" + studentID;
+		} else {
+			return REDIRECT_ERROR;
+		}
+	}
 
 }

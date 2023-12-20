@@ -137,10 +137,10 @@
 					<%-- Courses Section --%>
 					<h4>COURSES</h4>
 
-					<c:if test="${loggedUser.id == user.id}">
+					<c:if test="${loggedUser.role == 'admin' || loggedUser.id == user.id}">
 						<a class="btn btn-info" role="button"
-							href="editCourse?schoolID=${user.school.id}">Edit Courses</a>
-					</c:if>
+							href="editCourse.do?schoolID=${user.school.id}&userID=${user.id}">Edit Courses</a>
+					</c:if> 
 
 					<div>
 						<c:if test="${empty courses}">

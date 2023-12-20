@@ -35,15 +35,17 @@
 						
 						<td>
 							<c:choose>
-                                <c:when test="${!loggedUser.courses.contains(course)}">
+                                <c:when test="${!user.courses.contains(course)}">
                                     <form action="addCourse.do" method="post">
                                         <input type="hidden" name="courseID" value="${course.id}" />
+                                        <input type="hidden" name="studentID" value="${user.id}" />
                                         <button type="submit" class="btn btn-info">Enroll</button>
                                     </form>
                                 </c:when>
                                 <c:otherwise>
                                     <form action="unenrollCourse.do" method="post">
                                         <input type="hidden" name="courseID" value="${course.id}" />
+                                        <input type="hidden" name="studentID" value="${user.id}" />
                                         <button type="submit" class="btn btn-info">Remove</button>
                                     </form>
                                 </c:otherwise>

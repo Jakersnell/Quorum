@@ -85,7 +85,6 @@ public class CourseDaoImpl implements CourseDAO {
         
         if (user != null && course != null) {
             user.getCourses().add(course);
-            em.persist(user);
             return true;
         }
         return false;
@@ -99,7 +98,6 @@ public class CourseDaoImpl implements CourseDAO {
 
 	    if (user != null && course != null && user.getCourses().contains(course)) {
 	        user.getCourses().remove(course);
-	        em.persist(user);
 	        return true;
 	    }
 	    return false;

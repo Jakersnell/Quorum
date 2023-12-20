@@ -90,7 +90,7 @@ public class User {
 		return role.equals("admin");
 	}
 
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.EAGER)
 	@JoinTable(name = "course_schedule", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private List<Course> courses;
 
