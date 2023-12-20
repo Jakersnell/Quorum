@@ -77,9 +77,9 @@
 						<div id="collapseOne" class="collapse show"
 							data-parent="#accordion">
 							<h4>Users</h4>
-							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
-								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-								tabindex="0">
+							<div class="card-body scrollable-card stylized-scroll"
+								data-bs-spy="scroll" data-bs-smooth-scroll="true"
+								data-bs-target="#collapseOne" tabindex="0">
 								<c:forEach var="resultUser" items="${userResults}">
 									<a class="wrapper-link"
 										href="userProfile.do?userID=${resultUser.id}">
@@ -101,9 +101,9 @@
 						</div>
 						<div id="collapseTwo" class="collapse" data-parent="#accordion">
 							<h4>Schools</h4>
-							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
-								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-								tabindex="0">
+							<div class="card-body scrollable-card stylized-scroll"
+								data-bs-spy="scroll" data-bs-smooth-scroll="true"
+								data-bs-target="#collapseOne" tabindex="0">
 								<c:forEach var="resultSchool" items="${schoolResults}">
 									<a class="wrapper-link"
 										href="school.do?schoolID=${resultSchool.id}">
@@ -122,9 +122,9 @@
 						</div>
 						<div id="collapseThree" class="collapse" data-parent="#accordion">
 							<h4>Groups</h4>
-							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
-								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-								tabindex="0">
+							<div class="card-body scrollable-card stylized-scroll"
+								data-bs-spy="scroll" data-bs-smooth-scroll="true"
+								data-bs-target="#collapseOne" tabindex="0">
 								<c:forEach var="group" items="${groupResults}">
 									<a class="wrapper-link" href="group.do?groupID=${group.id}">
 										<div class="card-body result-card">
@@ -136,6 +136,11 @@
 													<h6>${group.description}</h6>
 												</div>
 											</div>
+											<c:if test="${loggedUser.isAdmin()}">
+												<div class="row">
+													<h6>Enabled: ${group.enabled}</h6>
+												</div>
+											</c:if>
 										</div>
 									</a>
 								</c:forEach>
@@ -144,12 +149,11 @@
 
 						<div id="collapseFour" class="collapse" data-parent="#accordion">
 							<h4>Posts</h4>
-							<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
-								data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-								tabindex="0">
+							<div class="card-body scrollable-card stylized-scroll"
+								data-bs-spy="scroll" data-bs-smooth-scroll="true"
+								data-bs-target="#collapseOne" tabindex="0">
 								<c:forEach var="resultPost" items="${postResults}">
-									<a class="wrapper-link"
-										href="post.do?postID=${resultPost.id}">
+									<a class="wrapper-link" href="post.do?postID=${resultPost.id}">
 										<div class="card-body result-card">
 											<div class="row">
 												<div class="col-6">
@@ -160,9 +164,13 @@
 												</div>
 											</div>
 											<div class="row">
-
 												<h5 class="card-title">${resultPost.title}</h5>
 											</div>
+											<c:if test="${loggedUser.isAdmin()}">
+												<div class="row">
+													<h5 class="card-title">Enabled: ${resultPost.enabled}</h5>
+												</div>
+											</c:if>
 										</div>
 									</a>
 								</c:forEach>
@@ -171,9 +179,9 @@
 						<div id="collapseFive" class="collapse" data-parent="#accordion">
 							<h4>Proffesors</h4>
 							<div class="card-body">
-								<div class="card-body scrollable-card stylized-scroll" data-bs-spy="scroll"
-									data-bs-smooth-scroll="true" data-bs-target="#collapseOne"
-									tabindex="0">
+								<div class="card-body scrollable-card stylized-scroll"
+									data-bs-spy="scroll" data-bs-smooth-scroll="true"
+									data-bs-target="#collapseOne" tabindex="0">
 									<c:forEach var="professor" items="${professorResults}">
 										<a class="wrapper-link"
 											href="professorview.do?professorId=${professor.id}">

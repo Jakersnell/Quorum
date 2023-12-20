@@ -100,6 +100,21 @@ public class GroupPostController {
 
 		return redirect;
 	}
+	
+	@PostMapping({"reActivatePost.do"})
+	public String reactivatePost(@RequestParam(name = "postID") int postId, HttpSession session) {
+		String redirect;
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		
+		if (loggedUser.isAdmin()) {
+			postDao.setEnabled(postId, true);
+			redirect = "redirect:/post.do?postID=" + postId;
+		} else {
+			redirect = REDIRECT_404;
+		}
+		
+		return redirect;
+	}
 
 	@GetMapping({ "/post", "post.do" })
 	public ModelAndView postDetailView(@RequestParam(name = "postID") int postId, HttpSession session,

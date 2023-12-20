@@ -35,7 +35,7 @@ body {
 					<div class="col-6 home-center" align="center">
 						<c:choose>
 							<c:when test="${loggedUser.isAdmin()}">
-								<h1 id="administrator>">Welcom Quorum Admin</h1>
+								<h1 id="administrator>">Welcome Quorum Admin</h1>
 							</c:when>
 							<c:otherwise>
 

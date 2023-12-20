@@ -143,6 +143,22 @@ public class SocialGroupController {
 		}
 		return redirect;
 	}
+	
+	@PostMapping({"reactivateGroup.do"}) 
+	public String reactivateSocialGroupAsAdmin(@RequestParam(name = "groupID") int groupId, HttpSession session) {
+		String redirect;
+		
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		
+		if (loggedUser.isAdmin()) {
+			groupDao.setEnabled(groupId, true);
+			redirect = "redirect:/group.do?groupID=" + groupId;
+		} else {
+			redirect = REDIRECT_404;
+		}
+		
+		return redirect;
+	}
 
 	private boolean userHasEditAuth(int groupID, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
