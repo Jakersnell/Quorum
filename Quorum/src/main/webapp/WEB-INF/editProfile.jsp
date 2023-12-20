@@ -18,38 +18,47 @@
 								Profile</strong></label>
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="text" class="firstName"
+						<label for="firstName">First Name:</label> <input id="firstName"
+							class="form-control" type="text" class="firstName"
 							name="firstName" id="firstName" value="${user.firstName }"
 							required /><br />
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="text" class="lastName"
-							name="lastName" id="lastName" value="${user.lastName }" required /><br />
+						<label for="lastName">Last Name:</label> <input
+							class="form-control" type="text" class="lastName" name="lastName"
+							id="lastName" value="${user.lastName }" required /><br />
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="text"
+						<label for="dateOfBirth">Date of birth:</label> <input
+							class="form-control" type="text" id="dateOfBirth"
 							value="${user.dateOfBirth}" aria-label="Disabled input example"
 							disabled />
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="text" class="username"
-							name="username" id="username" value="${user.username }" required /><br />
+						<label for="username">Username:</label> <input
+							class="form-control" type="text" class="username" name="username"
+							id="username" value="${user.username }" required /><br />
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="text" class="password"
-							name="password" id="password" value="${user.password }" required /><br />
+						<label for="password">Password:</label> <input
+							class="form-control" type="text" class="password" name="password"
+							id="password" value="${user.password }" required /><br />
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="email" class="email"
-							name="email" id="email" value="${user.email }" required /><br />
+						<label for="email">Email:</label> <input class="form-control"
+							type="email" class="email" name="email" id="email"
+							value="${user.email }" required /><br />
 					</div>
 					<div class="row mb-3">
-						<input class="form-control" type="text" class="bio"
-							name="biography" id="bio" value="${user.biography }" /><br />
+						<label for="bio">Bio:</label> <input class="form-control"
+							type="text" class="bio" name="biography" id="bio"
+							value="${user.biography }" /><br />
 					</div>
 					<div class="row mb-3">
 						<input type="hidden" class="id" name="id" id="id"
-							value="${user.id}" /><br />
+							value="${user.id}" /><br /> <input type="hidden"
+							class="profileImageUrl" name="profileImageUrl"
+							id="profileImageUrl" value="${user.profileImageUrl}" /><br />
 					</div>
 					<div>
 						<button type="submit" class="btn btn-info form-control">Save

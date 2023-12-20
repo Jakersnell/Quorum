@@ -169,10 +169,8 @@ public class UserController {
 	private String userAddFollowing(@RequestParam(name = "userID") int userID,
 			@RequestParam(name = "followID") int followID, HttpSession session) {
 		String redirect = "redirect:/userProfile.do?userID=" + followID;
-		User loggedUser = (User) session.getAttribute("loggedUser");
 		if (hasAuth(userID, session)) {
 			userDao.addFollowing(userID, followID);
-			User user = userDao.getUserById(followID);
 		}
 		return redirect;
 	}
