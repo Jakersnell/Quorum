@@ -138,7 +138,7 @@
 					<h4>COURSES</h4>
 
 					<c:if test="${loggedUser.id == user.id}">
-						<a class="btn btn-info" role="button"
+						<a class="btn btn-info"
 							href="editCourse?schoolID=${user.school.id}">Edit Courses</a>
 					</c:if>
 

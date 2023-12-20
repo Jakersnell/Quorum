@@ -56,8 +56,12 @@
 					</div>
 					<div class="row mb-3">
 						<input type="hidden" class="id" name="id" id="id"
-							value="${user.id}" /><br /> <input type="hidden"
-							class="profileImageUrl" name="profileImageUrl"
+							value="${user.id}" /><br /> 
+					</div>
+					<div class="row mb-3">
+					<label for="profileImageUrl">Profile pic url:</label>
+						<input type="text"
+							class="form-control" name="profileImageUrl"
 							id="profileImageUrl" value="${user.profileImageUrl}" /><br />
 					</div>
 					<div>
