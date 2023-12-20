@@ -98,7 +98,7 @@ public class GroupPostDaoImpl implements GroupPostDAO {
 					        EXISTS (
 					            SELECT
 					                1
-					            FROM
+					            FROM	
 					                post.user.followers f
 					            WHERE
 					                f.id = :userId

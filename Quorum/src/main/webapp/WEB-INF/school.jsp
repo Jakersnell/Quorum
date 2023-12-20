@@ -11,15 +11,15 @@
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="/img/school-campus.jpg" class="d-block w-100"
+					<img src="img/school-campus.jpg" class="d-block w-100"
 						alt="A school campus">
 				</div>
 				<div class="carousel-item">
-					<img src="/img/school-dark-wave.jpg" class="d-block w-100"
+					<img src="img/school-dark-wave.jpg" class="d-block w-100"
 						alt="A school campus entrance">
 				</div>
 				<div class="carousel-item">
-					<img src="/img/school-library.jpg" class="d-block w-100"
+					<img src="img/school-library.jpg" class="d-block w-100"
 						alt="A school library">
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 		<div class="container mt-4">
 			<div class="row">
 				<div class="col-md-4">
-					<img src="../img/school-pink-flowers.jpg" class="img-fluid"
+					<img src="img/school-pink-flowers.jpg" class="img-fluid"
 						alt="School Image">
 				</div>
 				<div class="col-md-8">
@@ -77,7 +77,7 @@
 						<div class="col-md-4">
 							<div class="card mb-3 text-center">
 								<div class="card-body align-items-center">
-									<img src="../img/profheadshot.jpg" class="img-fluid"
+									<img src="img/profheadshot.jpg" class="img-fluid"
 										alt="Professor Headshot"> <br>
 									<%-- <h5 class="card-title">${professor.firstName}
 									${professor.lastName}</h5> --%>
