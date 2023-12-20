@@ -19,7 +19,7 @@
 
 ## Quorum
 
-#### Mid-term Team Project for Skill Distillery
+#### Mid-term Team Project undertaken as members of Skill Distillery
 
 ### Overview
 Quorum is a social media platform designed for students. Its goal is to connect students attending the same school.
@@ -41,6 +41,8 @@ As a user, you can:
 
 ### Implementation
 
+#### Database
+The database schema is centered around the user, everything is related to the user, and the process of designing the database was focused on supporting the experience of the user on the site. This involves a lot of different types of patterns, and our goal was to normalize these as much as possible to provide a cohesive usage of the entities throughout the backend. 
 
 ![image](https://github.com/Deonnaa/MidtermProject/blob/main/photos/EntityRelationshipDiagram.png)
 
@@ -50,14 +52,14 @@ As a user, you can:
 
 Languages: Java <br>
 Web: HTML, CSS, Bootstrap 5.3 <br>
-Database: SQL, Spring Data, JPA, JDBC, JPQL <br>
-Methodologies: TDD <br>
-Frameworks: Spring, Spring Boot, Agile, Scrum <br>
+Database: SQL, Spring Data, JPA, JDBC, JPQL, Hibernate <br>
+Methodologies: TDD, Agile, Scrum  <br>
+Backend: Spring, Spring Boot <br>
 Configuration Management: Git <br>
 IDE: STS4, Eclipse, VSCode <br>
 
 ### Lessons Learned
-When databases grow into multi-keyed monsters, the mapping requirements for what seems like simple actions can become quite difficult.
+When databases grow into multi-keyed monsters, the mapping requirements for what seems like simple actions can become quite difficult. This is why we made key choices to structure our entities in the most supportive way possible, carefully crafting our relationship representations in both the database schema, aswell as the entity mapping within Java. This involved a lot of careful consideration about fetch types and ownership amongst other aspects. One of the most important tools that we leveraged during this project was communication, serving as the platform for every aspect of our project, we understood that by facilitating proper communication, we could design and build with great efficiency. Along with this, we gained a huge benefit to our skills of technical planning, by focusing on this aspect with highest priority, we achieved a more cohesive structure, enhancing user experience.
 
 
 ### Stretch Goals
