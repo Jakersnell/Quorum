@@ -84,7 +84,7 @@
 								<c:forEach items="${user.following}" var="friend" begin="0"
 									end="3">
 									<a href="userProfile.do?userID=${friend.id}" class="p-2"> <img
-										src="${user.profileImageUrl}" alt="${friend.username} Image"
+										src="${friend.profileImageUrl}" alt="${friend.username} Image"
 										class="rounded-circle" style="width: 75px; height: 75px;">
 									</a>
 								</c:forEach>
