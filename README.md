@@ -26,17 +26,20 @@ Quorum is a social media platform designed for students. Its goal is to connect 
 
 ### Description
 Quorum has multiple avenues of social interaction, involving `posts` and `private messages`. After creating an account and selecting the school you attend, you will be given a surplus of actions.
-    As a user, you can:
-        * Update your profile
-        * Search any content within your school
-            * including professors, students, and groups
-        * Join social groups started by other students
-        * Create posts to those groups or start your own
-        * Follow and Unfollow other students as well as Removing Followers from your page.
-        * Enroll or Remove active classes from your schedule
-            * _this is purely a social action, to show friends your schedule_
-        * Send or Recieve `Messages` to and from other users at your school
-        * Leave a review for current instructors at your school
+<br><br>
+As a user, you can:
+* `Update` or `Delete` your profile
+![image](https://github.com/Deonnaa/MidtermProject/blob/main/photos/edit-delete2.png) <br>
+* `Search` any content within your school <br>
+![image](https://github.com/Deonnaa/MidtermProject/blob/main/photos/search.png) <br>
+  * including professors, students, and groups
+* Join social groups started by other students
+* `Create` posts to those groups or start your own
+* Follow and Unfollow other students as well as Removing Followers from your page.
+* Enroll or Remove active classes from your schedule
+  * _this is purely a social action, to show friends your schedule_
+* Send or Recieve `Messages` to and from other users at your school
+* Leave a review for current instructors at your school
 
 
 _How it works, what the user can do_
