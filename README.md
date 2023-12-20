@@ -39,51 +39,34 @@ As a user, you can:
 * Send or Recieve `Messages` to and from other users at your school
 * Leave a review for current instructors at your school
 
-
-_How it works, what the user can do_
-
-_screenshot1.png_ _screenshot2.png_
-
-_Link to deployed app_
-
-_How to login, username/password, etc._
-
 ### Implementation
-_Description of overall project structure_
 
-_ERDiagram.png_
+
+![image](https://github.com/Deonnaa/MidtermProject/blob/main/photos/EntityRelationshipDiagram.png)
+
 
 ### Technologies and Methodologies Used
-_bullet list or table of technologies/libraries/frameworks used_
-* Spring Tool Suite 4
-* Eclipse
-* Gradle
-* JPA
-* JSP
-* Java
-* Tomcat
-* MAMP
-* MySQL
-* HTML
-* CSS
-* Bootstrap 5.3
-* 
+<br>
 
-_bullet list or table of development techniques (pair programming, agile, git collaboration, etc.)_
-* Pair Programming
-* Agile
-* Git Collaboration
-* github
-* 
+Languages: Java <br>
+Web: HTML, CSS, Bootstrap 5.3 <br>
+Database: SQL, Spring Data, JPA, JDBC, JPQL <br>
+Methodologies: TDD <br>
+Frameworks: Spring, Spring Boot, Agile, Scrum <br>
+Configuration Management: Git <br>
+IDE: STS4, Eclipse, VSCode <br>
 
 ### Lessons Learned
+When databases grow into multi-keyed monsters, the mapping requirements for what seems like simple actions can become quite difficult.
 
 
 ### Stretch Goals
+1. Enrolling students in courses.
+2. Separating students by school ( limits their interaction )
+3. Allowing the students to `Rate` professors in their school.
 
 
 ### How to Download and Run
-_How a developer would download and set up, install DB, etc._
 
 To set up this project to run on your own computer follow the steps below.
 
@@ -108,8 +91,10 @@ To set up this project to run on your own computer follow the steps below.
             root
             ```
        
-5. Make sure MAMP is running on port 8085, and launch from the `Boot Dashboard`.
+5. Make sure MAMP is running on port 8085, and launch from the Spring `Boot Dashboard`.
         * Click on the globe after it's up and check out the site!
+
+Otherwise just head to the deployed website above.
 
 Thanks for visiting!
     - Quorum team
