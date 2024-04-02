@@ -1,5 +1,5 @@
 <h2 align="center">
-    <a href="#" target="blank_">
+    <a href="http://172.234.29.146:8080/QUORUM" target="blank_">
         <img height="100" alt="Quorum Logo" src=
         "https://github.com/Deonnaa/MidtermProject/blob/main/Quorum/src/main/webapp/img/quorum.png"/>
     </a>
@@ -8,17 +8,12 @@
 </h2>
 
 <div align="center">
-    
-![Static Badge](https://img.shields.io/badge/Quorum-AWS-yellow?link=http%3A%2F%2F52.86.229.80%3A8080%2FQuorum%2Flogin.do)
-![Static Badge](https://img.shields.io/badge/Deonna-Repo_Owner-green?link=https%3A%2F%2Fgithub.com%2FDeonnaa)
-![Static Badge](https://img.shields.io/badge/Jake-DBA-blue?link=https%3A%2F%2Fgithub.com%2FJakersnell)
-![Static Badge](https://img.shields.io/badge/Parris-SCRUM-orange?link=https%3A%2F%2Fgithub.com%2FParrisu)
 
 </div>
 
 
 ## Quorum
-
+http://172.234.29.146:8080/QUORUM
 #### Mid-term Team Project undertaken as members of Skill Distillery
 
 ### Overview
