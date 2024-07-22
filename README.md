@@ -16,8 +16,9 @@
 
 </div>
 
-
 ## Quorum
+
+### View the website [here!](http://198.58.124.18:8080/Quorum)
 
 #### Mid-term Team Project undertaken as members of Skill Distillery
 
